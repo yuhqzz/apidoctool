@@ -1,0 +1,30 @@
+<div class="panel-heading">博客配置</div>
+<div class="panel-body">
+    <form action="/admin/setsystem" method="POST">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="systemname">博客名称</label>
+                <input type="text" name="systemname" value="{$blogconfig.BlogTitle}" class="form-control" placeholder="请输入博客名称">
+            </div>
+            <div class="form-group">
+                <label for="systemmsg">博客描述</label>
+                <input type="text" name="systemmsg" value="{$blogconfig.BlogInfo}" class="form-control" placeholder="请输入博客描述">
+            </div>
+            <div class="form-group">
+                <label for="pagenum">每页显示文章数</label>
+                <select name="pagenum">
+                    <option value="10" {$blogconfig.PageNum==10 ? 'selected' : ''} >10</option>
+                    <option value="15" {$blogconfig.PageNum==15 ? 'selected' : ''} >15</option>
+                    <option value="20" {$blogconfig.PageNum==20 ? 'selected' : ''} >20</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="copyright">版权声明</label>
+                <input type="text" name="copyright" value="{$blogconfig.CopyRight}" class="form-control">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">确认保存</button>
+            </div>
+        </div>
+    </form>
+</div>

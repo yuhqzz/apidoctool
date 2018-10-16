@@ -1,0 +1,38 @@
+<!-- Main Footer -->
+<footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+        <a href="#"></a><b>博客管理后台</b></a>. 刘单风专用后台
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; <a href="#">刘单风</a>.</strong>  刘单风所有
+</footer>
+
+
+<!-- jQuery 2.1.4 -->
+{js href="/static/admin/plugins/jQuery/jquery-1.9.1.min.js" /}
+<!-- Bootstrap 3.3.2 JS -->
+{js href="/static/admin/js/bootstrap.min.js" /}
+<!-- iCheck -->
+{js href="/static/admin/plugins/iCheck/icheck.min.js,/static/admin/js/app.js" /}
+<!-- 富文本编辑器配置文件 -->
+{js href="/static/admin/ueditor/ueditor.config.js" /}
+<!-- 富文本编辑器源码文件 -->
+{js href="/static/admin/ueditor/ueditor.all.js" /}
+<!-- 实例化编辑器 -->
+{js href="/static/admin/js/DatePicker/WdatePicker.js" /}
+<script>
+    //文章封面图上传
+    $('#coverimgupload').click(function(){
+        document.articleform.action="/admin/fileupload";
+        document.articleform.target="coverframe";
+        document.articleform.submit();
+    });
+
+    $('#publicbtn').click(function(){
+        document.articleform.action="/admin/doAddarticle";
+        document.articleform.target="";
+        document.articleform.submit();
+    });
+
+</script>

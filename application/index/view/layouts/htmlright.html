@@ -1,0 +1,63 @@
+<!--右边数据栏start-->
+<div id="beta">
+    <div id="beta-inner">
+        <div class="likeme" id="likeoper" onclick="likeoperation(0,0)">
+            <span id="likemsg">Do you like me ?</span><br/>
+            <span id="likenum">{$weblikenum}</span>
+        </div>
+
+        <!--关于我start-->
+        <div class="module-categories module">
+            <h2 class="module-header">关于</h2>
+            <div class="module-content">
+                <ul class="module-list">
+                    <li class="module-list-item" style="margin-top:5px;float:left;margin-right:10px;">
+                        <a href="/static/userimg.jpg" onclick="window.open('/static/userimg.jpg','popup','width=480,height=640,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false">
+                            <img src="/static/userimg.jpg" width="80" height="90" alt="个人照片" />
+                        </a>
+                    </li>
+                    <li class="module-list-item"><a href="/aboutme">个人简介</a>，<a target=_blank href="http://weibo.com/2815473314">微博</a></li>
+                    <li class="module-list-item"><a target=_blank href="https://github.com/zhuifengxia">GitHub</a>，<a target=_blank href="/blogwords">留言板</a></li>
+                    <li class="module-list-item"><a href="mailto:xirizhifeng@163.com">xirizhifeng@163.com</a></li>
+                </ul>
+
+            </div>
+            <div style="margin-left:1em">文章：{$articlenum}&nbsp;&nbsp;&nbsp;留言：{$postnum}&nbsp;&nbsp;&nbsp;用户：{$usernum}<br/>建站日期：2016-12-23&nbsp;&nbsp;运行天数：{$publictime}<br/>最后更新：{$lasttime|date="y-m-d",###}</div>
+        </div>
+        <!--关于我end-->
+
+        <!--分类目录start-->
+        <div class="module-type module">
+            <h2 class="module-header">分类目录</h2>
+            <div class="module-content">
+                <ul class="module-list">
+                    {foreach $typelst as $type}
+                    <li class="module-list-item">
+                        <a href="/blog/{$type.TypeID}">{$type.TypeName}&nbsp;<span>({$type.ArticleNum})</span></a>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+        <!--分类目录end-->
+        <div style="clear: both;"></div>
+
+        <!--最新评论start-->
+        <div class="module-comments module"  id="latest-comments">
+            <h2 class="module-header">最新评论</h2>
+            <div class="module-content">
+                <ul>
+                    {foreach $postdata as $post}
+                    <li>
+                        <img class="commentimg" src="{$post.ImgUrl?$post.ImgUrl:'/homeback/35.jpg'}">
+                        <div class="commentcss"><i>{$post.PostName?$post.PostName:'匿名用户'}</i>{$post.PostDate|date="m-d",###}说：{$post.PostContent}</div>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+        <!--最新评论end-->
+
+    </div>
+</div>
+<!--右边数据栏end-->

@@ -1,0 +1,63 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="Movable Type  5.2.2" />
+<meta name="description" content="{$nowlocation.pagedesc?$nowlocation.pagedesc:'刘小莫的日志博客'}"/>
+<meta name="keywords" content="{$nowlocation.pagekeywords?$nowlocation.pagekeywords:'刘小莫的日志博客'}"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{js href="/static/admin/plugins/jQuery/jquery-1.9.1.min.js" /}
+{css href="/static/admin/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" /}
+{js href="/static/admin/ueditor/third-party/SyntaxHighlighter/shCore.js" /}
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?f7264d5fa672e198cf2004907faf1ccf";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script>
+    //增加文章分享次数
+    function updatesharenum(cmd)
+    {
+        $.ajax({
+            type: "POST",
+            url: "/blog/doshare",
+            data:"dataid="+{$article.ArticleID?$article.ArticleID : 0},
+            success: function(msg){}
+        });
+    }
+    //第三方分享代码插件
+    window._bd_share_config = {
+        "common": {
+            onAfterClick: updatesharenum
+        }, "share": {}
+    }
+    with(document)0[
+            (getElementsByTagName('head')[0]||body).
+            appendChild(createElement('script')).
+                    src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)
+            ];
+
+    /**
+     * 全网搜索提交
+     */
+    function searchsubmit()
+    {
+        $("#selform").submit();
+    }
+
+    /**
+     * 标签搜索
+     * @param obj
+     */
+   function tagsubmit(obj)
+   {
+       $("#tagform"+obj).submit();
+   }
+    SyntaxHighlighter.all();
+</script>
+<link rel="stylesheet" href="/static/home/css/styles.css" type="text/css" />
+{css href="/static/admin/css/font-awesome.min.css" /}
+{css href="/static/home/css/animation.css" /}
+<title>{$nowlocation.blogtitle?$nowlocation.blogtitle:'刘小莫的日志博客'}</title>

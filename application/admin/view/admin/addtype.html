@@ -1,0 +1,33 @@
+<div class="panel-heading">{$typedata.TypeID==0?"添加":"编辑"}文章分类</div>
+<div class="panel-body">
+    <form action="/admin/doAddtype" method="POST">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="typename">分类名称</label>
+                <input type="hidden" name="typeid" value="{$typedata.TypeID}"/>
+                <input type="text" name="typename" value="{$typedata.TypeName}" class="form-control" placeholder="请输入分类名称">
+            </div>
+
+            <div class="form-group">
+                <label for="typecolor">分类色值</label>
+                <input type="text" name="typecolor" value="{$typedata.TypeColor}" class="form-control" placeholder="请输入分类色值">
+            </div>
+
+            <div class="form-group">
+                <label for="typeshort">分类缩写</label>
+                <input type="text" name="typeshort" value="{$typedata.TypeShort}" class="form-control" placeholder="请输入分类缩写">
+            </div>
+
+            <div class="form-group">
+                <label for="typestatus">分类状态</label>
+                <select name="typestatus">
+                    <option value="0" {$typedata.IsHidden==0 ? 'selected' : ''} >显示</option>
+                    <option value="1" {$typedata.IsHidden==1 ? 'selected' : ''} >隐藏</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">确认保存</button>
+            </div>
+        </div>
+    </form>
+</div>

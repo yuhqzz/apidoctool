@@ -1,0 +1,174 @@
+{js href="/static/home/js/dropload.min.js" /}
+<!--页脚start-->
+<div id="footer">
+    <div id="footer-inner">
+        <div id="footer-content">
+            <p><a href="/contact.html">联系方式</a> | liuxiaomo.cn 2003 - 2017</p>
+        </div>
+    </div>
+</div>
+<!--页脚end-->
+
+<script>
+    function autoScroll(obj){
+        $(obj).find("ul").animate({
+            marginTop : "-39px"
+        },500,function(){
+            $(this).css({marginTop : "0px"}).find("li:first").appendTo(this);
+        })
+    }
+    $(function(){
+        setInterval('autoScroll(".speedbar")',2000);
+    });
+
+</script>
+<!--留言板加载更多start-->
+<script type="text/javascript">
+    $(function(){
+        var articleid=$("#articleid").val();
+        // 页数
+        var page = 1;
+        // dropload
+        $('#postcomments').dropload({
+            scrollArea : window,
+            domUp : {
+                domClass   : 'dropload-up',
+                domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
+                domUpdate  : '<div class="dropload-update">↑释放更新</div>',
+                domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+            },
+            domDown : {
+                domClass   : 'dropload-down',
+                domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+                domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+                domNoData  : '<div class="dropload-noData">没有更多数据了</div>'
+            },
+            loadDownFn : function(me){
+                page++;
+                $.ajax({
+                    type: 'POST',
+                    url: '/blogwordsnext',
+                    data:"cpage="+page+"&articleid="+articleid,
+                    dataType:"html",
+                    success: function(data){
+                        if(data){
+                        }else{
+                            // 锁定
+                            me.lock();
+                            // 无数据
+                            me.noData();
+                        }
+                        // 为了测试，延迟1秒加载
+                        setTimeout(function(){
+                            // 插入数据到页面，放到最后面
+                            $('.commentlist').append(data);
+                            // 每次数据插入，必须重置
+                            me.resetload();
+                        },1000);
+                    },
+                    error: function(xhr, type){
+                        alert('Ajax error!');
+                        // 即使加载出错，也得重置
+                        me.resetload();
+                    }
+                });
+            },
+            threshold : 50
+        });
+
+        b();
+        $('#gotop').click(function(){
+            $(document).scrollTop(0);
+        });
+        function b(){
+            h = $(window).height();
+            t = $(document).scrollTop();
+            if(t > h){
+                $('#gotop').show();
+            }else{
+                $('#gotop').hide();
+            }
+        }
+
+        $(window).scroll(function(e){
+            b();
+        });
+
+    });
+</script>
+<!--留言板加载更多end-->
+
+<!--碎语加载更多start-->
+<script type="text/javascript">
+    $(function(){
+        // 页数
+        var page = 2;
+        // dropload
+        $('#gossiplist').dropload({
+            scrollArea : window,
+            domUp : {
+                domClass   : 'dropload-up',
+                domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
+                domUpdate  : '<div class="dropload-update">↑释放更新</div>',
+                domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+            },
+            domDown : {
+                domClass   : 'dropload-down',
+                domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+                domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+                domNoData  : '<div class="dropload-noData">没有更多数据了</div>'
+            },
+            loadDownFn : function(me){
+                page++;
+                $.ajax({
+                    type: 'POST',
+                    url: '/gossipsnext',
+                    data:"cpage="+page,
+                    dataType:"html",
+                    success: function(data){
+                        if(data){
+                        }else{
+                            // 锁定
+                            me.lock();
+                            // 无数据
+                            me.noData();
+                        }
+                        // 为了测试，延迟1秒加载
+                        setTimeout(function(){
+                            // 插入数据到页面，放到最后面
+                            $('.archives-monthlisting').append(data);
+                            // 每次数据插入，必须重置
+                            me.resetload();
+                        },1000);
+                    },
+                    error: function(xhr, type){
+                        alert('Ajax error!');
+                        // 即使加载出错，也得重置
+                        me.resetload();
+                    }
+                });
+            },
+            threshold : 50
+        });
+
+        b();
+        $('#gotop').click(function(){
+            $(document).scrollTop(0);
+        });
+        function b(){
+            h = $(window).height();
+            t = $(document).scrollTop();
+            if(t > h){
+                $('#gotop').show();
+            }else{
+                $('#gotop').hide();
+            }
+        }
+
+        $(window).scroll(function(e){
+            b();
+        });
+
+    });
+</script>
+<!--碎语加载更多end-->

@@ -1,0 +1,193 @@
+{layout name="layouts/twoindex" replace="[__REPLACE__]" /}
+<div class="aboutme">
+    <h3>留言板</h3>
+    <div class="divhr"></div>
+    <div class="coutent">
+        有什么意见建议都可以留言给我哦;
+        一起学习讨论;
+    </div>
+    <!--文章评论start-->
+    <div id="respond" class="no_webshot">
+        <form action="#" method="post" id="commentform">
+            <div class="comt-title">
+                <div class="comt-avatar pull-left">
+                    <input type="hidden" value="{$article.ArticleID}" id="articleid" name="articleid"/>
+                    <img alt="说点什么..." src="/static/home/images/hello.gif" class="avatar avatar-54 photo" height="54" width="54">
+                </div>
+                <div class="comt-author pull-left"> 发表我的评论(HTML标签部分可用) </div>
+            </div>
+            <div class="comt">
+                <div class="comt-box">
+                    <textarea onfocus="javascript:$('.comt-comterinfo').show();" placeholder="说下你的观点看法吧..." class="input-block-level comt-area" name="commentmsg" id="commentmsg" cols="100%" rows="10" tabindex="1"></textarea>
+                    <div class="comt-ctrl">
+                        <input type="button" style="margin-right:5%" class="btn btn-primary pull-right" onclick="commitcomment()" value="提交评论"/>
+                        <div class="comt-tips pull-right">
+                            <input type="hidden" name="comment_post_ID" value="2005" id="comment_post_ID">
+                            <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+                            <!--<label for="comment_mail_notify" style="padding-top:0;color: #999;">-->
+                            <!--&lt;!&ndash;<input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" checked="checked">有人回复时通知我&ndash;&gt;-->
+                            <!--</label>-->
+                            <div class="comt-tip comt-loading" style="display: none;">正在提交, 请稍候...</div>
+                            <div class="comt-tip comt-error" style="display: none;">#</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--提交评论时需要填写内容start-->
+                <div class="comt-comterinfo" id="comment-author-info">
+                    <h4>Hi，您需要填写昵称和邮箱！</h4>
+                    <ul>
+                        <li class="form-inline">
+                            <label class="hide" for="nickname">昵称</label>
+                            <input class="ipt" type="text" name="nickname" id="nickname" value="" tabindex="2" placeholder="昵称">
+                            <span class="help-inline">昵称 (必填)</span>
+                        </li>
+                        <li class="form-inline">
+                            <label class="hide" for="useremail">邮箱</label>
+                            <input class="ipt" type="text" name="useremail" id="useremail" value="" tabindex="3" placeholder="邮箱">
+                            <span class="help-inline">邮箱 (必填,不公开)</span>
+                        </li>
+                        <li class="form-inline">
+                            <label class="hide" for="userimg">个性头像</label>
+                            <input class="ipt" type="text" name="userimg" id="userimg" value="" tabindex="3" placeholder="个性头像地址">
+                            <span class="help-inline">个性头像 (可不填)</span>
+                        </li>
+                        <li class="form-inline">
+                            <label class="hide" for="userurl">网址</label>
+                            <input class="ipt" type="text" name="userurl" id="userurl" value="" tabindex="4" placeholder="网址">
+                            <span class="help-inline">网址(我信任你，不会填写广告链接)</span>
+                        </li>
+                    </ul>
+                </div>
+                <!--提交评论时需要填写内容end-->
+            </div>
+        </form>
+    </div>
+    <!--文章评论end-->
+
+    <!--文章评论列表start-->
+    <div id="postcomments">
+        <div id="comments">
+            <i class="fa fa-comments-o"></i>
+            <b id="commentcount">{$wordscount}</b>个小伙伴在吐槽
+        </div>
+
+
+        <ol class="commentlist">
+            <!-- #comment-## -->
+            {foreach $wordlst as $post}
+            <li class="commentlst">
+                <div class="c-avatar">
+                    <img class="avatar" height="54" width="54" src="{$post.ImgUrl?$post.ImgUrl:'/homeback/35.jpg'}" style="display: block;">
+                    <div class="c-main">{$post.PostContent}
+                        <div class="c-meta">
+                        <span class="c-author">
+                            <a href="{$post.UserUrl?$post.UserUrl:'http://liuxiaomo.cn'}" class="url" target="_blank">{$post.PostName?$post.PostName:'匿名用户'}</a>
+                        </span>
+                            {$post.PostDate|date="y-m-d h:i:s",###}
+                            <!--<a rel="nofollow" class="comment-reply-link" href="#" >回复</a>-->
+                        </div>
+                    </div>
+                </div>
+                {if $post.commchild}
+                <ul class="children">
+                    {foreach $post.commchild as $childpost}
+                    <li class="commentlst">
+                        <div class="c-avatar">
+                            <img class="avatar" height="54" width="54" src="{$childpost.ImgUrl?$childpost.ImgUrl:'/homeback/35.jpg'}" style="display: block;">
+                            <div class="c-main" id="div-comment-65">
+                                {$childpost.PostContent}
+                                <div class="c-meta">
+                                <span class="c-author">
+                                    <a href="{$post.UserUrl?$post.UserUrl:'http://liuxiaomo.cn'}" class="url" target="_blank">{$childpost.PostName?$childpost.PostName:'匿名用户'}</a>
+                                </span>
+                                    <a title="博主认证" class="vip"></a>
+                                    {$childpost.PostDate|date="y-m-d h:i:s",###}
+                                    <!--<a rel="nofollow" class="comment-reply-link" href="#">回复</a>-->
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {/foreach}
+                    <!-- #comment-## -->
+                </ul>
+                {/if}
+                <!-- .children -->
+            </li>
+
+            {/foreach}
+            <!-- #comment-## -->
+        </ol>
+    </div>
+    <!--文章评论列表end-->
+
+</div>
+
+<script>
+    /*提交评论*/
+    function commitcomment()
+    {
+        $(".comt-loading").show();
+        var commentmsg=$("#commentmsg").val();
+        var nickname=$("#nickname").val();
+        var useremail=$("#useremail").val();
+        var userurl=$("#userurl").val();
+        var articleid=$("#articleid").val();
+        var userimg=$("#userimg").val();
+        if(commentmsg=="")
+        {
+            $(".comt-loading").hide();
+            $(".comt-error").show();
+            $(".comt-error").text("请您填写评论信息");
+            setTimeout(function(){$(".comt-error").hide()},5000);
+            return;
+        }
+        if(nickname==""||useremail=="")
+        {
+            $(".comt-loading").hide();
+            $(".comt-error").show();
+            $(".comt-error").text("请您昵称和邮箱");
+            setTimeout(function(){$(".comt-error").hide()},5000);
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/blog/docomment",
+            data:"dataid="+0+"&commentmsg="+commentmsg+"&username="+nickname+"&useremail="+useremail+"&userurl="+userurl+"&userimg="+userimg,
+            success: function(msg) {
+                $('.comt-comterinfo').hide();
+                $(".comt-loading").hide();
+                $(".comt-error").show();
+                if (msg == 0) {
+                    $(".comt-error").text("发布成功");
+                    setTimeout(function () {
+                        $(".comt-error").hide()
+                    }, 2000);
+                    var comcount=$("#commentcount").text();
+                    $("#commentcount").text(parseInt(comcount)+1);
+
+                    var myDate = new Date();
+                    var year=myDate.getFullYear();
+                    var month=myDate.getMonth()+1;
+                    var date=myDate.getDate();
+                    var h=myDate.getHours();
+                    var m=myDate.getMinutes();
+                    var s=myDate.getSeconds();
+                    var nowdate=year+'-'+p(month)+"-"+p(date)+" "+p(h)+':'+p(m)+":"+p(s);
+
+                    var newmsg='<li class="commentlst"><div class="c-avatar"><img class="avatar" height="54" width="54" src="'+(userimg?userimg:"/homeback/35.jpg")+'" style="display: block;"><div class="c-main">'+commentmsg+'<div class="c-meta"><span class="c-author"><a href="'+(userurl?userurl:"http://liuxiaomo.cn")+'" class="url" target="_blank">'+nickname+'</a></span>'+nowdate+'</div></div></div></li>';
+                    $(".commentlist").prepend(newmsg);
+                } else {
+                    $(".comt-error").text("管理员正在修复bug,感谢支持");
+                    setTimeout(function () {
+                        $(".comt-error").hide()
+                    }, 5000);
+                }
+            }
+        });
+    }
+    function p(s) {
+        return s < 10 ? '0' + s: s;
+    }
+</script>

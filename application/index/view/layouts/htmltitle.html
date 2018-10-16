@@ -1,0 +1,16 @@
+<div id="blogheader">
+    <div style="float: left;width:70%">
+        <h1>{$blogdata.BlogTitle}</h1>
+        <p>{$blogdata.BlogInfo}</p>
+    </div>
+    <div id="google_search" style="float: left;line-height: 80px;">
+        <!-- 全站查询start -->
+        <form id="selform" action="/blog" id="cse-search-box"  method="post">
+            <div>
+                <input type="text" onkeydown='if(event.keyCode==13){searchsubmit();}' name="keywords" class="searchbox" placeholder="请输入搜索关键词">
+            </div>
+        </form>
+        <!-- 全站查询end -->
+    </div>
+</div>
+<div class="headhr"></div>

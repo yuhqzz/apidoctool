@@ -1,0 +1,23 @@
+<!--网页导航-->
+<div class="breadcrumbs">
+    <a title="返回首页" href="/blog"><i class="fa fa-home"></i></a>
+    <small>&gt;</small>
+    <a href="/blog">首页</a>
+    {if $nowlocation}
+    {if $nowlocation.onemsg}
+    <small>&gt;</small>
+    <span class="muted"><a href="{$nowlocation.oneurl?$nowlocation.oneurl:'#'}">{$nowlocation.onemsg?$nowlocation.onemsg:''}</a></span>
+    {/if}
+    <small>&gt;</small>
+    <span class="muted">{$nowlocation?$nowlocation.lastmsg:''}</span>
+    {/if}
+    <!--滚动公告start-->
+    <div class="speedbar">
+        <ul>
+            <li><a>如果你觉得博客还不错，请Ctrl+D收藏(*^__^*)</a></li>
+            <li><a>如有大神光临请不要黑我的网站(ಥ _ ಥ)</a></li>
+            <li><a>PHP是世界上最好的语言，有任何问题都可以留言一起探究</a></li>
+        </ul>
+    </div>
+    <!--滚动公告end-->
+</div>

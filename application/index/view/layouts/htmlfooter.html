@@ -1,0 +1,132 @@
+{include file="../application/index/view/layouts/twohtmlfooter.html" /}
+{js href="/static/home/js/dropload.min.js" /}
+{if !$nojs}
+<!--文章列表加载代码start-->
+<script type="text/javascript">
+    $(function(){
+        // 页数
+        var page = 1;
+        var typeid=$("#typeid").val();
+        var keywords="{$selkeyword ? $selkeyword:''}";
+        // dropload
+        $('.articlelist').dropload({
+            scrollArea : window,
+            domUp : {
+                domClass   : 'dropload-up',
+                domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
+                domUpdate  : '<div class="dropload-update">↑释放更新</div>',
+                domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+            },
+            domDown : {
+                domClass   : 'dropload-down',
+                domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+                domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+                domNoData  : '<div class="dropload-noData">没有更多数据了</div>'
+            },
+            loadDownFn : function(me){
+                page++;
+                $.ajax({
+                    type: 'POST',
+                    url: '/blog/articlenext',
+                    data:"cpage="+page+"&typeid="+typeid+"&keywords="+keywords,
+                    dataType:"html",
+                    success: function(data){
+                        if(data){
+                        }else{
+                            // 锁定
+                            me.lock();
+                            // 无数据
+                            me.noData();
+                        }
+                        // 为了测试，延迟1秒加载
+                        setTimeout(function(){
+                            // 插入数据到页面，放到最后面
+                            $('.articdata').append(data);
+                            // 每次数据插入，必须重置
+                            me.resetload();
+                        },1000);
+                    },
+                    error: function(xhr, type){
+                        alert('Ajax error!');
+                        // 即使加载出错，也得重置
+                        me.resetload();
+                    }
+                });
+            },
+            threshold : 50
+        });
+
+        b();
+        $('#gotop').click(function(){
+            $(document).scrollTop(0);
+        });
+        function b(){
+            h = $(window).height();
+            t = $(document).scrollTop();
+            if(t > h){
+                $('#gotop').show();
+            }else{
+                $('#gotop').hide();
+            }
+        }
+
+        $(window).scroll(function(e){
+            b();
+        });
+
+    });
+</script>
+<!--文章列表加载代码end-->
+{/if}
+
+<script type="text/javascript">
+    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent)) document.body.classList.add('mobile');
+
+    /*网站点赞/文章点赞/评论点赞*/
+    function likeoperation(datatype,dataid)
+    {
+        $.ajax({
+            type: "POST",
+            url: "/blog/dolike",
+            data:"datatype="+datatype+"&dataid="+dataid,
+            success: function(msg){
+                var ms = eval('(' + msg + ')');
+                if(ms==0)
+                {
+                    if(datatype==0)
+                    {
+                        $("#likemsg").html("已经收到你的 ❤ 啦");
+                    }
+                    else if(datatype==1)
+                    {
+                        $("#artlikenumi"+dataid).addClass("fa-heart");
+                        $("#artlikenumi"+dataid).removeClass("fa-heart-o");
+                    }
+                }
+                else {
+                    if (datatype == 0) {
+                        var msg = ["I ❤ you too (*￣▽￣*)", "你很有眼光哇\(^o^)/", "你太帅嘞︿(￣︶￣)︿", "PHP是最好的语言^O^", "喜欢我就收藏我(∩_∩)"];
+                        var likemsg = msg[Math.floor(Math.random() * msg.length)];
+                        $("#likemsg").html(likemsg);
+                        var likenum = $("#likenum").html();
+                        if(likenum==0) {
+                            $("#likenum").html(1);
+                        }else {
+                            $("#likenum").html(parseInt(likenum) + 1);
+                        }
+                    }else if(datatype==1){
+                        var artnum=$("#artlikenum"+dataid).text();
+                        if(artnum==""||artnum==0)
+                        {
+                            $("#artlikenum"+dataid).text(1);
+                        }else{
+                            $("#artlikenum"+dataid).text(parseInt(artnum)+1);
+                        }
+                        $("#artlikenumi"+dataid).addClass("fa-heart");
+                        $("#artlikenumi"+dataid).removeClass("fa-heart-o");
+                    }
+                }
+            }
+        });
+    }
+</script>
