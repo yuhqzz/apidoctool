@@ -1,0 +1,19 @@
+<div class="panel-heading">{$project.projectid==0?"添加":"编辑"}项目</div>
+<div class="panel-body">
+    <form action="/admin/doAddProject" method="POST">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="projectname">项目名称</label>
+                <input type="hidden" name="proid" value="{$project.projectid}"/>
+                <input type="text" name="projectname" value="{$project.project_name}" class="form-control" placeholder="请输入项目名称">
+            </div>
+            <div class="form-group">
+                <label for="projectinfo">项目简介</label>
+                <input type="text" name="projectinfo" value="{$project.project_info}" class="form-control" placeholder="请输入项目简介">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">确认保存</button>
+            </div>
+        </div>
+    </form>
+</div>

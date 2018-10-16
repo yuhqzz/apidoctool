@@ -1,9 +1,9 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:90:"/Users/liudanfeng/Documents/www/blog/public/../application/admin/view/adminauth/login.html";i:1503300356;s:49:"../application/admin/view/layouts/htmlheader.html";i:1503300356;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/adminauth/login.html";i:1539667891;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539668118;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-<title>博客管理后台</title>
+<title>接口文档管理后台</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.4 -->
 <link rel="stylesheet" type="text/css" href="/static/admin/css/bootstrap.css" />
@@ -50,7 +50,7 @@
 <body class="hold-transition login-page" onkeydown="keyLogin();">
 <div class="login-box">
     <div class="login-logo">
-        <b>博客管理后台登录</b>
+        <b>接口文档管理登录</b>
     </div><!-- /.login-logo -->
 
     <div class="alert alert-danger" style="display: none" id="errordiv">
@@ -64,7 +64,7 @@
         <p class="login-box-msg">登录 管理后台</p>
         <form action="admin/dologin" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="用户名、手机号" name="username" id="username"/>
+                <input type="text" class="form-control" placeholder="用户名" name="username" id="username"/>
             </div>
             <div class="form-group has-feedback">
                 <input type="password" class="form-control" placeholder="密 码" name="password" id="password"/>

@@ -1,8 +1,8 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:90:"/Users/liudanfeng/Documents/www/blog/public/../application/admin/view/adminauth/index.html";i:1503300356;s:78:"/Users/liudanfeng/Documents/www/blog/application/admin/view/layouts/admin.html";i:1503300356;s:49:"../application/admin/view/layouts/htmlheader.html";i:1503300356;s:49:"../application/admin/view/layouts/mainheader.html";i:1503300356;s:45:"../application/admin/view/layouts/menuer.html";i:1503300356;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1503300356;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:95:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/projects.html";i:1539676147;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539671571;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539668118;s:49:"../application/admin/view/layouts/mainheader.html";i:1539668144;s:45:"../application/admin/view/layouts/menuer.html";i:1539671411;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539669772;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
-<title>博客管理后台</title>
+<title>接口文档管理后台</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.4 -->
 <link rel="stylesheet" type="text/css" href="/static/admin/css/bootstrap.css" />
@@ -48,7 +48,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">Shop</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg">博客管理后台</span>
+        <span class="logo-lg">接口文档管理后台</span>
     </a>
 
     <!-- Header Navbar -->
@@ -118,13 +118,28 @@
 
             <li>
                 <a href="#">
-                    <i class='fa fa-desktop'></i> <span>分类管理</span>
+                    <i class='fa fa-desktop'></i> <span>项目管理</span>
                     <i class="pull-right fa fa-caret-down"></i>
                 </a>
 
                 <ul class="treeview-menu">
                     <li>
-                        <a href="/admin/types">文章分类列表
+                        <a href="/admin/projects">项目列表
+                            <i class="pull-right fa"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/types">接口版块列表
+                            <i class="pull-right fa"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/types">接口列表
+                            <i class="pull-right fa"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/types">项目环境管理
                             <i class="pull-right fa"></i>
                         </a>
                     </li>
@@ -133,38 +148,13 @@
 
             <li>
                 <a href="#">
-                    <i class='fa fa-desktop'></i> <span>文章管理</span>
+                    <i class='fa fa-desktop'></i> <span>用户管理</span>
                     <i class="pull-right fa fa-caret-down"></i>
                 </a>
 
                 <ul class="treeview-menu">
                     <li>
-                        <a href="/admin/articles">文章列表
-                            <i class="pull-right fa"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/gossips">闲言碎语
-                            <i class="pull-right fa"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/artrecycle">回收站
-                            <i class="pull-right fa"></i>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class='fa fa-desktop'></i> <span>系统设置</span>
-                    <i class="pull-right fa fa-caret-down"></i>
-                </a>
-
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="/admin/system">博客配置
+                        <a href="/admin/system">用户管理
                             <i class="pull-right fa"></i>
                         </a>
                     </li>
@@ -188,15 +178,52 @@
         <section class="content">
             <div class="container spark-screen">
                 <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
+                    <div class="col-md-10">
                         <div class="panel panel-default">
-                            <div class="panel-heading">后台首页</div>
+                            <div class="panel-heading">项目列表
+   <a style="float:right;margin-top:-6px;" href="/admin/addproject" class="btn btn-primary">添加项目</a>
+</div>
 
 <div class="panel-body">
-    欢迎登陆博客管理后台！
-    <?php echo $userdata['LoginName']; ?>
-    <br/>
-    登录IP：<?php echo $userdata['LoginIP']; ?>
+    <div class="box-body">
+        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-hover dataTable" >
+                        <thead>
+                        <tr>
+                            <th>项目ID</th>
+                            <th>项目名称</th>
+                            <th>创建人ID</th>
+                            <th>创建人</th>
+                            <th>编辑</th>
+                            <th>删除</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($projects as $project): ?>
+                        <tr>
+                            <td><?php echo $project['projectid']; ?></td>
+                            <td><?php echo $project['project_name']; ?></td>
+                            <td><?php echo $project['create_userid']; ?></td>
+                            <td><?php echo $project['create_user']; ?></td>
+                            <td><a href="/admin/addproject/<?php echo $project['projectid']; ?>"><i class="fa fa-pencil fa-fw" style="font-size: 20px;"></i></a></td>
+                            <td><a href="/admin/delproject/<?php echo $project['projectid']; ?>" onclick="return confirm('确定要删除该项目么？')"><i class="fa fa-trash-o fa-fw" style="font-size: 20px;"></i></a></td>
+                        </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9 ">
+                    <?php echo !empty($projects)?"":"暂无数据"; ?>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>
                         </div>
                     </div>
@@ -209,7 +236,7 @@
 <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-        <a href="#"></a><b>博客管理后台</b></a>. 刘单风专用后台
+        <a href="#"></a><b>接口文档管理后台</b></a>. 刘单风专用后台
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; <a href="#">刘单风</a>.</strong>  刘单风所有

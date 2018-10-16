@@ -17,7 +17,6 @@ class Adminauth extends Controller
      */
     public function Login()
     {
-//        phpinfo();
         // 临时关闭当前模板的布局功能
         $this->view->engine->layout(false);
         Session::set('adminuser',null,'admin');
@@ -38,9 +37,9 @@ class Adminauth extends Controller
             exit();
         }
         //查询数据写入session
-        $adminuser=db('admin_users')
-            ->where('LoginName',$_POST['username'])
-            ->where('LoginPwd',md5($_POST['password']))
+        $adminuser=db('doc_users')
+            ->where('username',$_POST['username'])
+            ->where('userpwd',md5($_POST['password']))
             ->find();
         if($adminuser)
         {

@@ -1,8 +1,8 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:89:"/Users/liudanfeng/Documents/www/blog/public/../application/admin/view/admin/articles.html";i:1503300356;s:78:"/Users/liudanfeng/Documents/www/blog/application/admin/view/layouts/admin.html";i:1503300356;s:49:"../application/admin/view/layouts/htmlheader.html";i:1503300356;s:49:"../application/admin/view/layouts/mainheader.html";i:1503300356;s:45:"../application/admin/view/layouts/menuer.html";i:1503300356;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1503300356;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:97:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/addproject.html";i:1539672937;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539671571;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539668118;s:49:"../application/admin/view/layouts/mainheader.html";i:1539668144;s:45:"../application/admin/view/layouts/menuer.html";i:1539671411;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539669772;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
-<title>博客管理后台</title>
+<title>接口文档管理后台</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.4 -->
 <link rel="stylesheet" type="text/css" href="/static/admin/css/bootstrap.css" />
@@ -48,7 +48,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">Shop</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg">博客管理后台</span>
+        <span class="logo-lg">接口文档管理后台</span>
     </a>
 
     <!-- Header Navbar -->
@@ -118,13 +118,28 @@
 
             <li>
                 <a href="#">
-                    <i class='fa fa-desktop'></i> <span>分类管理</span>
+                    <i class='fa fa-desktop'></i> <span>项目管理</span>
                     <i class="pull-right fa fa-caret-down"></i>
                 </a>
 
                 <ul class="treeview-menu">
                     <li>
-                        <a href="/admin/types">文章分类列表
+                        <a href="/admin/projects">项目列表
+                            <i class="pull-right fa"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/types">接口版块列表
+                            <i class="pull-right fa"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/types">接口列表
+                            <i class="pull-right fa"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/types">项目环境管理
                             <i class="pull-right fa"></i>
                         </a>
                     </li>
@@ -133,38 +148,13 @@
 
             <li>
                 <a href="#">
-                    <i class='fa fa-desktop'></i> <span>文章管理</span>
+                    <i class='fa fa-desktop'></i> <span>用户管理</span>
                     <i class="pull-right fa fa-caret-down"></i>
                 </a>
 
                 <ul class="treeview-menu">
                     <li>
-                        <a href="/admin/articles">文章列表
-                            <i class="pull-right fa"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/gossips">闲言碎语
-                            <i class="pull-right fa"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/artrecycle">回收站
-                            <i class="pull-right fa"></i>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class='fa fa-desktop'></i> <span>系统设置</span>
-                    <i class="pull-right fa fa-caret-down"></i>
-                </a>
-
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="/admin/system">博客配置
+                        <a href="/admin/system">用户管理
                             <i class="pull-right fa"></i>
                         </a>
                     </li>
@@ -188,56 +178,26 @@
         <section class="content">
             <div class="container spark-screen">
                 <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
+                    <div class="col-md-10">
                         <div class="panel panel-default">
-                            <div class="panel-heading">文章列表
-   <a style="float:right;margin-top:-6px;" href="/admin/addarticle" class="btn btn-primary">写新文章</a>
-</div>
-
+                            <div class="panel-heading"><?php echo $project['projectid']==0?"添加":"编辑"; ?>项目</div>
 <div class="panel-body">
-    <div class="box-body">
-        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-            <div class="row">
-                <div class="col-sm-12">
-                    <table class="table table-hover dataTable" >
-                        <thead>
-                        <tr>
-                            <th>文章ID</th>
-                            <th>文章标题</th>
-                            <th>阅读</th>
-                            <th>是否发布</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach($articles as $article): ?>
-                        <tr>
-                            <td><?php echo $article['ArticleID']; ?></td>
-                            <td><?php echo $article['ArticleTitle']; ?>(<?php echo date("y-m-d",$article['PublishTime']); ?>)</td>
-                            <td><?php echo $article['ReadNum']; ?></td>
-                            <td><?php echo $article['IsPublish']==1?'已发布':'未发布'; ?></td>
-                            <td>
-                                <a href="/admin/addarticle/<?php echo $article['ArticleID']; ?>"><i class="fa fa-pencil fa-fw" style="font-size: 20px;"></i></a>
-                                <a href="/admin/delarticle/<?php echo $article['ArticleID']; ?>" onclick="return confirm('确定要删除该文章么？')"><i class="fa fa-trash-o fa-fw" style="font-size: 20px;"></i></a>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                    <div class="col-sm-7" style="float: right">
-                    <?php echo $articles->render(); ?>
-                    </div>
-                </div>
+    <form action="/admin/doAddProject" method="POST">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="projectname">项目名称</label>
+                <input type="hidden" name="proid" value="<?php echo $project['projectid']; ?>"/>
+                <input type="text" name="projectname" value="<?php echo $project['project_name']; ?>" class="form-control" placeholder="请输入项目名称">
             </div>
-            <div class="row">
-                <div class="col-md-9 ">
-                    <?php echo !empty($articles[0])?"":"暂无数据"; ?>
-                </div>
-
+            <div class="form-group">
+                <label for="projectinfo">项目简介</label>
+                <input type="text" name="projectinfo" value="<?php echo $project['project_info']; ?>" class="form-control" placeholder="请输入项目简介">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">确认保存</button>
             </div>
         </div>
-    </div>
-
+    </form>
 </div>
                         </div>
                     </div>
@@ -250,7 +210,7 @@
 <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-        <a href="#"></a><b>博客管理后台</b></a>. 刘单风专用后台
+        <a href="#"></a><b>接口文档管理后台</b></a>. 刘单风专用后台
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; <a href="#">刘单风</a>.</strong>  刘单风所有

@@ -6,8 +6,8 @@
  * 版权：刘单风个人所有
  */
 namespace app\admin\controller;
+use app\common\model\Projects;
 use think\Controller;
-use think\Db;
 use think\Hook;
 class Admin extends Controller
 {
@@ -18,128 +18,61 @@ class Admin extends Controller
     }
 
     /**
-     * 博客配置页面
+     * 项目列表
      */
-    public function Systempage()
+    public function Projectlists()
     {
-        $data = Db::table('blog_config')
-            ->where('ConfID', 1)
-            ->find();
-        $this->assign('blogconfig', $data);
-        return $this->fetch('systempage');
+        $projectsModel = new Projects();
+        $projectdata = $projectsModel->projectlists();
+        $this->assign('projects', $projectdata);
+        return $this->fetch('projects');
     }
 
     /**
-     * 博客配置页面保存
+     * 添加/编辑项目
+     * @param int $proid 项目id
      */
-    public function Setsystem()
+    public function addProject($proid = 0)
     {
-        //博客标题
-        if ($_POST['systemname']) {
-            $updata['BlogTitle'] = $_POST['systemname'];
-        }
-
-        //博客描述
-        if ($_POST['systemmsg']) {
-            $updata['BlogInfo'] = $_POST['systemmsg'];
-        }
-
-        //文章每页显示个数
-        if ($_POST['pagenum']) {
-            $updata['PageNum'] = $_POST['pagenum'];
-        }
-
-        //版权声明
-        if ($_POST['copyright']) {
-            $updata['CopyRight'] = $_POST['copyright'];
-        }
-
-        //更新数据库
-        if ($updata) {
-            Db::table('blog_config')
-                ->where('ConfID', 1)
-                ->update($updata);
-        }
-        $this->success('保存配置成功', '/admin/system');
-    }
-
-    /**
-     * 文章分类列表
-     */
-    public function Typelists()
-    {
-        $data = Db::table('article_type')
-            ->where('IsLogicDel', 0)
-            ->select();
-        $this->assign('articletypes', $data);
-        return $this->fetch('typelists');
-    }
-
-    /**
-     * 添加/编辑文章分类
-     * @param int $typeid 分类ID
-     */
-    public function addType($typeid = 0)
-    {
-        $data = array(
-            "TypeID" => 0,
-            "TypeName" => ""
-        );
-        if ($typeid) {
-            $data = Db::table('article_type')
-                ->where('TypeID', $typeid)
-                ->where("IsLogicDel", 0)
-                ->find();
-        }
-        $this->assign("typedata", $data);
-        return $this->fetch('addtype');
-    }
-
-    /**
-     * 文章分类保存
-     */
-    public function doAddtype()
-    {
-        //查询当前分类是否存在
-        if ($_POST['typeid']) {
-            $data = Db::table('article_type')
-                ->where('TypeName', $_POST['typename'])
-                ->where("TypeID!=" . $_POST['typeid'])
-                ->where("IsLogicDel", 0)
-                ->find();
+        $projectsModel = new Projects();
+        if ($proid) {
+            $projectdata = $projectsModel->prodetails($proid);
         } else {
-            $data = Db::table('article_type')
-                ->where('TypeName', $_POST['typename'])
-                ->where("IsLogicDel", 0)
-                ->find();
+            $projectdata = $projectsModel->toArray();
         }
+        $this->assign("project", $projectdata);
+        return $this->fetch('addproject');
+    }
+
+    /**
+     * 项目保存
+     */
+    public function doAddProject()
+    {
+        $projectsModel = new Projects();
+        //查询项目是否存在
+        $data = $projectsModel->proisexist($_POST['proid'], $_POST['projectname']);
         if ($data) {
-            $this->error('该分类已经存在，请重新输入', '/admin/addtype');
+            $this->error('该项目已经存在，请重新输入', '/admin/addproject');
         } else {
-            $data = [
-                'TypeName' => $_POST['typename'],
-                'IsHidden' => $_POST['typestatus'],
-                'TypeShort' => $_POST['typeshort'],
-                'TypeColor' => $_POST['typecolor']
-            ];
-            if ($_POST['typeid']) {
-                Db::table('article_type')->where('TypeID=' . $_POST['typeid'])->update($data);
-            } else {
-                Db::table('article_type')->insert($data);
-            }
-            $this->success('保存成功', '/admin/types');
+            $projectsModel->proinsert($_POST['proid'], $_POST['projectname'], $_POST['projectinfo']);
+            $this->success('保存成功', '/admin/projects');
         }
     }
 
     /**
-     * 删除分类
-     * @param $typeid 分类ID
+     * 删除项目
+     * @param $typeid 项目id
      */
-    public function delType($typeid)
+    public function delProject($proid)
     {
-        $data = ['IsLogicDel' => 1];
-        Db::table('article_type')->where('TypeID=' . $typeid)->update($data);
-        $this->success('删除成功', '/admin/types');
+        $projectsModel = new Projects();
+        $result = $projectsModel->deletepro($proid);
+        if ($result) {
+            $this->error('你没权限删除该项目,请联系管理员', '/admin/projects');
+        } else {
+            $this->success('删除成功', '/admin/projects');
+        }
     }
 
     /**

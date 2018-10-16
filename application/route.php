@@ -21,15 +21,12 @@ Route::rule('adminauth/index','admin/Adminauth/Index');
  * 后台管理相关
  */
 Route::group('admin',[
-    //博客配置
-    'system'   => ['admin/Admin/Systempage', ['method' => 'get']],
-    'setsystem'   => ['admin/Admin/Setsystem', ['method' => 'post']],
 
-    //文章分类
-    'types'   => ['admin/Admin/Typelists', ['method' => 'get']],
-    'addtype/[:typeid]' => ['admin/Admin/addType', ['method' => 'get']],
-    'doAddtype' => ['admin/Admin/doAddtype', ['method' => 'post']],
-    'deltype/:typeid' => ['admin/Admin/delType'],
+    //项目列表
+    'projects'   => ['admin/Admin/Projectlists', ['method' => 'get']],
+    'addproject/[:proid]' => ['admin/Admin/addProject', ['method' => 'get']],
+    'doAddProject' => ['admin/Admin/doAddProject', ['method' => 'post']],
+    'delProject/:proid' => ['admin/Admin/delProject'],
 
     //文章管理
     'articles'   => ['admin/Admin/Articles', ['method' => 'get']],
