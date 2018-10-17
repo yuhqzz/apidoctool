@@ -137,4 +137,72 @@ class Admin extends Controller
         }
     }
 
+    /**
+     * 接口列表
+     * @param $moduleid
+     */
+    public function Docapis($proid=0,$moduleid=0)
+    {
+        $projectsModel = new Projects();
+        $docapis = $projectsModel->docapis($proid, $moduleid);
+        $this->assign("docapis", $docapis);
+        $this->assign("moduleid", $moduleid);
+        $this->assign("proid", $proid);
+        return $this->fetch('docapis');
+    }
+
+    /**
+     * 添加、编辑接口
+     * @param $apiid
+     */
+    public function addDocapi($proid,$moduleid,$apiid=0){
+        $projectsModel = new Projects();
+        if ($apiid) {
+            $apidata = $projectsModel->apidetails($apiid);
+            $proid=$apidata['apiid'];
+            $moduleid=$apidata['moduleid'];
+        } else {
+            $apidata = $projectsModel->toArray();
+        }
+        //获取项目列表
+        $prolists=$projectsModel->projectlists();
+        if($proid){
+            //获取项目下的版块列表
+            $modules=$projectsModel->promodules($proid);
+        }
+        $this->assign("docapi", $apidata);
+        $this->assign("prolists", $prolists);
+        $this->assign("modules", $modules);
+        $this->assign("proid", $proid);
+        $this->assign("moduleid", $moduleid);
+        $this->assign("apiid", $apiid);
+        return $this->fetch('adddocapi');
+    }
+
+    /**
+     * 接口保存
+     */
+    public function doAddapi()
+    {
+        $projectsModel = new Projects();
+        //查询项目是否存在
+        $data = $projectsModel->apiisexist($_POST['apiid'], $_POST['apiname'], $_POST['projectid']);
+        if ($data) {
+            $this->error('该接口已经存在，请重新输入', '/admin/adddocapi/' . $_POST['proid'] . "/" . $_POST['moduleid']);
+        } else {
+            $projectsModel->apiinsert($_POST);
+            $this->success('保存成功', '/admin/docapis/' . $_POST['proid']);
+        }
+    }
+
+    /**
+     * 根据项目id获取此项目下的版块列表
+     */
+    public function getModuleByproid(){
+        $projectsModel = new Projects();
+        $modules=$projectsModel->promodules($_POST['proid']);
+        return json($modules);
+
+    }
+
 }

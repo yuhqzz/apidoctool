@@ -197,24 +197,180 @@ class Projects extends Model
 
     //删除版块
     public function deletemodule($proid,$moduleid)
-{
-    $userid = $this->user['userid'];
-    //查看当前用户是否有权限删除
-    $proids = Db::table('doc_jurisdiction')->name('projectid')
-        ->where('userid', $userid)
-        ->where('projectid', $proid)
-        ->where('level', 1)
-        ->select();
-    if ($proids || $this->user['username'] == "admin") {
-        $data = ['is_logic_del' => 1];
-        Db::table('doc_module')
-            ->where('projectid=' . $proid)
-            ->where('id=' . $moduleid)
-            ->update($data);
-        return 0;
-    } else {
-        //没有权限删除
-        return 1;
+    {
+        $userid = $this->user['userid'];
+        //查看当前用户是否有权限删除
+        $proids = Db::table('doc_jurisdiction')->name('projectid')
+            ->where('userid', $userid)
+            ->where('projectid', $proid)
+            ->where('level', 1)
+            ->select();
+        if ($proids || $this->user['username'] == "admin") {
+            $data = ['is_logic_del' => 1];
+            Db::table('doc_module')
+                ->where('projectid=' . $proid)
+                ->where('id=' . $moduleid)
+                ->update($data);
+            return 0;
+        } else {
+            //没有权限删除
+            return 1;
+        }
     }
-}
+
+    //接口列表数据
+    public function docapis($proid,$moduleid)
+    {
+        $where = "is_logic_del=0";
+        if ($proid) {
+            $where .= " AND projectid=$proid";
+        }
+        if ($moduleid) {
+            $where .= " AND moduleid=$moduleid";
+        }
+        $modules = Db::table('doc_api')
+            ->where($where)
+            ->paginate(20,false,['query'=>request()->param()])->each(function($item, $key){
+                //项目名称
+                $proname = Db::table('doc_projects')->name('project_name')
+                    ->where('projectid', $item['projectid'])
+                    ->find();
+                $item['project_name'] = $proname['project_name'];
+                //版块名称
+                $modulename = Db::table('doc_module')->name('module_name')
+                    ->where('id', $item['moduleid'])
+                    ->find();
+                $item['module_name'] = $modulename['module_name'];
+                //创建人姓名
+                $createuser = Common::userdata($item['create_userid']);
+                $item['create_user'] = $createuser['username'];
+                //修改人姓名
+                $createuser = Common::userdata($item['update_userid']);
+                $item['update_user'] = $createuser['username'];
+                return $item;
+            });
+        return $modules;
+    }
+
+    //接口详情
+    public function apidetails($apiid)
+    {
+        $docapi = Db::table('doc_api')
+            ->where('apiid', $apiid)
+            ->find();
+        //项目名称
+        $proname = Db::table('doc_projects')->name('project_name')
+            ->where('projectid', $docapi['projectid'])
+            ->find();
+        $docapi['project_name'] = $proname['project_name'];
+        //版块名称
+        $modulename = Db::table('doc_module')->name('module_name')
+            ->where('id', $docapi['moduleid'])
+            ->find();
+        $docapi['module_name'] = $modulename['module_name'];
+        //创建人姓名
+        $createuser = Common::userdata($docapi['create_userid']);
+        $docapi['create_user'] = $createuser['username'];
+        //修改人姓名
+        $createuser = Common::userdata($docapi['update_userid']);
+        $docapi['update_user'] = $createuser['username'];
+        //获取当前接口的请求参数
+        $reqparams = Db::table('doc_params')
+            ->where('apiid', $apiid)
+            ->where('data_type', 0)
+            ->select();
+        $docapi['req_params'] = $reqparams;
+        //获取当前接口的响应参数
+        $resparams = Db::table('doc_params')
+            ->where('apiid', $apiid)
+            ->where('data_type', 1)
+            ->select();
+        $docapi['res_params'] = $resparams;
+        return $docapi;
+    }
+
+    //查看当前项目下有没有此接口
+    public function apiisexist($apiid, $apiname, $proid)
+    {
+        if ($apiid) {
+            $apidata = Db::table('doc_api')
+                ->where('apiid!=' . $apiid)
+                ->where('api_name', $apiname)
+                ->where('projectid', $proid)
+                ->find();
+        } else {
+            $apidata = Db::table('doc_api')
+                ->where('api_name', $apiname)
+                ->where('projectid', $proid)
+                ->find();
+        }
+        return $apidata;
+    }
+
+    //保存接口
+    public function apiinsert($reqdata)
+    {
+        $userid = $this->user['userid'];
+        $data = [
+            "api_name" => $reqdata['apiname'],
+            "moduleid" => $reqdata['moduleid'],
+            "api_info" => $reqdata['apiinfo'],
+            "api_url" => $reqdata['apiurl'],
+            "api_test_url" => $reqdata['apitesturl'],
+            "api_format" => $reqdata['apiformat'],
+            "api_request" => $reqdata['apirequest'],
+            "projectid" => $reqdata['projectid'],
+            "success_result" => $reqdata['successresult'],
+            "failed_result" => $reqdata['failedresult'],
+            "update_time" => time(),
+            "update_userid" => $userid,
+        ];
+        if ($reqdata['apiid']) {
+            Db::table('doc_api')
+                ->where('projectid=' . $reqdata['projectid'])
+                ->where('apiid', $reqdata['apiid'])
+                ->update($data);
+            $apiid = $reqdata['apiid'];
+        } else {
+            $data['create_time'] = time();
+            $data['create_userid'] = $userid;
+            Db::table('doc_api')->insert($data);
+            $apiid = Db::name('doc_api')->getLastInsID();
+        }
+        //保存请求/响应参数数据
+        //清空原来的请求参数数据
+        Db::table('doc_params')
+            ->where('data_type', 0)
+            ->where('apiid', $reqdata['apiid'])
+            ->delete();
+        for ($i = 0; $i < count($reqdata['reqname']); $i++) {
+            $reqdta = [
+                'param_name' => $reqdata['reqname'][$i],
+                'param_type' => $reqdata['reqtype'][$i],
+                'is_required' => $reqdata['reqisrequired'][$i],
+                'max_length' => $reqdata['reqmaxlenth'][$i],
+                'param_info' => $reqdata['reqinfo'][$i],
+                'data_type' => 0,
+                'apiid' => $apiid
+            ];
+            Db::table('doc_params')->insert($reqdta);
+        }
+        //清空原来的响应参数
+        Db::table('doc_params')
+            ->where('data_type', 1)
+            ->where('apiid', $reqdata['apiid'])
+            ->delete();
+        for ($i = 0; $i < count($reqdata['resname']); $i++) {
+            $reqdta = [
+                'param_name' => $reqdata['resname'][$i],
+                'param_type' => $reqdata['restype'][$i],
+                'is_required' => $reqdata['resisrequired'][$i],
+                'max_length' => $reqdata['resmaxlenth'][$i],
+                'param_info' => $reqdata['resinfo'][$i],
+                'data_type' => 1,
+                'apiid' => $reqdata['apiid']
+            ];
+            Db::table('doc_params')->insert($reqdta);
+        }
+    }
 }

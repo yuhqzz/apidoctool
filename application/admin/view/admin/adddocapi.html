@@ -1,0 +1,255 @@
+<div class="panel-heading">{$docapi.apiid?"编辑":"添加"}接口</div>
+<div class="panel-body">
+    <form action="/admin/doAddapi" method="POST" onsubmit="return datacheck()"  enctype="multipart/form-data">
+        <div class="box-body">
+            <div class="form-group"  style="clear:both;padding-top:20px;">
+                <label for="apiname" >接口名称</label>
+                <input type="hidden" id="apiid" name="apiid" value="{$docapi?$docapi.apiid:''}"/>
+                <input type="text" id="apiname" name="apiname" value="{$docapi.api_name?$docapi.api_name:''}" class="form-control" placeholder="请输入接口名称">
+            </div>
+            <div class="form-group" style="padding-top:20px;float:left;width:40%;">
+                <label for="projectid" class="apiformlabel">接口所属项目</label>
+                <select style="width:55%" class="form-control" id="projectid" name="projectid" onchange="projectchange()">
+                    <option value="0">请选择项目</option>
+                    {foreach $prolists as $pro}
+                    <option value="{$pro.projectid}" {$proid ? ($proid==$pro.projectid ? 'selected' : ''):''} >{$pro.project_name}</option>
+                    {/foreach}
+                </select>
+            </div>
+
+            <div class="form-group" style="padding-top:20px;float:left;width:40%;">
+                <label for="moduleid" class="apiformlabel">接口所属版块</label>
+                <select style="width:55%" class="form-control" id="moduleid" name="moduleid">
+                    <option value="0">请选择版块</option>
+                    {foreach $modules as $module}
+                    <option value="{$module.id}" {$moduleid ? ($moduleid==$module.id ? 'selected' : ''):''} >{$module.module_name}</option>
+                    {/foreach}
+                </select>
+            </div>
+
+            <div class="form-group" style="clear:both;padding-top:10px;">
+                <label for="apiinfo">接口介绍</label>
+                <textarea id="apiinfo" name="apiinfo" class="form-control" placeholder="请输入接口介绍">{$docapi.api_info?$docapi.api_info:''}</textarea>
+            </div>
+
+            <div class="form-group" style="clear:both;padding-top:10px;">
+                <label for="apiurl">接口正式地址</label>
+                <input type="text" id="apiurl" name="apiurl" value="{$docapi.api_url?$docapi.api_url:''}" class="form-control" placeholder="请输入接口正式地址">
+            </div>
+
+            <div class="form-group" style="clear:both;padding-top:10px;">
+                <label for="apitesturl">接口测试地址</label>
+                <input type="text" id="apitesturl" name="apitesturl" value="{$docapi.api_test_url?$docapi.api_test_url:''}" class="form-control" placeholder="请输入接口测试地址">
+            </div>
+
+            <div class="form-group" style="clear:both;padding-top:10px;width:40%;float: left">
+                <label for="apiformat" class="apiformlabel">接口支持格式</label>
+               <input style="width:55%;" type="text" value="JSON" name="apiformat" id="apiformat" class="form-control"/>
+            </div>
+
+
+            <div class="form-group" style="padding-top:10px;width:40%;float: left">
+                <label for="apirequest" class="apiformlabel">接口请求方式</label>
+                <select onchange="requestchange(this.value)" class="form-control" id="apirequest" name="apirequest" style="width:55%;float:left">
+                    <option value="-1" {$docapi?'':'selected'}>请选择</option>
+                    <option value="0" {$docapi?$docapi.api_request==0 ? 'selected' : '':''}>GET</option>
+                    <option value="1" {$docapi?$docapi.api_request==1 ? 'selected' : '':''}>POST</option>
+                    <option value="2" {$docapi?$docapi.api_request==2 ? 'selected' : '':''}>PUT</option>
+                    <option value="2" {$docapi?$docapi.api_request==3 ? 'selected' : '':''}>DELETE</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="clear:both;bpadding-top:10px;">
+                <label>接口请求参数&nbsp;&nbsp;&nbsp;
+                    <a href="javascript:void(0)" onclick="addreqRow()">
+                    <i class="fa fa-edit" title="添加参数"></i> </a>
+                </label>
+                <table class="table table-hover dataTable" >
+                    <thead>
+                    <tr>
+                        <th>参数名称</th>
+                        <th>参数类型</th>
+                        <th>是否必填</th>
+                        <th>最大长度</th>
+                        <th>参数描述</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="reqparamtable">
+                    {foreach $docapi.req_params as $reqparam}
+                    <tr>
+                        <td><input type='text' name='reqname[]' value="{$reqparam.param_name}" class='form-control' placeholder='参数名称'/></td>
+                        <td><input type='text' name='reqtype[]' value="{$reqparam.param_type}"  class='form-control' placeholder='参数类型'/></td>
+                        <td>
+                            <select class="form-control"  name="reqisrequired[]" style="width:80%;float:left">
+                                <option value="0" {$reqparam?$reqparam.is_required==0 ? 'selected' : '':''}>必填</option>
+                                <option value="1" {$reqparam?$reqparam.is_required==1 ? 'selected' : '':''}>可选</option>
+                                <option value="2" {$reqparam?$reqparam.is_required==2 ? 'selected' : '':''}>特殊可选</option>
+                            </select>
+                        </td>
+                        <td><input type='text' name='reqmaxlenth[]' value="{$reqparam.max_length}" class='form-control' placeholder='最大长度' /></td>
+                        <td><input type='text' name='reqinfo[]' value="{$reqparam.param_info}" class='form-control' placeholder='参数描述'/></td>
+                        <td><a href='javascript:void(0)' onclick='removeRow(this,0);'><i class="fa fa-trash-o fa-fw" style="font-size: 20px;"></i></a></td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+
+
+            </div>
+
+            <div class="form-group" style="padding-top:10px;">
+                <label>接口响应参数&nbsp;&nbsp;&nbsp;
+                    <a href="javascript:void(0)" onclick="addresRow()">
+                        <i class="fa fa-edit" title="添加参数"></i> </a></label>
+                <table class="table table-hover dataTable" >
+                    <thead>
+                    <tr>
+                        <th>参数名称</th>
+                        <th>参数类型</th>
+                        <th>是否必填</th>
+                        <th>最大长度</th>
+                        <th>参数描述</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="resparamtable">
+                    {foreach $docapi.res_params as $resparam}
+                    <tr>
+                        <td><input type='text' name='resname[]' value="{$resparam.param_name}" class='form-control' placeholder='参数名称'/></td>
+                        <td><input type='text' name='restype[]' value="{$resparam.param_type}"  class='form-control' placeholder='参数类型'/></td>
+                        <td>
+                            <select class="form-control" name="resisrequired[]" style="width:80%;float:left">
+                                <option value="0" {$docapi.res_params?$docapi.res_params.is_required==0 ? 'selected' : '':''}>必填</option>
+                                <option value="1" {$docapi.res_params?$docapi.res_params.is_required==1 ? 'selected' : '':''}>可选</option>
+                                <option value="2" {$docapi.res_params?$docapi.res_params.is_required==2 ? 'selected' : '':''}>特殊可选</option>
+                            </select>
+                        </td>
+                        <td><input type='text' name='resmaxlenth[]' value="{$resparam.max_length}" class='form-control' placeholder='最大长度' /></td>
+                        <td><input type='text' name='resinfo[]' value="{$resparam.param_info}" class='form-control' placeholder='参数描述'/></td>
+                        <td><a href='javascript:void(0)' onclick='removeRow(this,1);'><i class="fa fa-trash-o fa-fw" style="font-size: 20px;"></i></a></td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-group" style="clear:both;padding-top:10px;">
+                <label for="successresult">请求成功实例</label>
+                <textarea id="successresult" name="successresult" class="form-control" placeholder="请输入接口请求成功示例">{$docapi.success_result?$docapi.success_result:''}</textarea>
+            </div>
+
+            <div class="form-group" style="clear:both;padding-top:10px;">
+                <label for="failedresult">请求失败实例</label>
+                <textarea id="failedresult" name="failedresult" class="form-control" placeholder="请输入接口请求失败示例">{$docapi.failed_result?$docapi.failed_result:''}</textarea>
+            </div>
+
+            <div class="form-group" style="text-align: center">
+
+                <button type="submit" style="margin-right:10%;" class="btn btn-primary">立即保存</button>
+                <span id="savelabel" style="display: none;padding:5px;margin-left:10%;border:1px solid #FFCC00;background-color: #FFFFCC;color:#008000"></span>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+    //增加请求参数
+    function addreqRow()
+    {
+        var row=document.getElementById("reqparamtable").rows.length;
+        var newRow = document.getElementById("reqparamtable").insertRow(row);
+
+//得到表的对象并插入一行，下面是插入了行以后，填充相应的列节点，如下面所示
+        var oCell = newRow.insertCell(0);//插入列的节点
+        oCell.innerHTML = "<input type='text' name='reqname[]' class='form-control' placeholder='参数名称'/>";//列里面填充的值，innerHtml值列内的所有元素
+
+        oCell = newRow.insertCell(1);
+        oCell.innerHTML="<input type='text' name='reqtype[]'  class='form-control' placeholder='参数类型'/>";
+
+        oCell=newRow.insertCell(2);
+        oCell.innerHTML = " <select class='form-control'  name='reqisrequired[]' style='width:80%;float:left'> <option value='0'>必填</option><option value='1'>可选</option> <option value='2'>特殊可选</option></select>";
+
+        oCell=newRow.insertCell(3);
+        oCell.innerHTML = "<input type='text' name='reqmaxlenth[]' class='form-control' placeholder='最大长度' />";
+
+        oCell=newRow.insertCell(4);
+        oCell.innerHTML = "<input type='text' name='reqinfo[]' class='form-control' placeholder='参数描述'/>";
+
+        oCell=newRow.insertCell(5);
+        oCell.innerHTML = "<a href='javascript:void(0)' onclick='removeRow(this,0);'><i class='fa fa-trash-o fa-fw' style='font-size: 20px;'></i></a>";
+
+    }
+
+    //增加响应参数
+    function addresRow()
+    {
+        var row=document.getElementById("resparamtable").rows.length;
+        var newRow = document.getElementById("resparamtable").insertRow(row);
+
+//得到表的对象并插入一行，下面是插入了行以后，填充相应的列节点，如下面所示
+        var oCell = newRow.insertCell(0);//插入列的节点
+        oCell.innerHTML = "<input type='text' name='resname[]' class='form-control' placeholder='参数名称'/>";//列里面填充的值，innerHtml值列内的所有元素
+
+        oCell = newRow.insertCell(1);
+        oCell.innerHTML="<input type='text' name='restype[]'  class='form-control' placeholder='参数类型'/>";
+
+        oCell=newRow.insertCell(2);
+        oCell.innerHTML = " <select class='form-control'  name='resisrequired[]' style='width:80%;float:left'> <option value='0'>必填</option><option value='1'>可选</option> <option value='2'>特殊可选</option></select>";
+
+        oCell=newRow.insertCell(3);
+        oCell.innerHTML = "<input type='text' name='resmaxlenth[]' class='form-control' placeholder='最大长度' />";
+
+        oCell=newRow.insertCell(4);
+        oCell.innerHTML = "<input type='text' name='resinfo[]' class='form-control' placeholder='参数描述'/>";
+
+        oCell=newRow.insertCell(5);
+        oCell.innerHTML = "<a href='javascript:void(0)' onclick='removeRow(this,1);'><i class='fa fa-trash-o fa-fw' style='font-size: 20px;'></i></a>";
+
+    }
+
+    //删除参数
+    function removeRow(src,obj)
+    {
+        var oRow = src.parentElement;  //获取当前事件的父节点
+        if(obj==0){
+            var table="reqparamtable";
+        }else{
+            var table="resparamtable";
+        }
+        document.getElementById(table).deleteRow(oRow.rowIndex);  //删除当前列
+    }
+
+
+    //提交验证
+    function datacheck() {
+        var apiname=$("#apiname").val();
+        var articletitle=$("#articletitle").val();
+        var typeid=$("#typeid").val();
+        if(apiname=="") {
+            alert("请输入接口名称");
+            return false;
+        }
+    }
+
+    //更改项目,重新加载项目版块
+    function projectchange(){
+        var proid = $("#projectid").find('option:selected').val();
+        $.ajax({
+            type: "POST",
+            url: "/admin/getModuleByproid",
+            data:"proid="+proid,
+            success: function(msg){
+                var up = $("#moduleid");
+                $("option",up).remove(); //清空原有的选项
+                var option1 = "<option value='0'>接口所属版块</option>";
+                up.append(option1);
+                $.each(msg,function(index,array){
+                    var option = "<option value='"+array['id']+"'>"+array['module_name']+"</option>";
+                    up.append(option);
+                });
+            }
+        });
+    }
+
+</script>

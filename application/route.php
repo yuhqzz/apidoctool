@@ -34,9 +34,11 @@ Route::group('admin',[
     'doAddmodule' => ['admin/Admin/doAddmodule', ['method' => 'post']],
     'delModule/:proid/:moduleid' => ['admin/Admin/delModule'],
 
-    //文章回收站
-    'artrecycle'   => ['admin/Admin/artRecycle', ['method' => 'get']],
-    'recycledel/:articleid' => ['admin/Admin/delRecycle'],
+    //接口列表数据
+    'docapis/[:proid]/[:moduleid]'   => ['admin/Admin/Docapis', ['method' => 'get']],
+    'addDocapi/:proid/:moduleid/[:apiid]' => ['admin/Admin/addDocapi'],
+    'doAddapi' => ['admin/Admin/doAddapi', ['method' => 'post']],
+    'getModuleByproid' => ['admin/Admin/getModuleByproid', ['method' => 'post']],
 
     //闲言碎语
     'gossips'   => ['admin/Admin/Gossips', ['method' => 'get']],
