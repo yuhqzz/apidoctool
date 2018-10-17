@@ -1,5 +1,5 @@
 <div class="panel-heading">项目列表
-   <a style="float:right;margin-top:-6px;" href="/admin/addproject" class="btn btn-primary">添加项目</a>
+   <a style="float:right;margin-top:-6px;" href="/admin/addProject" class="btn btn-primary">添加项目</a>
 </div>
 
 <div class="panel-body">
@@ -14,8 +14,7 @@
                             <th>项目名称</th>
                             <th>创建人ID</th>
                             <th>创建人</th>
-                            <th>编辑</th>
-                            <th>删除</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -25,8 +24,12 @@
                             <td>{$project.project_name}</td>
                             <td>{$project.create_userid}</td>
                             <td>{$project.create_user}</td>
-                            <td><a href="/admin/addproject/{$project.projectid}"><i class="fa fa-pencil fa-fw" style="font-size: 20px;"></i></a></td>
-                            <td><a href="/admin/delproject/{$project.projectid}" onclick="return confirm('确定要删除该项目么？')"><i class="fa fa-trash-o fa-fw" style="font-size: 20px;"></i></a></td>
+                            <td><a href="/admin/addProject/{$project.projectid}"><i class="fa fa-pencil fa-fw" style="font-size: 20px;" title="编辑"></i></a>
+                                <a href="/admin/delProject/{$project.projectid}" onclick="return confirm('确定要删除该项目么？')"><i class="fa fa-trash-o fa-fw" style="font-size: 20px;" title="删除"></i></a>
+                            <a href="/admin/modules/{$project.projectid}"><i class="fa fa-th-large fa-fw" style="font-size: 20px;" title="接口版块列表"></i></a>
+
+                                <a href="/admin/apis/{$project.projectid}"><i class="fa fa-list fa-fw" style="font-size: 20px;" title="接口列表"></i></a>
+                            </td>
                         </tr>
                         {/foreach}
                         </tbody>

@@ -24,17 +24,15 @@ Route::group('admin',[
 
     //项目列表
     'projects'   => ['admin/Admin/Projectlists', ['method' => 'get']],
-    'addproject/[:proid]' => ['admin/Admin/addProject', ['method' => 'get']],
+    'addProject/[:proid]' => ['admin/Admin/addProject', ['method' => 'get']],
     'doAddProject' => ['admin/Admin/doAddProject', ['method' => 'post']],
     'delProject/:proid' => ['admin/Admin/delProject'],
 
-    //文章管理
-    'articles'   => ['admin/Admin/Articles', ['method' => 'get']],
-    'addarticle/[:articleid]' => ['admin/Admin/addarticle', ['method' => 'get']],
-    'doAddarticle' => ['admin/Admin/doAddarticle', ['method' => 'post']],
-    'ajaxarticle' => ['admin/Admin/doAjaxarticle', ['method' => 'post']],
-    'fileupload' => ['admin/Admin/fileupload', ['method' => 'post']],
-    'delarticle/:articleid' => ['admin/Admin/delArticle'],
+    //接口版块列表
+    'modules/:proid'   => ['admin/Admin/Apimodules', ['method' => 'get']],
+    'addModule/:proid/[:moduleid]' => ['admin/Admin/addModule', ['method' => 'get']],
+    'doAddmodule' => ['admin/Admin/doAddmodule', ['method' => 'post']],
+    'delModule/:proid/:moduleid' => ['admin/Admin/delModule'],
 
     //文章回收站
     'artrecycle'   => ['admin/Admin/artRecycle', ['method' => 'get']],

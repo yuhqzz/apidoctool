@@ -120,4 +120,101 @@ class Projects extends Model
             return 1;
         }
     }
+
+    //接口版块列表
+    public function promodules($proid)
+    {
+        $userid = $this->user['userid'];
+        //查看当前用户是否有权限查看
+        $proids = Db::table('doc_jurisdiction')->name('projectid')
+            ->where('userid', $userid)
+            ->where('projectid', $proid)
+            ->where('level', 1)
+            ->select();
+        if ($proids || $this->user['username'] == "admin") {
+            $modules = Db::table('doc_module')
+                ->where('projectid', $proid)
+                ->where('is_logic_del', 0)
+                ->select();
+            //获取创建人姓名
+            for ($i = 0; $i < count($modules); $i++) {
+                $createuser = Db::table('doc_users')->name('username')
+                    ->where('userid', $modules[$i]['create_userid'])
+                    ->find();
+                $modules[$i]['create_user'] = $createuser['username'];
+            }
+        }
+        return $modules;
+    }
+
+    //接口版块详情
+    public function moduledetails($moduleid)
+    {
+        $module = Db::table('doc_module')
+            ->where('id', $moduleid)
+            ->find();
+        return $module;
+    }
+
+    //查看接口版块是否存在
+    public function moduleisexist($proid,$modulename,$moduleid)
+    {
+        if ($moduleid) {
+            $moduledata = Db::table('doc_module')
+                ->where('id!='.$moduleid)
+                ->where('module_name', $modulename)
+                ->where('projectid', $proid)
+                ->find();
+
+        } else {
+            $moduledata = Db::table('doc_module')
+                ->where('module_name', $modulename)
+                ->where('projectid', $proid)
+                ->find();
+        }
+        return $moduledata;
+    }
+
+    //版块保存
+    public function moduleinsert($proid,$modulename,$moduleid)
+    {
+        $userid = $this->user['userid'];
+        $data = [
+            "module_name" => $modulename,
+            "projectid" => $proid
+        ];
+        if ($moduleid) {
+            Db::table('doc_module')
+                ->where('projectid=' . $proid)
+                ->where('id', $moduleid)
+                ->update($data);
+        } else {
+            $data['create_time'] = time();
+            $data['create_userid'] = $userid;
+            Db::table('doc_module')->insert($data);
+        }
+    }
+
+    //删除版块
+    public function deletemodule($proid,$moduleid)
+{
+    $userid = $this->user['userid'];
+    //查看当前用户是否有权限删除
+    $proids = Db::table('doc_jurisdiction')->name('projectid')
+        ->where('userid', $userid)
+        ->where('projectid', $proid)
+        ->where('level', 1)
+        ->select();
+    if ($proids || $this->user['username'] == "admin") {
+        $data = ['is_logic_del' => 1];
+        Db::table('doc_module')
+            ->where('projectid=' . $proid)
+            ->where('id=' . $moduleid)
+            ->update($data);
+        return 0;
+    } else {
+        //没有权限删除
+        return 1;
+    }
+}
 }

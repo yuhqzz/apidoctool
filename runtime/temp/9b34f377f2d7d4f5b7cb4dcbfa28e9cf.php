@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:95:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/projects.html";i:1539678672;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539671571;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539668118;s:49:"../application/admin/view/layouts/mainheader.html";i:1539668144;s:45:"../application/admin/view/layouts/menuer.html";i:1539677291;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539669772;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/addmodule.html";i:1539686386;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539671571;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539668118;s:49:"../application/admin/view/layouts/mainheader.html";i:1539668144;s:45:"../application/admin/view/layouts/menuer.html";i:1539677291;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539669772;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
@@ -175,53 +175,22 @@
                 <div class="row">
                     <div class="col-md-10">
                         <div class="panel panel-default">
-                            <div class="panel-heading">项目列表
-   <a style="float:right;margin-top:-6px;" href="/admin/addProject" class="btn btn-primary">添加项目</a>
-</div>
-
+                            <div class="panel-heading"><?php echo $module['id']==0?"添加":"编辑"; ?>接口版块</div>
 <div class="panel-body">
-    <div class="box-body">
-        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-            <div class="row">
-                <div class="col-sm-12">
-                    <table class="table table-hover dataTable" >
-                        <thead>
-                        <tr>
-                            <th>项目ID</th>
-                            <th>项目名称</th>
-                            <th>创建人ID</th>
-                            <th>创建人</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach($projects as $project): ?>
-                        <tr>
-                            <td><?php echo $project['projectid']; ?></td>
-                            <td><?php echo $project['project_name']; ?></td>
-                            <td><?php echo $project['create_userid']; ?></td>
-                            <td><?php echo $project['create_user']; ?></td>
-                            <td><a href="/admin/addProject/<?php echo $project['projectid']; ?>"><i class="fa fa-pencil fa-fw" style="font-size: 20px;" title="编辑"></i></a>
-                                <a href="/admin/delProject/<?php echo $project['projectid']; ?>" onclick="return confirm('确定要删除该项目么？')"><i class="fa fa-trash-o fa-fw" style="font-size: 20px;" title="删除"></i></a>
-                            <a href="/admin/modules/<?php echo $project['projectid']; ?>"><i class="fa fa-th-large fa-fw" style="font-size: 20px;" title="接口版块列表"></i></a>
-
-                                <a href="/admin/apis/<?php echo $project['projectid']; ?>"><i class="fa fa-list fa-fw" style="font-size: 20px;" title="接口列表"></i></a>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
+    <form action="/admin/doAddmodule" method="POST">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="projectname">版块名称</label>
+                <input type="hidden" name="proid" value="<?php echo $proid; ?>"/>
+                <input type="hidden" name="moduleid" value="<?php echo $module['id']; ?>"/>
+                <input type="text" name="modulename" value="<?php echo $module['module_name']; ?>" class="form-control" placeholder="请输入版块名称">
             </div>
-            <div class="row">
-                <div class="col-md-9 ">
-                    <?php echo !empty($projects)?"":"暂无数据"; ?>
-                </div>
 
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">确认保存</button>
             </div>
         </div>
-    </div>
-
+    </form>
 </div>
                         </div>
                     </div>
