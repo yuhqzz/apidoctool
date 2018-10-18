@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:94:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/adduser.html";i:1539826392;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539762352;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;s:49:"../application/admin/view/layouts/mainheader.html";i:1539668144;s:45:"../application/admin/view/layouts/menuer.html";i:1539764240;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539762186;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:94:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/adduser.html";i:1539830937;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539762352;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;s:49:"../application/admin/view/layouts/mainheader.html";i:1539668144;s:45:"../application/admin/view/layouts/menuer.html";i:1539764240;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539762186;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
@@ -186,12 +186,12 @@
         <div class="box-body">
             <div class="form-group">
                 <label for="username">用户名</label>
-                <input type="hidden" name="userid" value="<?php echo $userdata['id']; ?>"/>
+                <input type="hidden" name="userid" value="<?php echo $userdata['userid']; ?>"/>
                 <input type="text" name="username" value="<?php echo $userdata['username']; ?>" class="form-control" placeholder="请输入用户名">
             </div>
             <div class="form-group">
                 <label for="userpwd">密码</label>
-                <input type="text" name="userpwd" value="<?php echo $userdata['userpwd']; ?>" class="form-control" placeholder="请输入密码">
+                <input type="text" name="userpwd" value="<?php echo $userdata['truepwd']; ?>" class="form-control" placeholder="请输入密码">
             </div>
 
             <div class="form-group">
@@ -201,6 +201,22 @@
                     <option value="1" <?php echo !empty($userdata)?$userdata['userlevel']==1 ? 'selected' : '':''; ?>>普通用户</option>
                     <option value="2" <?php echo !empty($userdata)?$userdata['userlevel']==2 ? 'selected' : '':''; ?>>项目管理员</option>
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label for="proid">可读项目</label><br/>
+                <?php foreach($prolists as $project): ?>
+                <input type="checkbox" <?php echo $project['prodic']==0?'checked':($project['prodic']==1?'checked':''); ?> value="<?php echo $project['projectid']; ?>" name="proid[]"/><?php echo $project['project_name']; ?>&nbsp;&nbsp;&nbsp;
+                <?php endforeach; ?>
+
+            </div>
+
+            <div class="form-group">
+                <label for="proid">可编辑项目</label><br/>
+                <?php foreach($prolists as $project): ?>
+                <input type="checkbox" <?php echo $project['prodic']==1?'checked':''; ?> value="<?php echo $project['projectid']; ?>" name="editproid[]"/><?php echo $project['project_name']; ?>&nbsp;&nbsp;&nbsp;
+                <?php endforeach; ?>
+
             </div>
 
             <div class="form-group">

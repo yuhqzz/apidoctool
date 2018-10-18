@@ -8,6 +8,7 @@
 namespace app\admin\controller;
 use app\common\model\Projects;
 use app\common\model\Users;
+use phpDocumentor\Reflection\DocBlock\Tags\Param;
 use think\Controller;
 use think\Hook;
 class Admin extends Controller
@@ -229,22 +230,45 @@ class Admin extends Controller
         } else {
             $userdata = $userModuel->toArray();
         }
+        //获得项目列表
+        $projectModel = new Projects();
+        $prolists = $projectModel->projectlists();
+        if ($userid) {
+            for ($i = 0; $i < count($prolists); $i++) {
+                $dic = $userModuel->userdic($userid, $prolists[$i]['projectid']);
+                $prolists[$i]['prodic'] = $dic;
+            }
+        }
         $this->assign("userdata", $userdata);
+        $this->assign("prolists", $prolists);
         return $this->fetch('adduser');
     }
 
     /**
      * 添加/编辑用户保存
      */
-    public function doAddUser(){
+    public function doAddUser()
+    {
         $userModuel = new Users();
         //查询用户是否存在
         $data = $userModuel->userisexist($_POST['userid'], $_POST['username']);
         if ($data) {
-            $this->error('该用户已经存在，请重新输入', '/admin/adduser');
+            $this->error('该用户已经存在，请重新输入', '/admin/adduser/' . $_POST['userid']);
         } else {
             $userModuel->userinsert($_POST);
             $this->success('保存成功', '/admin/users');
+        }
+    }
+
+    //删除用户
+    public function delUser($userid)
+    {
+        $userModuel = new Users();
+        $result = $userModuel->deleteuser($userid);
+        if ($result) {
+            $this->error('你没权限删除,请联系管理员', '/admin/users');
+        } else {
+            $this->success('删除成功', '/admin/users');
         }
     }
 

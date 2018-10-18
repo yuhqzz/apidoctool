@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:92:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/users.html";i:1539825325;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539762352;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;s:49:"../application/admin/view/layouts/mainheader.html";i:1539668144;s:45:"../application/admin/view/layouts/menuer.html";i:1539764240;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539762186;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:92:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/users.html";i:1539829592;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539762352;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;s:49:"../application/admin/view/layouts/mainheader.html";i:1539668144;s:45:"../application/admin/view/layouts/menuer.html";i:1539764240;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539762186;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
@@ -205,8 +205,7 @@
                             <td><?php echo $user['username']; ?></td>
                             <td><?php echo $user['userlevel']==0?'超级管理员':($user['userlevel']==1?'普通用户':'项目管理用户'); ?></td>
                             <td><a href="/admin/addUser/<?php echo $user['userid']; ?>"><i class="fa fa-pencil fa-fw" style="font-size: 20px;" title="编辑"></i></a>
-                                <a href="/admin/delUser/<?php echo $user['prouseridjectid']; ?>" onclick="return confirm('确定要删除该用户么？')"><i class="fa fa-trash-o fa-fw" style="font-size: 20px;" title="删除"></i></a>
-                            <a href="/admin/modules/<?php echo $project['projectid']; ?>"><i class="fa fa-th-large fa-fw" style="font-size: 20px;" title="项目列表"></i></a>
+                                <a href="/admin/delUser/<?php echo $user['userid']; ?>" onclick="return confirm('确定要删除该用户么？')"><i class="fa fa-trash-o fa-fw" style="font-size: 20px;" title="删除"></i></a>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -216,7 +215,7 @@
             </div>
             <div class="row">
                 <div class="col-md-9 ">
-                    <?php echo !empty($projects)?"":"暂无数据"; ?>
+                    <?php echo !empty($users)?"":"暂无数据"; ?>
                 </div>
 
             </div>

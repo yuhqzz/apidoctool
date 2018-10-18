@@ -4,12 +4,12 @@
         <div class="box-body">
             <div class="form-group">
                 <label for="username">用户名</label>
-                <input type="hidden" name="userid" value="{$userdata.id}"/>
+                <input type="hidden" name="userid" value="{$userdata.userid}"/>
                 <input type="text" name="username" value="{$userdata.username}" class="form-control" placeholder="请输入用户名">
             </div>
             <div class="form-group">
                 <label for="userpwd">密码</label>
-                <input type="text" name="userpwd" value="{$userdata.userpwd}" class="form-control" placeholder="请输入密码">
+                <input type="text" name="userpwd" value="{$userdata.truepwd}" class="form-control" placeholder="请输入密码">
             </div>
 
             <div class="form-group">
@@ -19,6 +19,22 @@
                     <option value="1" {$userdata?$userdata.userlevel==1 ? 'selected' : '':''}>普通用户</option>
                     <option value="2" {$userdata?$userdata.userlevel==2 ? 'selected' : '':''}>项目管理员</option>
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label for="proid">可读项目</label><br/>
+                {foreach $prolists as $project}
+                <input type="checkbox" {$project.prodic==0?'checked':($project.prodic==1?'checked':'')} value="{$project.projectid}" name="proid[]"/>{$project.project_name}&nbsp;&nbsp;&nbsp;
+                {/foreach}
+
+            </div>
+
+            <div class="form-group">
+                <label for="proid">可编辑项目</label><br/>
+                {foreach $prolists as $project}
+                <input type="checkbox" {$project.prodic==1?'checked':''} value="{$project.projectid}" name="editproid[]"/>{$project.project_name}&nbsp;&nbsp;&nbsp;
+                {/foreach}
+
             </div>
 
             <div class="form-group">

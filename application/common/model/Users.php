@@ -37,6 +37,16 @@ class Users extends Model
         return $module;
     }
 
+    //查看当前用户是否有权限
+    public function userdic($userid,$proid){
+        //获取当前用户的项目数据
+        $dicdata=Db::table('doc_jurisdiction')
+            ->where('userid',$userid)
+            ->where('projectid',$proid)
+            ->find();
+        return $dicdata?$dicdata['level']:-1;
+    }
+
     //查看用户是否存在
     public function userisexist($userid,$username)
     {
@@ -57,7 +67,7 @@ class Users extends Model
     //用户保存
     public function userinsert($data)
     {
-        $data = [
+        $newdata = [
             "username" => $data['username'],
             "userpwd" => $data['userpwd'],
             "userpwd" => md5($data['userpwd']),
@@ -67,10 +77,68 @@ class Users extends Model
         if ($data['userid']) {
             Db::table('doc_users')
                 ->where('userid', $data['userid'])
-                ->update($data);
+                ->update($newdata);
+            $userid=$data['userid'];
         } else {
             $data['regtime'] = time();
-            Db::table('doc_users')->insert($data);
+            Db::table('doc_users')->insert($newdata);
+            $userid = Db::name('doc_users')->getLastInsID();
+        }
+
+        //删除用户原来的用户权限
+        Db::table('doc_jurisdiction')
+            ->where('userid',$userid)
+            ->delete();
+        //存入只读权限
+        foreach ($data['proid'] as $readid) {
+            $readdata = [
+                'userid' => $userid,
+                'projectid' => $readid,
+                'level' => 0
+            ];
+            Db::table('doc_jurisdiction')
+                ->insert($readdata);
+        }
+        //存入可读可写项目权限
+        foreach ($data['editproid'] as $editid){
+            //查询是否有
+            $isdata=Db::table('doc_jurisdiction')
+                ->where('userid',$userid)
+                ->where('projectid',$editid)
+                ->find();
+            if($isdata){
+                $editdata=[
+                    'level'=>1
+                ];
+                Db::table('doc_jurisdiction')
+                    ->where('userid',$userid)
+                    ->where('projectid',$editid)
+                    ->update($editdata);
+            }else{
+                $editdata = [
+                    'userid' => $userid,
+                    'projectid' => $editid,
+                    'level' => 1
+                ];
+                Db::table('doc_jurisdiction')
+                    ->insert($editdata);
+            }
+        }
+    }
+
+    //删除用户
+    public function deleteuser($delid)
+    {
+        //只有超级管理员可以删除用户
+        if ($this->user['username'] == "admin") {
+            $data = ['is_logic_del' => 1];
+            Db::table('doc_users')
+                ->where('userid=' . $delid)
+                ->delete();
+            return 0;
+        } else {
+            //没有权限删除
+            return 1;
         }
     }
 }

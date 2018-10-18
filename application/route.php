@@ -44,7 +44,7 @@ Route::group('admin',[
     'users'   => ['admin/Admin/Users', ['method' => 'get']],
     'addUser/[:userid]' => ['admin/Admin/addUser'],
     'doAddUser' => ['admin/Admin/doAddUser', ['method' => 'post']],
-    'addgossip/[:gossipid]' => ['admin/Admin/editGossip', ['method' => 'get']],
+    'delUser/:userid' => ['admin/Admin/delUser'],
 ]);
 
 
