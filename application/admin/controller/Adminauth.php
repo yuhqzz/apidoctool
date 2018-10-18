@@ -68,6 +68,6 @@ class Adminauth extends Controller
     public function loginOut()
     {
         Session::set('adminuser',null,'admin');
-        $this->success('退出成功！', U('/Adminauth/login'));
+        $this->success('退出成功！', '/adminauth/login');
     }
 }

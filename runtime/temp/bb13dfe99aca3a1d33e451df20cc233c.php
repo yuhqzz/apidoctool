@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:94:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/adduser.html";i:1539830937;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539762352;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;s:49:"../application/admin/view/layouts/mainheader.html";i:1539668144;s:45:"../application/admin/view/layouts/menuer.html";i:1539764240;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539762186;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:94:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/adduser.html";i:1539831892;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539762352;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;s:49:"../application/admin/view/layouts/mainheader.html";i:1539668144;s:45:"../application/admin/view/layouts/menuer.html";i:1539764240;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539762186;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
@@ -195,7 +195,7 @@
             </div>
 
             <div class="form-group">
-                <select class="form-control" id="userlevel" name="userlevel">
+                <select onchange="userlevelchange()" class="form-control" id="userlevel" name="userlevel">
                     <option value="-1" <?php echo !empty($userdata)?'':'selected'; ?>>请选择</option>
                     <option value="0" <?php echo !empty($userdata)?$userdata['userlevel']==0 ? 'selected' : '':''; ?>>超级管理员</option>
                     <option value="1" <?php echo !empty($userdata)?$userdata['userlevel']==1 ? 'selected' : '':''; ?>>普通用户</option>
@@ -211,10 +211,10 @@
 
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="<?php echo !empty($userdata)?$userdata['userlevel']==1 ? 'display: none' : '':''; ?>" id="editprodiv">
                 <label for="proid">可编辑项目</label><br/>
                 <?php foreach($prolists as $project): ?>
-                <input type="checkbox" <?php echo $project['prodic']==1?'checked':''; ?> value="<?php echo $project['projectid']; ?>" name="editproid[]"/><?php echo $project['project_name']; ?>&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" <?php echo !empty($userdata)?$userdata['userlevel']==1 ? 'disabled' : '':''; ?>  <?php echo $project['prodic']==1?'checked':''; ?> value="<?php echo $project['projectid']; ?>" name="editproid[]"/><?php echo $project['project_name']; ?>&nbsp;&nbsp;&nbsp;
                 <?php endforeach; ?>
 
             </div>
@@ -225,6 +225,21 @@
         </div>
     </form>
 </div>
+
+<script>
+    //权限限制
+    function userlevelchange(){
+        var userlevel = $("#userlevel").find('option:selected').val();
+        if(userlevel==0||userlevel==2){
+            $("#editprodiv").show();
+            $('#editprodiv input').attr("disabled",false);
+        }else{
+            $("#editprodiv").hide();
+            $('#editprodiv input').attr("disabled",true);
+        }
+    }
+
+</script>
                         </div>
                     </div>
                 </div>

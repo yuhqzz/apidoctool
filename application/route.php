@@ -16,6 +16,7 @@ use think\Route;
 Route::rule('adminauth','admin/Adminauth/Login');
 Route::rule('adminauth/dologin','admin/Adminauth/doLogin','POST');
 Route::rule('adminauth/index','admin/Adminauth/Index');
+Route::rule('adminauth/loginOut','admin/Adminauth/loginOut');
 
 /**
  * 后台管理相关
