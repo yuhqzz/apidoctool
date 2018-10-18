@@ -25,7 +25,7 @@ class Projects extends Model
      */
     public function projectlists()
     {
-        $userid = $this->user;
+        $userid = $this->user['userid'];
         if ($this->user['username'] == "admin") {
             //可查看所有项目
             $data = Db::table('doc_projects')
@@ -98,6 +98,16 @@ class Projects extends Model
             $data['create_time'] = time();
             $data['create_userid'] = $userid;
             Db::table('doc_projects')->insert($data);
+            $proid = Db::name('doc_api')->getLastInsID();
+            //给新建的项目给当前用户管理权限
+            $dicdata = [
+                'userid' => $userid,
+                'projectid' => $proid,
+                'level' => 1
+            ];
+            Db::table('doc_jurisdiction')
+                ->insert($dicdata);
+
         }
     }
 
@@ -221,9 +231,25 @@ class Projects extends Model
     //接口列表数据
     public function docapis($proid,$moduleid)
     {
+        //查看当前用户是否有权限查看
+        $proids = Db::table('doc_jurisdiction')->name('projectid')
+            ->where('userid', $this->user['userid'])
+            ->where('level', 1)
+            ->select();
+
         $where = "is_logic_del=0";
         if ($proid) {
             $where .= " AND projectid=$proid";
+        }else{
+            if($this->user['username'] != "admin" &&$proids){
+                //不是超级管理员只展示当前用户可以看到的
+                $proidsnew = array();
+                foreach ($proids as $item) {
+                    $proidsnew[] = $item['projectid'];
+                }
+                $proidsnew=implode(",",$proidsnew);
+                $where .= " AND projectid IN ($proidsnew)";
+            }
         }
         if ($moduleid) {
             $where .= " AND moduleid=$moduleid";

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/addmodule.html";i:1539686386;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539671571;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539668118;s:49:"../application/admin/view/layouts/mainheader.html";i:1539668144;s:45:"../application/admin/view/layouts/menuer.html";i:1539677291;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539669772;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/addmodule.html";i:1539686386;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539762352;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;s:49:"../application/admin/view/layouts/mainheader.html";i:1539832086;s:45:"../application/admin/view/layouts/menuer.html";i:1539764240;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539762186;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
@@ -36,6 +36,11 @@
     .coverfile{
         right: 400px;
         top: 250px;
+    }
+    .apiformlabel{
+        float: left;
+        line-height: 35px;
+        margin-right: 10px;
     }
 </style>
 
@@ -85,7 +90,7 @@
                                 <a href="#" class="btn btn-default btn-flat">个人信息</a>
                             </div>
                             <div class="pull-right">
-                                <a href="/Adminlogin/loginout" class="btn btn-default btn-flat">退出登录</a>
+                                <a href="/adminauth/loginOut" class="btn btn-default btn-flat">退出登录</a>
                             </div>
                         </li>
                     </ul>
@@ -129,12 +134,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/types">接口列表
+                        <a href="/admin/docapis">接口列表
                             <i class="pull-right fa"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/types">项目环境管理
+                        <a href="/admin/types">项目环境管理(未开发)
                             <i class="pull-right fa"></i>
                         </a>
                     </li>
@@ -149,7 +154,7 @@
 
                 <ul class="treeview-menu">
                     <li>
-                        <a href="/admin/system">用户管理
+                        <a href="/admin/users">用户管理
                             <i class="pull-right fa"></i>
                         </a>
                     </li>
@@ -216,29 +221,7 @@
 <script type="text/javascript" src="/static/admin/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script type="text/javascript" src="/static/admin/plugins/iCheck/icheck.min.js"></script><script type="text/javascript" src="/static/admin/js/app.js"></script>
-<!-- 富文本编辑器配置文件 -->
-<script type="text/javascript" src="/static/admin/ueditor/ueditor.config.js"></script>
-<!-- 富文本编辑器源码文件 -->
-<script type="text/javascript" src="/static/admin/ueditor/ueditor.all.js"></script>
-<!-- 实例化编辑器 -->
 <script type="text/javascript" src="/static/admin/js/DatePicker/WdatePicker.js"></script>
-<script>
-    //文章封面图上传
-    $('#coverimgupload').click(function(){
-        document.articleform.action="/admin/fileupload";
-        document.articleform.target="coverframe";
-        document.articleform.submit();
-    });
 
-    $('#publicbtn').click(function(){
-        document.articleform.action="/admin/doAddarticle";
-        document.articleform.target="";
-        document.articleform.submit();
-    });
-
-</script>
-<script>
-    var articlemsg = UE.getEditor('articlemsg',{autoHeightEnabled:false});
-</script>
 </body>
 </html>

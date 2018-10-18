@@ -23,8 +23,15 @@ class Users extends Model
     //获取用户列表数据
     public function userlists()
     {
-        $data = Db::table('doc_users')
-            ->paginate(20);
+        if($this->user['username']!="admin"){
+            $data = Db::table('doc_users')
+                ->where("username!='admin'")
+                ->paginate(20);
+        }else{
+            $data = Db::table('doc_users')
+                ->paginate(20);
+        }
+
         return $data;
     }
 
@@ -131,7 +138,6 @@ class Users extends Model
     {
         //只有超级管理员可以删除用户
         if ($this->user['username'] == "admin") {
-            $data = ['is_logic_del' => 1];
             Db::table('doc_users')
                 ->where('userid=' . $delid)
                 ->delete();

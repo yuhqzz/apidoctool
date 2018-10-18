@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/adddocapi.html";i:1539762689;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539762352;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;s:49:"../application/admin/view/layouts/mainheader.html";i:1539668144;s:45:"../application/admin/view/layouts/menuer.html";i:1539764010;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539762186;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/adddocapi.html";i:1539825803;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539762352;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;s:49:"../application/admin/view/layouts/mainheader.html";i:1539832086;s:45:"../application/admin/view/layouts/menuer.html";i:1539764240;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539762186;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
@@ -90,7 +90,7 @@
                                 <a href="#" class="btn btn-default btn-flat">个人信息</a>
                             </div>
                             <div class="pull-right">
-                                <a href="/Adminlogin/loginout" class="btn btn-default btn-flat">退出登录</a>
+                                <a href="/adminauth/loginOut" class="btn btn-default btn-flat">退出登录</a>
                             </div>
                         </li>
                     </ul>
@@ -154,7 +154,7 @@
 
                 <ul class="treeview-menu">
                     <li>
-                        <a href="/admin/system">用户管理
+                        <a href="/admin/users">用户管理
                             <i class="pull-right fa"></i>
                         </a>
                     </li>
@@ -232,7 +232,7 @@
 
             <div class="form-group" style="padding-top:10px;width:40%;float: left">
                 <label for="apirequest" class="apiformlabel">接口请求方式</label>
-                <select onchange="requestchange(this.value)" class="form-control" id="apirequest" name="apirequest" style="width:55%;float:left">
+                <select class="form-control" id="apirequest" name="apirequest" style="width:55%;float:left">
                     <option value="-1" <?php echo !empty($docapi)?'':'selected'; ?>>请选择</option>
                     <option value="0" <?php echo !empty($docapi)?$docapi['api_request']==0 ? 'selected' : '':''; ?>>GET</option>
                     <option value="1" <?php echo !empty($docapi)?$docapi['api_request']==1 ? 'selected' : '':''; ?>>POST</option>
