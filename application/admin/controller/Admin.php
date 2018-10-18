@@ -7,6 +7,7 @@
  */
 namespace app\admin\controller;
 use app\common\model\Projects;
+use app\common\model\Users;
 use think\Controller;
 use think\Hook;
 class Admin extends Controller
@@ -198,11 +199,53 @@ class Admin extends Controller
     /**
      * 根据项目id获取此项目下的版块列表
      */
-    public function getModuleByproid(){
+    public function getModuleByproid()
+    {
         $projectsModel = new Projects();
-        $modules=$projectsModel->promodules($_POST['proid']);
+        $modules = $projectsModel->promodules($_POST['proid']);
         return json($modules);
+    }
 
+    /**
+     * 用户列表
+     */
+    public function Users()
+    {
+        $userModuel = new Users();
+        $users = $userModuel->userlists();
+        $this->assign("users", $users);
+        return $this->fetch('users');
+    }
+
+    /**
+     * 添加/编辑用户
+     * @param $userid
+     */
+    public function addUser($userid=0)
+    {
+        $userModuel = new Users();
+        if ($userid) {
+            $userdata = $userModuel->userdetails($userid);
+        } else {
+            $userdata = $userModuel->toArray();
+        }
+        $this->assign("userdata", $userdata);
+        return $this->fetch('adduser');
+    }
+
+    /**
+     * 添加/编辑用户保存
+     */
+    public function doAddUser(){
+        $userModuel = new Users();
+        //查询用户是否存在
+        $data = $userModuel->userisexist($_POST['userid'], $_POST['username']);
+        if ($data) {
+            $this->error('该用户已经存在，请重新输入', '/admin/adduser');
+        } else {
+            $userModuel->userinsert($_POST);
+            $this->success('保存成功', '/admin/users');
+        }
     }
 
 }

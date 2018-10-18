@@ -50,7 +50,7 @@
 
             <div class="form-group" style="padding-top:10px;width:40%;float: left">
                 <label for="apirequest" class="apiformlabel">接口请求方式</label>
-                <select onchange="requestchange(this.value)" class="form-control" id="apirequest" name="apirequest" style="width:55%;float:left">
+                <select class="form-control" id="apirequest" name="apirequest" style="width:55%;float:left">
                     <option value="-1" {$docapi?'':'selected'}>请选择</option>
                     <option value="0" {$docapi?$docapi.api_request==0 ? 'selected' : '':''}>GET</option>
                     <option value="1" {$docapi?$docapi.api_request==1 ? 'selected' : '':''}>POST</option>

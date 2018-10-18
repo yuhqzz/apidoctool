@@ -40,11 +40,11 @@ Route::group('admin',[
     'doAddapi' => ['admin/Admin/doAddapi', ['method' => 'post']],
     'getModuleByproid' => ['admin/Admin/getModuleByproid', ['method' => 'post']],
 
-    //闲言碎语
-    'gossips'   => ['admin/Admin/Gossips', ['method' => 'get']],
-    'delgossip/:gossipid/:statusid' => ['admin/Admin/delGossip'],
+    //用户管理
+    'users'   => ['admin/Admin/Users', ['method' => 'get']],
+    'addUser/[:userid]' => ['admin/Admin/addUser'],
+    'doAddUser' => ['admin/Admin/doAddUser', ['method' => 'post']],
     'addgossip/[:gossipid]' => ['admin/Admin/editGossip', ['method' => 'get']],
-    'doAddGossip' => ['admin/Admin/doAddGossip', ['method' => 'post']],
 ]);
 
 

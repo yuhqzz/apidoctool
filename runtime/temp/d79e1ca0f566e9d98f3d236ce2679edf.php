@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/adminauth/login.html";i:1539667891;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539668118;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/adminauth/login.html";i:1539667891;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +37,11 @@
     .coverfile{
         right: 400px;
         top: 250px;
+    }
+    .apiformlabel{
+        float: left;
+        line-height: 35px;
+        margin-right: 10px;
     }
 </style>
 
