@@ -32,23 +32,29 @@ class Adminauth extends Controller
     {
         //数据验证
         $validate = Loader::validate('Adminvalidate');
-        if(!$validate->check($_POST)){
-            echo json_decode(1);
-            exit();
+        if (!$validate->check($_POST)) {
+            echo json_encode(1);
+            exit;
         }
         //查询数据写入session
-        $adminuser=db('doc_users')
-            ->where('username',$_POST['username'])
-            ->where('userpwd',md5($_POST['password']))
+        $adminuser = db('doc_users')
+            ->where('username', $_POST['username'])
+            ->where('userpwd', md5($_POST['password']))
             ->find();
-        if($adminuser)
-        {
-            Session::set('adminuser',$adminuser,'admin');
-            echo json_decode(0);
-            exit();
-        }else{
-            echo json_decode(2);
-            exit();
+        if ($adminuser) {
+            Session::set('adminuser', $adminuser, 'admin');
+            if ($adminuser['userlevel'] == 1) {
+                //普通用户,只能看,不能进入后台,重定向到前端首页
+                echo json_encode(3);
+                exit;
+            } else {
+                echo json_encode(0);
+                exit;
+            }
+
+        } else {
+            echo json_encode(2);
+            exit;
         }
     }
 
@@ -68,6 +74,6 @@ class Adminauth extends Controller
     public function loginOut()
     {
         Session::set('adminuser',null,'admin');
-        $this->success('退出成功！', '/adminauth/login');
+        $this->success('退出成功！', '/loginauth');
     }
 }

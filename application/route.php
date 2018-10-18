@@ -13,7 +13,7 @@ use think\Route;
 /**
  * 登陆
  */
-Route::rule('adminauth','admin/Adminauth/Login');
+Route::rule('loginauth','admin/Adminauth/Login');
 Route::rule('adminauth/dologin','admin/Adminauth/doLogin','POST');
 Route::rule('adminauth/index','admin/Adminauth/Index');
 Route::rule('adminauth/loginOut','admin/Adminauth/loginOut');

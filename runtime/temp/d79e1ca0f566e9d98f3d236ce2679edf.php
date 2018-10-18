@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/adminauth/login.html";i:1539667891;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/adminauth/login.html";i:1539844152;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,6 +127,8 @@
                     if(msg==0)
                     {
                         window.location.href="/adminauth/index";
+                    }else if(msg==3){
+                        window.location.href="/";
                     }
                     else
                     {

@@ -8,7 +8,6 @@
 namespace app\admin\controller;
 use app\common\model\Projects;
 use app\common\model\Users;
-use phpDocumentor\Reflection\DocBlock\Tags\Param;
 use think\Controller;
 use think\Hook;
 class Admin extends Controller
