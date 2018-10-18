@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae309157-8e34-4aa3-a95b-959ccbaedebf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/admin/view/admin/adduser.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/admin/view/admin/users.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/common/model/Users.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/admin/controller/Admin.php" afterPath="$PROJECT_DIR$/application/admin/controller/Admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/admin/view/admin/adddocapi.html" afterPath="$PROJECT_DIR$/application/admin/view/admin/adddocapi.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/admin/view/layouts/menuer.html" afterPath="$PROJECT_DIR$/application/admin/view/layouts/menuer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/route.php" afterPath="$PROJECT_DIR$/application/route.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runtime/temp/406e4509b6e036118195a8bb7801a281.php" afterPath="$PROJECT_DIR$/runtime/temp/406e4509b6e036118195a8bb7801a281.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runtime/temp/cf472239d2a78fe7309002b0d5ca8749.php" afterPath="$PROJECT_DIR$/runtime/temp/cf472239d2a78fe7309002b0d5ca8749.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runtime/temp/d79e1ca0f566e9d98f3d236ce2679edf.php" afterPath="$PROJECT_DIR$/runtime/temp/d79e1ca0f566e9d98f3d236ce2679edf.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/admin/view/admin/users.html" afterPath="$PROJECT_DIR$/application/admin/view/admin/users.html" />
     </list>
     <ignored path="apidoctool.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,8 +26,8 @@
       <file leaf-file-name="users.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/admin/view/admin/users.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="25" column="195" selection-start-line="25" selection-start-column="195" selection-end-line="25" selection-end-column="195" />
+            <state relative-caret-position="420">
+              <caret line="35" column="27" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -486,12 +476,12 @@
       <workItem from="1501202064322" duration="2989000" />
       <workItem from="1501830924822" duration="1913000" />
       <workItem from="1539659014773" duration="240000" />
-      <workItem from="1539659553474" duration="38581000" />
+      <workItem from="1539659553474" duration="39210000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45639000" />
+    <option name="totallyTimeSpent" value="46268000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="701" extended-state="6" />
@@ -916,8 +906,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/admin/view/admin/users.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="25" column="195" selection-start-line="25" selection-start-column="195" selection-end-line="25" selection-end-column="195" />
+        <state relative-caret-position="420">
+          <caret line="35" column="27" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
           <folding />
         </state>
       </provider>
