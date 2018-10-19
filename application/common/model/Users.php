@@ -15,7 +15,7 @@ class Users extends Model
     public function __construct()
     {
         //获取用户信息
-        $userdata = Session::get('adminuser', 'admin');
+        $userdata = Session::get('adminuser');
         $this->user = $userdata;
     }
 

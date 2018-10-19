@@ -28,4 +28,7 @@ return [
     'CheckAuth' => [
         'app\\admin\\behavior\\loginauth',
     ],
+    'WebCheckAuth' => [
+        'app\\index\\behavior\\loginauth',
+    ],
 ];

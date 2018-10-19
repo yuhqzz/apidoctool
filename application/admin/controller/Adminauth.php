@@ -19,7 +19,7 @@ class Adminauth extends Controller
     {
         // 临时关闭当前模板的布局功能
         $this->view->engine->layout(false);
-        Session::set('adminuser',null,'admin');
+        Session::set('adminuser',null);
         // 获取包含域名的完整URL地址
         $this->assign('domain',$this->request->url(true));
         return $this->fetch('login');
@@ -42,7 +42,7 @@ class Adminauth extends Controller
             ->where('userpwd', md5($_POST['password']))
             ->find();
         if ($adminuser) {
-            Session::set('adminuser', $adminuser, 'admin');
+            Session::set('adminuser', $adminuser);
             if ($adminuser['userlevel'] == 1) {
                 //普通用户,只能看,不能进入后台,重定向到前端首页
                 echo json_encode(3);
@@ -63,7 +63,7 @@ class Adminauth extends Controller
      */
     public function Index()
     {
-        $session = Session::get('adminuser', 'admin');
+        $session = Session::get('adminuser');
         $this->assign('userdata', $session);
         return $this->fetch('index');
     }
@@ -73,7 +73,7 @@ class Adminauth extends Controller
      */
     public function loginOut()
     {
-        Session::set('adminuser',null,'admin');
+        Session::set('adminuser',null);
         $this->success('退出成功！', '/loginauth');
     }
 }

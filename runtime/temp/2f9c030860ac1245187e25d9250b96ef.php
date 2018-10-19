@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:92:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/index/index.html";i:1539858365;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1539856724;s:48:"../application/index/view/layouts/htmltitle.html";i:1539910522;s:49:"../application/index/view/layouts/htmlfooter.html";i:1539856552;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:93:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/docapi/index.html";i:1539859763;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1539856724;s:48:"../application/index/view/layouts/htmltitle.html";i:1539910522;s:49:"../application/index/view/layouts/htmlfooter.html";i:1539856552;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
@@ -69,34 +69,40 @@
         <div class="body">
             <div class="Home">
                 <div class="row">
-                    <div class="container">
-    <!-- Jumbotron -->
-    <div class="jumbotron" style="text-align: center">
-        <h1>DocApi</h1>
-
-        <p class="lead">DocApi是一个为您提供API管理、API测试、API文档的服务平台。</p>
-        <p> 你还在用Word管理接口文档吗？你还在使用拼接URL测试吗？</p>
-        <p style="font-weight: bold"> 你OUT了！用了这个网站,告别加班不是梦! ! !</p>
-
-        <p>
-            <a class="btn btn-lg btn-success" href="https://github.com/zhuifengxia/apidoctool" target="_blank" role="button">
-                GitHub
-            </a>
-        </p>
+                    <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+    <div class="Logs card">
+        <div class="card-block">
+            <div class="Log clearfix">
+                <div class="Log-body"><span class="Log-user"><img
+                        src="https://work.alibaba-inc.com/photo/undefined.220x220.jpg"
+                        class="Log-avatar"><a target="_blank" class="Log-user-link"
+                                              href="/https://work.alibaba-inc.com/work/u/undefined">ldf</a></span><span
+                        class="Log-type">创建了</span><span class="Log-target"><a
+                        href="/repository/editor?id=95180">test</a><span class="slash"> / </span><a
+                        href="/repository/editor?id=95180&amp;mod=150269">test</a></span></div>
+                <div class="Log-footer"><i class="Log-fromnow">3 小时前</i></div>
+            </div>
+            <div class="Log clearfix">
+                <div class="Log-body"><span class="Log-user"><img
+                        src="https://work.alibaba-inc.com/photo/undefined.220x220.jpg"
+                        class="Log-avatar"><a target="_blank" class="Log-user-link"
+                                              href="/https://work.alibaba-inc.com/work/u/undefined">ldf</a></span><span
+                        class="Log-type">创建了</span><span class="Log-target"><a
+                        href="/repository/editor?id=95180">test</a></span></div>
+                <div class="Log-footer"><i class="Log-fromnow">3 小时前</i></div>
+            </div>
+        </div>
     </div>
-
-    <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-md-4" style="margin-right:30%">
-            <h2>轻松编辑</h2>
-            <p>可视化编辑，完善的版本控制，各种格式的导入导出。让前后端约定接口的工作变得十分简单 </p>
-        </div>
-
-        <div class="col-md-4">
-            <h2>轻松测试</h2>
-            <p>DocApi可以根据实际需求进行测试，
-                校验真实接口的准确性</p>
-        </div>
+</div>
+<div class="col-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="card">
+        <div class="card-header">我拥有的仓库</div>
+        <div class="card-block"><p><a
+                href="/repository/editor?id=95180"><span></span><span>test</span></a></p></div>
+    </div>
+    <div class="card">
+        <div class="card-header">我加入的仓库</div>
+        <div class="card-block"><span>-</span></div>
     </div>
 </div>
                 </div>

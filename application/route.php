@@ -53,16 +53,12 @@ Route::group('admin',[
  * 网站首页通用相关
  */
 Route::rule('/','index/Index/index','GET');
-Route::rule('/aboutme','index/Index/aboutMe');
-Route::rule('/blogwords','index/Index/blogWords');
-Route::rule('/blogwordsnext','index/Index/blogWordsnext');
-Route::rule('/gossips','index/Index/gossips');
-Route::rule('/gossipsnext','index/Index/gossipsnext');
+Route::rule('/index','index/Docapi/userDefault');
 
 /**
  * 博客文章展示相关
  */
-Route::group('blog',[
+Route::group('docapi',[
     '/[:typeid]'   => ['index/Blog/index', ['method' => 'get|post'],['typeid' => '\d+']],
     'dolike'=>['index/Blog/doLike',['method' => 'post']],
     'articlenext'=>['index/Blog/artnext',['method' => 'post']],

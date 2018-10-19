@@ -1,43 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
-<head>
-    {include file="../application/index/view/layouts/htmlheader.html" /}
-</head>
-<body id="scrapbook" class="mt-main-index two-columns">
-{include file="../application/index/view/layouts/htmltitle.html" /}
-<div id="container">
-    <div id="container-inner">
-        <div id="content">
-            {include file="../application/index/view/layouts/htmlmain.html" /}
-            <div id="content-inner">
-                <div id="alpha" class="articlelist">
-                    <div id="alpha-inner" class="articdata">
-                        {__CONTENT__}
-                    </div>
+{include file="../application/index/view/layouts/htmlheader.html" /}
+<body>
+<div id="root">
+    <article class="Routes">
+        {include file="../application/index/view/layouts/htmltitle.html" /}
+        <div class="body">
+            <div class="Home">
+                <div class="row">
+                    {__CONTENT__}
                 </div>
-                {include file="../application/index/view/layouts/htmlright.html" /}
             </div>
         </div>
         {include file="../application/index/view/layouts/htmlfooter.html" /}
-    </div>
-    <a id="gotop" href="javascript:void(0)"><img src="/static/home/images/fhjt.png" alt=""/></a>
+    </article>
 </div>
-<div class="fancybox-overlay fancybox-overlay-fixed" style="width: 100%; height: 4054px; "></div>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("#showdiv").click(function(e){
-            e.stopPropagation();
-            $(".fancybox-wrap").show();
-            $(".fancybox-overlay").show();
-        });
-        $(document).click(function(){
-            if(!$(".fancybox-wrap").is(":hidden")){
-                $(".fancybox-wrap").hide();
-                $(".fancybox-overlay").hide();
-            }
-        });
-    });
-</script>
 </body>
 </html>
