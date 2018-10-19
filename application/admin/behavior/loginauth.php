@@ -16,7 +16,7 @@ class LoginAuth
         } else {
             $session = Session::get('adminuser');
             if ($session ['userlevel'] == 1) {
-                $this->redirect('/index');
+                $this->redirect('/docapi');
             }
         }
     }

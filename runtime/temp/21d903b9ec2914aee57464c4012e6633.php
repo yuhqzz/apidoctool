@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:93:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/docapi/index.html";i:1539919592;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1539856724;s:48:"../application/index/view/layouts/htmltitle.html";i:1539925577;s:49:"../application/index/view/layouts/htmlfooter.html";i:1539928102;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/docapi/projects.html";i:1539927338;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1539856724;s:48:"../application/index/view/layouts/htmltitle.html";i:1539925577;s:49:"../application/index/view/layouts/htmlfooter.html";i:1539928102;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
@@ -69,57 +69,21 @@
         <div class="body">
             <div class="Home">
                 <div class="row">
-                    <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-    <div class="Logs card">
+                    <?php foreach($projects as $project): ?>
+<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+    <div class="Repository card">
         <div class="card-block">
-
-            <?php foreach($indexupdate as $onedata): ?>
-            <div class="Log clearfix">
-                <div class="Log-body">
-                    <span class="Log-user">
-                        <img
-                        src="https://work.alibaba-inc.com/photo/undefined.220x220.jpg"
-                        class="Log-avatar">
-                        <a target="_blank" class="Log-user-link"><?php echo $onedata['showtype']==0?$onedata['create_user']:$onedata['update_user']; ?></a></span><span
-                        class="Log-type"><?php echo $onedata['showtype']==0?创建了:更新了; ?></span>
-                    <span class="Log-target">
-                        <a
-                        href="/repository/editor?id=95180">【<?php echo $onedata['project_name']; ?>】<?php echo $onedata['module_name']; ?></a>
-                        <span>/</span>
-                        <a
-                        href="/repository/editor?id=95180&amp;mod=150269"><?php echo $onedata['api_name']; ?></a></span></div>
-                <div class="Log-footer"><i class="Log-fromnow"><?php echo $onedata['showtype']==0?$onedata['create_time']:$onedata['update_time']; ?></i>
-                </div>
+            <div class="name">
+                <i class="fa fa-book" style="color:#3c8dbc"></i>&nbsp;&nbsp;<a href="/repository/editor?id=104491"><?php echo $project['project_name']; ?></a>
             </div>
-            <?php endforeach; ?>
+            <div class="desc"><?php echo $project['project_info']; ?></div>
         </div>
+        <div class="card-block card-footer">
+            <span class="ownername"><i class="fa fa-user"></i>&nbsp;&nbsp;<?php echo $project['last_user']; ?></span><span
+                class="fromnow"><?php echo $project['last_time']; ?>更新</span></div>
     </div>
 </div>
-<div class="col-12 col-sm-4 col-md-4 col-lg-4">
-    <div class="card">
-        <div class="card-header">我创建的项目</div>
-        <div class="card-block">
-            <?php foreach($createdata as $mycreate): ?>
-            <p>
-                <a href="#"><i class="fa fa-book"></i>&nbsp;&nbsp;<span><?php echo $mycreate['project_name']; ?></span></a>
-                <span style="float: right;color:#dedede"><?php echo date("y-m-d h:i:s",$mycreate['create_time']); ?></span>
-            </p>
-            <?php endforeach; ?>
-            <?php echo !empty($createdata)?"":"暂无数据"; ?>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header">我加入的项目</div>
-        <div class="card-block">
-            <?php foreach($joindta as $myjoin): ?>
-            <p>
-                <a href="#"><i class="fa fa-book"></i>&nbsp;&nbsp;<span><?php echo $myjoin['project_name']; ?></span></a>
-                <span style="float: right;color:#dedede"><?php echo date("y-m-d h:i:s",$myjoin['create_time']); ?></span>
-            </p>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</div>
+<?php endforeach; ?>
                 </div>
             </div>
         </div>

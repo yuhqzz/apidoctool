@@ -96,23 +96,23 @@ class Projects extends Model
      * 获取项目列表
      * @param $userid
      */
-    public function projectlists()
+    public function projectlists($web=0)
     {
         $userid = $this->user['userid'];
         if ($this->user['username'] == "admin") {
             //可查看所有项目
             $data = Db::table('doc_projects')
-                ->where('is_logic_del',0)
+                ->where('is_logic_del', 0)
                 ->select();
         } else {
             //查看当前用户可以查看哪些项目
             $proids = Db::table('doc_jurisdiction')->field('projectid')
                 ->where('userid', $userid)
-                ->where('level', 1)
+                ->where('level', 'in', $web == 0 ? 1 : [0, 1])
                 ->column('projectid');
             $data = Db::table('doc_projects')
                 ->where('projectid', 'in', $proids)
-                ->where('is_logic_del',0)
+                ->where('is_logic_del', 0)
                 ->select();
         }
         //获取创建人姓名
@@ -121,6 +121,21 @@ class Projects extends Model
                 ->where('userid', $data[$i]['create_userid'])
                 ->find();
             $data[$i]['create_user'] = $createuser['username'];
+
+            if ($web == 1) {
+                //前端页面需要查询出此项目接口最近更新的时间
+                $lastupdate = Db::table('doc_api')->field('update_userid,update_time')
+                    ->where('projectid', $data[$i]['projectid'])
+                    ->order('create_time desc')
+                    ->find();
+                if($lastupdate){
+                    $updateuser = Db::table('doc_users')->field('username')
+                        ->where('userid', $lastupdate['update_userid'])
+                        ->find();
+                    $data[$i]['last_user'] = $updateuser['username'];
+                    $data[$i]['last_time'] = Common::mdate($lastupdate['update_time']);
+                }
+            }
         }
         return $data;
     }

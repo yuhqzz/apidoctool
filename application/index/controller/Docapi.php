@@ -13,18 +13,31 @@ class Docapi extends Controller
     /**
      * 用户登录主页
      */
-    public function userDefault(){
+    public function userDefault()
+    {
         $this->assign("menuselect", 1);
         //获取当前登录用户创建的项目
-        $projectModel=new Projects();
-        $returndata=$projectModel->myprojects();
+        $projectModel = new Projects();
+        $returndata = $projectModel->myprojects();
         $this->assign("createdata", $returndata['createdata']);
         //当前登录用户加入的项目
         $this->assign("joindta", $returndata['joindata']);
         //获取用户参与项目内接口更新变化
-        $indexupdate=$projectModel->indexupdate();
+        $indexupdate = $projectModel->indexupdate();
         $this->assign("indexupdate", $indexupdate);
         return $this->fetch('index');
+    }
+
+    /**
+     * 项目列表
+     */
+    public function userProject()
+    {
+        $this->assign("menuselect", 2);
+        $projectModel = new Projects();
+        $projects = $projectModel->projectlists(1);
+        $this->assign("projects", $projects);
+        return $this->fetch('projects');
     }
 
 }

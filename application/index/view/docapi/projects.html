@@ -1,0 +1,15 @@
+{foreach $projects as $project}
+<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+    <div class="Repository card">
+        <div class="card-block">
+            <div class="name">
+                <i class="fa fa-book" style="color:#3c8dbc"></i>&nbsp;&nbsp;<a href="/repository/editor?id=104491">{$project.project_name}</a>
+            </div>
+            <div class="desc">{$project.project_info}</div>
+        </div>
+        <div class="card-block card-footer">
+            <span class="ownername"><i class="fa fa-user"></i>&nbsp;&nbsp;{$project.last_user}</span><span
+                class="fromnow">{$project.last_time}更新</span></div>
+    </div>
+</div>
+{/foreach}

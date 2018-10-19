@@ -53,39 +53,16 @@ Route::group('admin',[
  * 网站首页通用相关
  */
 Route::rule('/','index/Index/index','GET');
-Route::rule('/index','index/Docapi/userDefault');
 
 /**
- * 博客文章展示相关
+ * 前端相关页面
  */
 Route::group('docapi',[
-    '/[:typeid]'   => ['index/Blog/index', ['method' => 'get|post'],['typeid' => '\d+']],
-    'dolike'=>['index/Blog/doLike',['method' => 'post']],
+    '/'   => ['index/Docapi/userDefault', ['method' => 'get']],
+    'projects'=>['index/Docapi/userProject',['method' => 'get']],
     'articlenext'=>['index/Blog/artnext',['method' => 'post']],
     'article/[:articleid]'   => ['index/Blog/articleDetail', ['method' => 'get']],
     'doshare'   => ['index/Blog/doShare', ['method' => 'post']],
     'docomment'   => ['index/Blog/userComment', ['method' => 'post']],
 ]);
 
-
-/**
- * 博客数据相关数据接口
- */
-Route::group('api',[
-    '/[:cpage]'   => ['apiv1/Apiblog/index', ['method' => 'get|post'],['cpage' => '\d+']],
-    'article'   => ['apiv1/Apiblog/artdetail', ['method' => 'get|post']],
-    'dolike'=>['apiv1/Apiblog/artlike',['method' => 'get|post']],
-    'dologin'=>['apiv1/Apiblog/wechatlogin',['method' => 'get|post']],
-    'urlreturn'=>['apiv1/Apiblog/urlreturn',['method' => 'get|post']],
-    'writecomm'=>['apiv1/Apiblog/artcomment',['method' => 'get|post']]
-]);
-
-
-/**
- * 微信相关数据接口
- */
-Route::group('wechat',[
-    'autoreply'=>['activity/Apiwechat/autoreply',['method' => 'get|post']],
-    'test'=>['activity/Apiwechat/test',['method' => 'get']],
-    'testsubmit'=>['activity/Apiwechat/testsubmit',['method' => 'post']],
-]);
