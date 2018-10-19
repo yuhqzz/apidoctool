@@ -19,6 +19,79 @@ class Projects extends Model
         $this->user = $userdata;
     }
 
+    //获取我创建的项目/我加入的项目
+    public function myprojects()
+    {
+        $userid = $this->user['userid'];
+        if ($this->user['username'] == "admin") {
+            //如果登录的是admin所有项目都归为创建项目里面
+            $createdata = Db::table('doc_projects')
+                ->where('is_logic_del', 0)
+                ->select();
+            $joindata = [];
+        } else {
+            //查出用户创建的项目
+            $createdata = Db::table('doc_projects')
+                ->where('is_logic_del', 0)
+                ->where('create_userid', $userid)
+                ->select();
+            $createids = array();
+            foreach ($createdata as $create) {
+                $createids[] = $create['projectid'];
+            }
+            //查出用户加入的项目id集合
+            $joinids = Db::table('doc_jurisdiction')->field('projectid')
+                ->where('userid', $userid)
+                ->where('projectid', 'NOT IN', $createids)
+                ->column('projectid');
+            $joindata = Db::table('doc_projects')
+                ->where('is_logic_del', 0)
+                ->where('projectid', 'IN', $joinids)
+                ->select();
+        }
+        return ['createdata' => $createdata, 'joindata' => $joindata];
+    }
+
+    //获取我参与的项目的接口更新变化
+    public function indexupdate()
+    {
+        $userid = $this->user['userid'];
+        $joinids = Db::table('doc_jurisdiction')->field('projectid')
+            ->where('userid', $userid)
+            ->column('projectid');
+        $updatedata=Db::table('doc_api')->field('apiid,api_name,create_userid,create_time,update_time,update_userid,projectid,moduleid')
+            ->where('projectid', 'in', $joinids)
+            ->limit(10)
+            ->select();
+        for($i=0;$i<count($updatedata);$i++){
+            //创建人姓名
+            $createuser = Common::userdata($updatedata[$i]['create_userid']);
+            $updatedata[$i]['create_user'] = $createuser['username'];
+            //修改人姓名
+            $createuser = Common::userdata($updatedata[$i]['update_userid']);
+            $updatedata[$i]['update_user'] = $createuser['username'];
+            if($updatedata[$i]['create_time']==$updatedata[$i]['update_time']){
+                $updatedata[$i]['showtype']=0;//创建
+            }else{
+                $updatedata[$i]['showtype']=1;//更新
+            }
+            $updatedata[$i]['create_time']=Common::mdate($updatedata[$i]['create_time']);
+            $updatedata[$i]['update_time']=Common::mdate($updatedata[$i]['update_time']);
+
+            //项目名称
+            $proname = Db::table('doc_projects')->field('project_name')
+                ->where('projectid', $updatedata[$i]['projectid'])
+                ->find();
+            $updatedata[$i]['project_name'] = $proname['project_name'];
+            //版块名称
+            $modulename = Db::table('doc_module')->field('module_name')
+                ->where('id', $updatedata[$i]['moduleid'])
+                ->find();
+            $updatedata[$i]['module_name'] = $modulename['module_name'];
+        }
+        return $updatedata;
+    }
+
     /**
      * 获取项目列表
      * @param $userid
@@ -33,22 +106,18 @@ class Projects extends Model
                 ->select();
         } else {
             //查看当前用户可以查看哪些项目
-            $proids = Db::table('doc_jurisdiction')->name('projectid')
+            $proids = Db::table('doc_jurisdiction')->field('projectid')
                 ->where('userid', $userid)
                 ->where('level', 1)
-                ->select();
-            $proidsnew = array();
-            foreach ($proids as $item) {
-                $proidsnew[] = $item['projectid'];
-            }
+                ->column('projectid');
             $data = Db::table('doc_projects')
-                ->where('projectid', 'in', $proidsnew)
+                ->where('projectid', 'in', $proids)
                 ->where('is_logic_del',0)
                 ->select();
         }
         //获取创建人姓名
         for ($i = 0; $i < count($data); $i++) {
-            $createuser = Db::table('doc_users')->name('username')
+            $createuser = Db::table('doc_users')->field('username')
                 ->where('userid', $data[$i]['create_userid'])
                 ->find();
             $data[$i]['create_user'] = $createuser['username'];
@@ -116,7 +185,7 @@ class Projects extends Model
     {
         $userid = $this->user['userid'];
         //查看当前用户是否有权限删除
-        $proids = Db::table('doc_jurisdiction')->name('projectid')
+        $proids = Db::table('doc_jurisdiction')->field('projectid')
             ->where('userid', $userid)
             ->where('projectid', $proid)
             ->where('level', 1)
@@ -136,7 +205,7 @@ class Projects extends Model
     {
         $userid = $this->user['userid'];
         //查看当前用户是否有权限查看
-        $proids = Db::table('doc_jurisdiction')->name('projectid')
+        $proids = Db::table('doc_jurisdiction')->field('projectid')
             ->where('userid', $userid)
             ->where('projectid', $proid)
             ->where('level', 1)
@@ -148,7 +217,7 @@ class Projects extends Model
                 ->select();
             //获取创建人姓名
             for ($i = 0; $i < count($modules); $i++) {
-                $createuser = Db::table('doc_users')->name('username')
+                $createuser = Db::table('doc_users')->field('username')
                     ->where('userid', $modules[$i]['create_userid'])
                     ->find();
                 $modules[$i]['create_user'] = $createuser['username'];
@@ -210,7 +279,7 @@ class Projects extends Model
     {
         $userid = $this->user['userid'];
         //查看当前用户是否有权限删除
-        $proids = Db::table('doc_jurisdiction')->name('projectid')
+        $proids = Db::table('doc_jurisdiction')->field('projectid')
             ->where('userid', $userid)
             ->where('projectid', $proid)
             ->where('level', 1)
@@ -232,10 +301,10 @@ class Projects extends Model
     public function docapis($proid,$moduleid)
     {
         //查看当前用户是否有权限查看
-        $proids = Db::table('doc_jurisdiction')->name('projectid')
+        $proids = Db::table('doc_jurisdiction')->field('projectid')
             ->where('userid', $this->user['userid'])
             ->where('level', 1)
-            ->select();
+            ->column('projectid');
 
         $where = "is_logic_del=0";
         if ($proid) {
@@ -243,12 +312,7 @@ class Projects extends Model
         }else{
             if($this->user['username'] != "admin" &&$proids){
                 //不是超级管理员只展示当前用户可以看到的
-                $proidsnew = array();
-                foreach ($proids as $item) {
-                    $proidsnew[] = $item['projectid'];
-                }
-                $proidsnew=implode(",",$proidsnew);
-                $where .= " AND projectid IN ($proidsnew)";
+                $where .= " AND projectid IN ($proids)";
             }
         }
         if ($moduleid) {
@@ -258,12 +322,12 @@ class Projects extends Model
             ->where($where)
             ->paginate(20,false,['query'=>request()->param()])->each(function($item, $key){
                 //项目名称
-                $proname = Db::table('doc_projects')->name('project_name')
+                $proname = Db::table('doc_projects')->field('project_name')
                     ->where('projectid', $item['projectid'])
                     ->find();
                 $item['project_name'] = $proname['project_name'];
                 //版块名称
-                $modulename = Db::table('doc_module')->name('module_name')
+                $modulename = Db::table('doc_module')->field('module_name')
                     ->where('id', $item['moduleid'])
                     ->find();
                 $item['module_name'] = $modulename['module_name'];
@@ -285,12 +349,12 @@ class Projects extends Model
             ->where('apiid', $apiid)
             ->find();
         //项目名称
-        $proname = Db::table('doc_projects')->name('project_name')
+        $proname = Db::table('doc_projects')->field('project_name')
             ->where('projectid', $docapi['projectid'])
             ->find();
         $docapi['project_name'] = $proname['project_name'];
         //版块名称
-        $modulename = Db::table('doc_module')->name('module_name')
+        $modulename = Db::table('doc_module')->field('module_name')
             ->where('id', $docapi['moduleid'])
             ->find();
         $docapi['module_name'] = $modulename['module_name'];

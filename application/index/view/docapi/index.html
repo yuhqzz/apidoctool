@@ -1,36 +1,51 @@
 <div class="col-12 col-sm-8 col-md-8 col-lg-8">
     <div class="Logs card">
         <div class="card-block">
+
+            {foreach $indexupdate as $onedata}
             <div class="Log clearfix">
-                <div class="Log-body"><span class="Log-user"><img
+                <div class="Log-body">
+                    <span class="Log-user">
+                        <img
                         src="https://work.alibaba-inc.com/photo/undefined.220x220.jpg"
-                        class="Log-avatar"><a target="_blank" class="Log-user-link"
-                                              href="/https://work.alibaba-inc.com/work/u/undefined">ldf</a></span><span
-                        class="Log-type">创建了</span><span class="Log-target"><a
-                        href="/repository/editor?id=95180">test</a><span class="slash"> / </span><a
-                        href="/repository/editor?id=95180&amp;mod=150269">test</a></span></div>
-                <div class="Log-footer"><i class="Log-fromnow">3 小时前</i></div>
+                        class="Log-avatar">
+                        <a target="_blank" class="Log-user-link">{$onedata.showtype==0?$onedata.create_user:$onedata.update_user}</a></span><span
+                        class="Log-type">{$onedata.showtype==0?创建了:更新了}</span>
+                    <span class="Log-target">
+                        <a
+                        href="/repository/editor?id=95180">【{$onedata.project_name}】{$onedata.module_name}</a>
+                        <span>/</span>
+                        <a
+                        href="/repository/editor?id=95180&amp;mod=150269">{$onedata.api_name}</a></span></div>
+                <div class="Log-footer"><i class="Log-fromnow">{$onedata.showtype==0?$onedata.create_time:$onedata.update_time}</i>
+                </div>
             </div>
-            <div class="Log clearfix">
-                <div class="Log-body"><span class="Log-user"><img
-                        src="https://work.alibaba-inc.com/photo/undefined.220x220.jpg"
-                        class="Log-avatar"><a target="_blank" class="Log-user-link"
-                                              href="/https://work.alibaba-inc.com/work/u/undefined">ldf</a></span><span
-                        class="Log-type">创建了</span><span class="Log-target"><a
-                        href="/repository/editor?id=95180">test</a></span></div>
-                <div class="Log-footer"><i class="Log-fromnow">3 小时前</i></div>
-            </div>
+            {/foreach}
         </div>
     </div>
 </div>
 <div class="col-12 col-sm-4 col-md-4 col-lg-4">
     <div class="card">
-        <div class="card-header">我拥有的仓库</div>
-        <div class="card-block"><p><a
-                href="/repository/editor?id=95180"><span></span><span>test</span></a></p></div>
+        <div class="card-header">我创建的项目</div>
+        <div class="card-block">
+            {foreach $createdata as $mycreate}
+            <p>
+                <a href="#"><i class="fa fa-book"></i>&nbsp;&nbsp;<span>{$mycreate.project_name}</span></a>
+                <span style="float: right;color:#dedede">{$mycreate.create_time|date="y-m-d h:i:s",###}</span>
+            </p>
+            {/foreach}
+            {$createdata?"":"暂无数据"}
+        </div>
     </div>
     <div class="card">
-        <div class="card-header">我加入的仓库</div>
-        <div class="card-block"><span>-</span></div>
+        <div class="card-header">我加入的项目</div>
+        <div class="card-block">
+            {foreach $joindta as $myjoin}
+            <p>
+                <a href="#"><i class="fa fa-book"></i>&nbsp;&nbsp;<span>{$myjoin.project_name}</span></a>
+                <span style="float: right;color:#dedede">{$myjoin.create_time|date="y-m-d h:i:s",###}</span>
+            </p>
+            {/foreach}
+        </div>
     </div>
 </div>

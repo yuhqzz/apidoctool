@@ -10,7 +10,7 @@ class LoginAuth
     use \traits\controller\Jump;
     public function run()
     {
-        $session = Session::get('adminuser', 'admin');
+        $session = Session::get('adminuser');
         if (!$session) {
             return $this->error('请登录！', '/loginauth');
         }
