@@ -60,9 +60,7 @@ Route::rule('/','index/Index/index','GET');
 Route::group('docapi',[
     '/'   => ['index/Docapi/userDefault', ['method' => 'get']],
     'projects'=>['index/Docapi/userProject',['method' => 'get']],
-    'articlenext'=>['index/Blog/artnext',['method' => 'post']],
-    'article/[:articleid]'   => ['index/Blog/articleDetail', ['method' => 'get']],
-    'doshare'   => ['index/Blog/doShare', ['method' => 'post']],
-    'docomment'   => ['index/Blog/userComment', ['method' => 'post']],
+    'apis/[:proid]/[:moduleid]'=>['index/Docapi/userApis',['method' => 'get']],
+
 ]);
 

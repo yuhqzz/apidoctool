@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:93:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/docapi/index.html";i:1539945772;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1539934366;s:48:"../application/index/view/layouts/htmltitle.html";i:1539930137;s:49:"../application/index/view/layouts/htmlfooter.html";i:1539931598;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:92:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/docapi/apis.html";i:1539947477;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1539934366;s:48:"../application/index/view/layouts/htmltitle.html";i:1539930137;s:49:"../application/index/view/layouts/htmlfooter.html";i:1539931598;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
@@ -69,56 +69,33 @@
         <div class="body">
             <div class="Home">
                 <div class="row">
-                    <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-    <div class="Logs card">
-        <div class="card-block">
+                    <nav style="width:100%;border-bottom:1px solid #e1e4e8">
+    <select class="form-control float-left w160 mr12" onchange="self.location.href='/docapi/apis/'+options[selectedIndex].value">
+        <?php foreach($projects as $pro): ?>
+            <option <?php echo !empty($pro)?$pro['projectid']==$proid ? 'selected' : '':''; ?> value="<?php echo $pro['projectid']; ?>"><?php echo $pro['project_name']; ?></option>
+        <?php endforeach; ?>
+    </select>
 
-            <?php foreach($indexupdate as $onedata): ?>
-            <div class="Log clearfix">
-                <div class="Log-body">
-                    <span class="Log-user">
-                        <img
-                        src="https://work.alibaba-inc.com/photo/undefined.220x220.jpg"
-                        class="Log-avatar">
-                        <a target="_blank" class="Log-user-link"><?php echo $onedata['showtype']==0?$onedata['create_user']:$onedata['update_user']; ?></a></span><span
-                        class="Log-type"><?php echo $onedata['showtype']==0?创建了:更新了; ?></span>
-                    <span class="Log-target">
-                        <a href="/docapi/apis/<?php echo $onedata['projectid']; ?>">【<?php echo $onedata['project_name']; ?>】</a>
-                        <a href="/docapi/apis/<?php echo $onedata['projectid']; ?>/<?php echo $onedata['moduleid']; ?>"><?php echo $onedata['module_name']; ?></a>
-                        <span>/</span>
-                        <a
-                        href="/repository/editor?id=95180&amp;mod=150269"><?php echo $onedata['api_name']; ?></a></span></div>
-                <div class="Log-footer"><i class="Log-fromnow"><?php echo $onedata['showtype']==0?$onedata['create_time']:$onedata['update_time']; ?></i>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</div>
-<div class="col-12 col-sm-4 col-md-4 col-lg-4">
-    <div class="card">
-        <div class="card-header">我创建的项目</div>
-        <div class="card-block">
-            <?php foreach($createdata as $mycreate): ?>
-            <p>
-                <a href="/docapi/apis/<?php echo $mycreate['projectid']; ?>"><i class="fa fa-book"></i>&nbsp;&nbsp;<span><?php echo $mycreate['project_name']; ?></span></a>
-                <span style="float: right;color:#dedede"><?php echo date("y-m-d h:i:s",$mycreate['create_time']); ?></span>
-            </p>
-            <?php endforeach; ?>
-            <?php echo !empty($createdata)?"":"暂无数据"; ?>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header">我加入的项目</div>
-        <div class="card-block">
-            <?php foreach($joindta as $myjoin): ?>
-            <p>
-                <a href="/docapi/apis/<?php echo $myjoin['projectid']; ?>"><i class="fa fa-book"></i>&nbsp;&nbsp;<span><?php echo $myjoin['project_name']; ?></span></a>
-                <span style="float: right;color:#dedede"><?php echo date("y-m-d h:i:s",$myjoin['create_time']); ?></span>
-            </p>
-            <?php endforeach; ?>
-        </div>
-    </div>
+</nav>
+<div style="clear: both"></div>
+
+
+<div class="account-l fl" style="width: 20%;margin-top: 20px;">
+    <a class="list-title"><?php echo $proname; ?></a>
+    <ul id="accordion" class="accordion">
+        <?php foreach($modules as $module): ?>
+        <li <?php echo $module['id']==$moduleid?"class='open'":''; ?>>
+            <div class="link"><i class="fa fa-plug"></i><?php echo $module['module_name']; ?><i class="fa fa-chevron-down"></i></div>
+            <ul class="submenu"  style="<?php echo $module['id']==$moduleid?'display:block':''; ?>">
+                <?php foreach($module['apis'] as $api): ?>
+                <li id="shop"><a><?php echo $api['api_name']; ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        </li>
+        <?php endforeach; ?>
+    </ul>
+
+
 </div>
                 </div>
             </div>

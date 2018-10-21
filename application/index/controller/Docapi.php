@@ -40,4 +40,24 @@ class Docapi extends Controller
         return $this->fetch('projects');
     }
 
+    /**
+     * 接口列表
+     * @return mixed
+     */
+    public function userApis($proid=0,$moduleid=0){
+        $this->assign("menuselect", 3);
+        $projectModel = new Projects();
+        $resultdata = $projectModel->webapilists($proid,$moduleid);
+        //页面下拉项目列表
+        $this->assign("projects", $resultdata['projects']);
+        //当前项目下的版块列表
+        $this->assign("modules", $resultdata['modules']);
+        //当前项目id
+        $this->assign("proid", $resultdata['proid']);
+        //当前版块id
+        $this->assign("moduleid", $resultdata['moduleid']);
+        //当前项目名称
+        $this->assign("proname", $resultdata['proname']);
+        return $this->fetch('apis');
+    }
 }

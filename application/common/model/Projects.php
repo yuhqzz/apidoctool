@@ -19,7 +19,7 @@ class Projects extends Model
         $this->user = $userdata;
     }
 
-    //获取我创建的项目/我加入的项目
+    //获取我创建的项目/我加入的项目(web)
     public function myprojects()
     {
         $userid = $this->user['userid'];
@@ -52,7 +52,7 @@ class Projects extends Model
         return ['createdata' => $createdata, 'joindata' => $joindata];
     }
 
-    //获取我参与的项目的接口更新变化
+    //获取我参与的项目的接口更新变化(web)
     public function indexupdate()
     {
         $userid = $this->user['userid'];
@@ -91,6 +91,57 @@ class Projects extends Model
         }
         return $updatedata;
     }
+
+    //获取接口页面数据信息
+    public function webapilists($proid,$moduleid)
+    {
+        //获得项目列表
+        $userid = $this->user['userid'];
+        if ($this->user['username'] == "admin") {
+            //可查看所有项目
+            $prolist = Db::table('doc_projects')
+                ->where('is_logic_del', 0)
+                ->select();
+        } else {
+            //查看当前用户可以查看哪些项目
+            $proids = Db::table('doc_jurisdiction')->field('projectid')
+                ->where('userid', $userid)
+                ->column('projectid');
+            $prolist = Db::table('doc_projects')
+                ->where('projectid', 'in', $proids)
+                ->where('is_logic_del', 0)
+                ->select();
+        }
+        if (empty($proid)) {
+            //默认展示第一个项目的相关接口
+            $proid = $prolist[0]['projectid'];
+            //获取项目名称
+            $proname = $prolist[0]['project_name'];
+        } else {
+            //获取项目名称
+            $proname = Db::table('doc_projects')->field('project_name')
+                ->where('projectid', $proid)
+                ->value('project_name');
+        }
+
+        //获取项目的模块列表
+        $modules = Db::table('doc_module')
+            ->where('projectid', $proid)
+            ->where('is_logic_del', 0)
+            ->select();
+        for($i=0;$i<count($modules);$i++){
+            //取出这个版块的接口信息
+            $apis = Db::table('doc_api')->field('apiid,api_name')
+                ->where('moduleid', $modules[$i]['id'])
+                ->select();
+            $modules[$i]['apis']=$apis;
+        }
+        if (empty($moduleid)) {
+            $moduleid = $modules[0]['id'];
+        }
+        return ['projects' => $prolist, 'modules' => $modules, 'proname' => $proname, 'proid' => $proid, 'moduleid' => $moduleid];
+    }
+
 
     /**
      * 获取项目列表

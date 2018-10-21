@@ -12,8 +12,8 @@
                         <a target="_blank" class="Log-user-link">{$onedata.showtype==0?$onedata.create_user:$onedata.update_user}</a></span><span
                         class="Log-type">{$onedata.showtype==0?创建了:更新了}</span>
                     <span class="Log-target">
-                        <a
-                        href="/repository/editor?id=95180">【{$onedata.project_name}】{$onedata.module_name}</a>
+                        <a href="/docapi/apis/{$onedata.projectid}">【{$onedata.project_name}】</a>
+                        <a href="/docapi/apis/{$onedata.projectid}/{$onedata.moduleid}">{$onedata.module_name}</a>
                         <span>/</span>
                         <a
                         href="/repository/editor?id=95180&amp;mod=150269">{$onedata.api_name}</a></span></div>
@@ -30,7 +30,7 @@
         <div class="card-block">
             {foreach $createdata as $mycreate}
             <p>
-                <a href="#"><i class="fa fa-book"></i>&nbsp;&nbsp;<span>{$mycreate.project_name}</span></a>
+                <a href="/docapi/apis/{$mycreate.projectid}"><i class="fa fa-book"></i>&nbsp;&nbsp;<span>{$mycreate.project_name}</span></a>
                 <span style="float: right;color:#dedede">{$mycreate.create_time|date="y-m-d h:i:s",###}</span>
             </p>
             {/foreach}
@@ -42,7 +42,7 @@
         <div class="card-block">
             {foreach $joindta as $myjoin}
             <p>
-                <a href="#"><i class="fa fa-book"></i>&nbsp;&nbsp;<span>{$myjoin.project_name}</span></a>
+                <a href="/docapi/apis/{$myjoin.projectid}"><i class="fa fa-book"></i>&nbsp;&nbsp;<span>{$myjoin.project_name}</span></a>
                 <span style="float: right;color:#dedede">{$myjoin.create_time|date="y-m-d h:i:s",###}</span>
             </p>
             {/foreach}

@@ -2,5 +2,6 @@
 <project version="4">
   <component name="ProjectPlainTextFileTypeManager">
     <file url="file://$PROJECT_DIR$/application/admin/view/admin/addproject.html" />
+    <file url="file://$PROJECT_DIR$/public/static/home/js/dropload.min.js" />
   </component>
 </project>
