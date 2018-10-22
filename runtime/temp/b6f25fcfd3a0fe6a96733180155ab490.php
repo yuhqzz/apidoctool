@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:92:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/docapi/apis.html";i:1540208551;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1540204259;s:48:"../application/index/view/layouts/htmltitle.html";i:1540211400;s:49:"../application/index/view/layouts/htmlfooter.html";i:1540204282;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:92:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/docapi/apis.html";i:1540212199;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1540204259;s:48:"../application/index/view/layouts/htmltitle.html";i:1540211400;s:49:"../application/index/view/layouts/htmlfooter.html";i:1540204282;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
@@ -245,7 +245,7 @@
             <div class="tab-pane fade in active" id="successformat" style="margin-top:15px;">
             </div>
             <textarea id="failedcode" style="display: none"><?php echo $apidetails['failed_result']; ?></textarea>
-            <div class="tab-pane fade" id="failedformat"  style="margin-top:15px;">
+            <div class="tab-pane fade" id="failedformat"  style="margin-top:15px;overflow: auto">
             </div>
 
         </div>

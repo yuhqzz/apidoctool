@@ -129,19 +129,23 @@ class Projects extends Model
             ->where('projectid', $proid)
             ->where('is_logic_del', 0)
             ->select();
+        $m=0;
         for ($i = 0; $i < count($modules); $i++) {
             //取出这个版块的接口信息
             $apis = Db::table('doc_api')->field('apiid,api_name')
                 ->where('moduleid', $modules[$i]['id'])
                 ->select();
             $modules[$i]['apis'] = $apis;
+            if($moduleid==$modules[$i]['id']){
+                $m=$i;
+            }
         }
         if (empty($moduleid)) {
             $moduleid = $modules[0]['id'];
         }
 
         if (empty($apiid)) {
-            $apiid = $modules[0]['apis'][0]['apiid'];
+            $apiid = $modules[$m]['apis'][0]['apiid'];
         }
         //获取接口信息
         $apidetails = $this->apidetails($apiid);

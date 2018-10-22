@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:92:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/index/index.html";i:1539934544;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1540172287;s:48:"../application/index/view/layouts/htmltitle.html";i:1539930137;s:49:"../application/index/view/layouts/htmlfooter.html";i:1539931598;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:92:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/index/index.html";i:1540176884;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1540204259;s:48:"../application/index/view/layouts/htmltitle.html";i:1540211400;s:49:"../application/index/view/layouts/htmlfooter.html";i:1540204282;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
@@ -6,9 +6,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DocApi</title>
+    <!-- jQuery 2.1.4 -->
+    <script type="text/javascript" src="/static/admin/plugins/jQuery/jquery-1.9.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/home/css/main.css" />
     <link rel="stylesheet" type="text/css" href="/static/home/css/leftnav.css" />
 
+    <!-- Bootstrap 3.3.4 -->
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/bootstrap.css" />
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" type="text/css" href="/static/admin/css/font-awesome.min.css" />
     <!-- Ionicons -->
@@ -63,7 +67,7 @@
             <li><a href="/docapi/projects" class="<?php echo $menuselect==2?'selected':''; ?>"><i class="fa fa-book"></i>&nbsp;项目</a></li>
 
             <li><a href="/docapi/apis" class="<?php echo $menuselect==3?'selected':''; ?>"><i class="fa fa-plug"></i>&nbsp;接口</a></li>
-            <li><a href="/status" class="<?php echo $menuselect==4?'selected':''; ?>"><i class="fa fa-link"></i>&nbsp;模拟测试</a></li>
+            <li><a href="/docapi/apitest" class="<?php echo $menuselect==4?'selected':''; ?>"><i class="fa fa-link"></i>&nbsp;接口测试</a></li>
         </ul>
         <ul class="nav-actions list-inline float-right">
             <?php if(\think\Session::get('adminuser')): ?>
@@ -78,9 +82,7 @@
         <div class="body">
             <div class="Home">
                 <div class="row">
-                    <!-- Bootstrap 3.3.4 -->
-<link rel="stylesheet" type="text/css" href="/static/admin/css/bootstrap.css" />
-<div class="container">
+                    <div class="container">
     <!-- Jumbotron -->
     <div class="jumbotron" style="text-align: center">
         <h1>DocApi</h1>
@@ -119,6 +121,9 @@
 <!-- Bootstrap 3.3.2 JS -->
 <script type="text/javascript" src="/static/admin/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/home/js/leftnav.js"></script>
+
+<script type="text/javascript" src="/static/home/js/jsonFormater.js"></script>
+
     </article>
 </div>
 </body>

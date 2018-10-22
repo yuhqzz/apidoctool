@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/docapi/projects.html";i:1539945387;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1540204259;s:48:"../application/index/view/layouts/htmltitle.html";i:1540194976;s:49:"../application/index/view/layouts/htmlfooter.html";i:1540204282;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/docapi/projects.html";i:1539945387;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1540204259;s:48:"../application/index/view/layouts/htmltitle.html";i:1540211400;s:49:"../application/index/view/layouts/htmlfooter.html";i:1540204282;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
@@ -67,7 +67,7 @@
             <li><a href="/docapi/projects" class="<?php echo $menuselect==2?'selected':''; ?>"><i class="fa fa-book"></i>&nbsp;项目</a></li>
 
             <li><a href="/docapi/apis" class="<?php echo $menuselect==3?'selected':''; ?>"><i class="fa fa-plug"></i>&nbsp;接口</a></li>
-            <li><a href="/status" class="<?php echo $menuselect==4?'selected':''; ?>"><i class="fa fa-link"></i>&nbsp;接口测试</a></li>
+            <li><a href="/docapi/apitest" class="<?php echo $menuselect==4?'selected':''; ?>"><i class="fa fa-link"></i>&nbsp;接口测试</a></li>
         </ul>
         <ul class="nav-actions list-inline float-right">
             <?php if(\think\Session::get('adminuser')): ?>

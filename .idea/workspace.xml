@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae309157-8e34-4aa3-a95b-959ccbaedebf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/index/view/docapi/apitest.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thinkphp" afterPath="$PROJECT_DIR$/thinkphp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/admin/view/admin/adddocapi.html" afterPath="$PROJECT_DIR$/application/admin/view/admin/adddocapi.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/common/model/Common.php" afterPath="$PROJECT_DIR$/application/common/model/Common.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/index/controller/Docapi.php" afterPath="$PROJECT_DIR$/application/index/controller/Docapi.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/index/view/docapi/apis.html" afterPath="$PROJECT_DIR$/application/index/view/docapi/apis.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/index/view/layouts/htmlfooter.html" afterPath="$PROJECT_DIR$/application/index/view/layouts/htmlfooter.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/index/view/layouts/htmlheader.html" afterPath="$PROJECT_DIR$/application/index/view/layouts/htmlheader.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/index/view/layouts/htmltitle.html" afterPath="$PROJECT_DIR$/application/index/view/layouts/htmltitle.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/route.php" afterPath="$PROJECT_DIR$/application/route.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/common/model/Projects.php" afterPath="$PROJECT_DIR$/application/common/model/Projects.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runtime/temp/21d903b9ec2914aee57464c4012e6633.php" afterPath="$PROJECT_DIR$/runtime/temp/21d903b9ec2914aee57464c4012e6633.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runtime/temp/2f9c030860ac1245187e25d9250b96ef.php" afterPath="$PROJECT_DIR$/runtime/temp/2f9c030860ac1245187e25d9250b96ef.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runtime/temp/31ce92b05aef079e9162a85241fc43ea.php" afterPath="$PROJECT_DIR$/runtime/temp/31ce92b05aef079e9162a85241fc43ea.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runtime/temp/b6f25fcfd3a0fe6a96733180155ab490.php" afterPath="$PROJECT_DIR$/runtime/temp/b6f25fcfd3a0fe6a96733180155ab490.php" />
     </list>
     <ignored path="apidoctool.iws" />
@@ -38,8 +31,8 @@
       <file leaf-file-name="Docapi.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/index/controller/Docapi.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="118" column="33" selection-start-line="118" selection-start-column="33" selection-end-line="118" selection-end-column="33" />
+            <state relative-caret-position="167">
+              <caret line="51" column="41" selection-start-line="51" selection-start-column="41" selection-end-line="51" selection-end-column="41" />
               <folding>
                 <element signature="e#38#68#0#PHP" expanded="true" />
               </folding>
@@ -47,102 +40,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="route.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/route.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="65" column="43" selection-start-line="65" selection-start-column="43" selection-end-line="65" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Projects.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Projects.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/common/model/Projects.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="513" column="61" selection-start-line="513" selection-start-column="7" selection-end-line="513" selection-end-column="61" />
+            <state relative-caret-position="347">
+              <caret line="148" column="9" selection-start-line="148" selection-start-column="9" selection-end-line="148" selection-end-column="9" />
               <folding>
                 <element signature="e#35#51#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="apitest.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/index/view/docapi/apitest.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="16" column="57" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="57" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#div#2;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="e#1474#1480#0" expanded="true" />
-                <element signature="e#1480#1486#0" expanded="true" />
-                <element signature="n#style#0;n#table#0;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#a#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#a#0;n#td#1;n#tr#1;n#table#0;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#2;n#table#0;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#a#0;n#td#1;n#tr#2;n#table#0;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#3;n#table#0;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#a#0;n#td#1;n#tr#3;n#table#0;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <marker date="1540211924088" expanded="true" signature="5991:6011" ph="..." />
-                <marker date="1540211924088" expanded="true" signature="6151:6167" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jsonFormater.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/static/home/css/jsonFormater.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="apis.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/index/view/docapi/apis.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="163" column="95" selection-start-line="163" selection-start-column="95" selection-end-line="163" selection-end-column="95" />
-              <folding>
-                <element signature="n#style#0;n#nav#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#nav#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#li#0;n#ul#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#h2#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#0;n#div#1;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#0;n#div#4;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#0;n#div#5;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#0;n#div#6;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#textarea#0;n#div#0;n#div#7;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#7;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#textarea#1;n#div#0;n#div#7;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#7;n#div#2;n#!!top" expanded="true" />
-                <marker date="1540212199793" expanded="true" signature="6938:6967" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Common.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/common/model/Common.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="78" column="14" selection-start-line="78" selection-start-column="14" selection-end-line="78" selection-end-column="14" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -186,7 +91,6 @@
         <option value="$PROJECT_DIR$/application/index/view/docapi/projects.html" />
         <option value="$PROJECT_DIR$/application/index/view/docapi/index.html" />
         <option value="$PROJECT_DIR$/application/index/view/index/index.html" />
-        <option value="$PROJECT_DIR$/application/common/model/Projects.php" />
         <option value="$PROJECT_DIR$/application/index/view/layouts/htmlheader.html" />
         <option value="$PROJECT_DIR$/application/index/view/layouts/htmlfooter.html" />
         <option value="$PROJECT_DIR$/application/route.php" />
@@ -197,6 +101,7 @@
         <option value="$PROJECT_DIR$/application/index/view/docapi/apis.html" />
         <option value="$PROJECT_DIR$/application/index/controller/Docapi.php" />
         <option value="$PROJECT_DIR$/application/common/model/Common.php" />
+        <option value="$PROJECT_DIR$/application/common/model/Projects.php" />
       </list>
     </option>
   </component>
@@ -731,12 +636,12 @@
       <workItem from="1539659014773" duration="240000" />
       <workItem from="1539659553474" duration="64219000" />
       <workItem from="1539911736003" duration="32351000" />
-      <workItem from="1540189478598" duration="18300000" />
+      <workItem from="1540189478598" duration="18936000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="121928000" />
+    <option name="totallyTimeSpent" value="122564000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="701" extended-state="6" />
@@ -748,7 +653,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20361248" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20361248" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1057,16 +962,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/common/model/Projects.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="513" column="61" selection-start-line="513" selection-start-column="7" selection-end-line="513" selection-end-column="61" />
-          <folding>
-            <element signature="e#35#51#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/route.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -1175,21 +1070,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/common/model/Common.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="76" column="47" selection-start-line="76" selection-start-column="47" selection-end-line="76" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/index/controller/Docapi.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="118" column="33" selection-start-line="118" selection-start-column="33" selection-end-line="118" selection-end-column="33" />
+        <state relative-caret-position="167">
+          <caret line="51" column="41" selection-start-line="51" selection-start-column="41" selection-end-line="51" selection-end-column="41" />
           <folding>
             <element signature="e#38#68#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/common/model/Common.php">
+    <entry file="file://$PROJECT_DIR$/application/common/model/Projects.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="78" column="14" selection-start-line="78" selection-start-column="14" selection-end-line="78" selection-end-column="14" />
-          <folding />
+        <state relative-caret-position="347">
+          <caret line="148" column="9" selection-start-line="148" selection-start-column="9" selection-end-line="148" selection-end-column="9" />
+          <folding>
+            <element signature="e#35#51#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
