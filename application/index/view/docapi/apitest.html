@@ -1,0 +1,149 @@
+<div class="container" style="margin-left:8%">
+    <form id="apiform">
+        <div class="form-group">
+            <label class="apihd">测试地址</label>
+            <input type="text" placeholder='请输入测试地址' name="apiurl" class='form-control' value="{$apidetails.api_url}"
+                   style="width:90%;"/>
+        </div>
+        <div class="form-group">
+            <label class="apihd">请求类型</label>
+            <select class="form-control" name="reqtype" style="width:15%;">
+                <option value="0">HTTP</option>
+                <option value="1">HTTPS</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="apihd">请求方式</label>
+            <select class="form-control" name="apirequest" style="width:15%;">
+                <option value="-1" {$apidetails?
+                '':'selected'}>请选择</option>
+                <option value="0" {$apidetails?$apidetails.api_request==0 ?
+                'selected' : '':''}>GET</option>
+                <option value="1" {$apidetails?$apidetails.api_request==1 ?
+                'selected' : '':''}>POST</option>
+                <option value="2" {$apidetails?$apidetails.api_request==2 ?
+                'selected' : '':''}>PUT</option>
+                <option value="3" {$apidetails?$apidetails.api_request==3 ?
+                'selected' : '':''}>DELETE</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="apihd">请求参数&nbsp;&nbsp;<a onclick="addreqRow()"><i class="fa fa-edit"
+                                                                             title="添加参数"></i></a></label>
+            <div>
+                <table class="table table-bordered" style="width:90%;" id="reqparamtable">
+                    <th>参数名称</th>
+                    <th>参数值</th>
+                    {if $apidetails}
+
+                    {foreach $apidetails.req_params as $reqparam}
+                    <tr>
+                        <td><input type="text" class='form-control' name='reqname[]' value="{$reqparam.param_name}"
+                                   placeholder='请输入参数名称'/></td>
+                        <td><input type="text" class='form-control' name='reqvalue[]' placeholder='请输入参数值'
+                                   style='width:80%;float:left'/>
+                            <a href='javascript:void(0)' onclick='removeRow(this);'><i
+                                    class='fa fa-trash-o fa-fw' style='font-size: 20px;'></i></a></td>
+                    </tr>
+                    {/foreach}
+                    {else /}
+                    <tr>
+                        <td><input type="text" class='form-control' name='reqname[]' placeholder='请输入参数名称'/></td>
+                        <td><input type="text" class='form-control' name='reqvalue[]' placeholder='请输入参数值'
+                                   style='width:80%;float:left'/>
+                            <a href='javascript:void(0)' onclick='removeRow(this);'><i
+                                    class='fa fa-trash-o fa-fw' style='font-size: 20px;'></i></a></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class='form-control' name='reqname[]' placeholder='请输入参数名称'/></td>
+                        <td><input type="text" class='form-control' name='reqvalue[]' placeholder='请输入参数值'
+                                   style='width:80%;float:left'/>
+                            <a href='javascript:void(0)' onclick='removeRow(this);'><i
+                                    class='fa fa-trash-o fa-fw' style='font-size: 20px;'></i></a></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class='form-control' name='reqname[]' placeholder='请输入参数名称'/></td>
+                        <td><input type="text" class='form-control' name='reqvalue[]' placeholder='请输入参数值'
+                                   style='width:80%;float:left'/>
+                            <a href='javascript:void(0)' onclick='removeRow(this);'><i
+                                    class='fa fa-trash-o fa-fw' style='font-size: 20px;'></i></a></td>
+                    </tr>
+                    {/if}
+                </table>
+
+            </div>
+        </div>
+        <div>
+            <input onclick="testsubmit()" type="button" value="提&nbsp;&nbsp;&nbsp;&nbsp;交" class='form-control'
+                   style="width:60%;background-color:#3c8dbc;color: white;font-weight: bold;margin-left:12%"/>
+        </div>
+
+    </form>
+
+
+    <div class="form-group">
+        <label class="apihd">响应结果</label>
+        <ul id="myTab" class="nav nav-tabs apivalue">
+            <li class="active"><a href="#resultformat" data-toggle="tab">
+                格式化JSON</a>
+            </li>
+            <li><a href="#originaljson" data-toggle="tab">原始JSON</a></li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content apivalue">
+            <div class="tab-pane fade in active" id="resultformat" style="margin-top:15px;">
+            </div>
+            <div class="tab-pane fade in" id="originaljson" style="margin-top:15px;">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+var resultformat;
+    $(document).ready(function () {
+        resultformat = function () {
+            var options = {
+                dom: '#resultformat',
+            };
+            window.jf = new JsonFormater(options);
+            jf.doFormat($('#originaljson').html());
+        };
+    });
+
+
+    //增加请求参数
+    function addreqRow() {
+        var row = document.getElementById("reqparamtable").rows.length;
+        var newRow = document.getElementById("reqparamtable").insertRow(row);
+
+//得到表的对象并插入一行，下面是插入了行以后，填充相应的列节点，如下面所示
+        var oCell = newRow.insertCell(0);//插入列的节点
+        oCell.innerHTML = "<input type='text' name='reqname[]' class='form-control' placeholder='请输入参数名称'/>";//列里面填充的值，innerHtml值列内的所有元素
+
+        oCell = newRow.insertCell(1);
+        oCell.innerHTML = "<input type='text' name='reqvalue[]' style='width:80%;float:left'  class='form-control' placeholder='请输入参数值'/><a href='javascript:void(0)' onclick='removeRow(this);'><i class='fa fa-trash-o fa-fw' style='font-size: 20px;'></i></a>";
+    }
+
+    //删除参数
+    function removeRow(obj) {
+        var oRow = obj.parentElement;
+        var oRow = oRow.parentElement;  //获取当前事件的父节点
+        document.getElementById("reqparamtable").deleteRow(oRow.rowIndex);  //删除当前列
+    }
+
+    function testsubmit() {
+        $.ajax({
+            type: "POST",
+            url: "/docapi/doapitest",
+            data: $("#apiform").serialize(),
+            success: function (msg) {
+                $("#originaljson").html(msg);
+                resultformat();
+            }
+        });
+    }
+
+</script>

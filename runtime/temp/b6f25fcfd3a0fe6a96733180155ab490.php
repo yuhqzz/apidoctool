@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:92:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/docapi/apis.html";i:1540190790;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1540176889;s:48:"../application/index/view/layouts/htmltitle.html";i:1539930137;s:49:"../application/index/view/layouts/htmlfooter.html";i:1540192447;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:92:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/docapi/apis.html";i:1540208551;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1540204259;s:48:"../application/index/view/layouts/htmltitle.html";i:1540211400;s:49:"../application/index/view/layouts/htmlfooter.html";i:1540204282;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DocApi</title>
+    <!-- jQuery 2.1.4 -->
+    <script type="text/javascript" src="/static/admin/plugins/jQuery/jquery-1.9.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/home/css/main.css" />
     <link rel="stylesheet" type="text/css" href="/static/home/css/leftnav.css" />
 
@@ -65,7 +67,7 @@
             <li><a href="/docapi/projects" class="<?php echo $menuselect==2?'selected':''; ?>"><i class="fa fa-book"></i>&nbsp;项目</a></li>
 
             <li><a href="/docapi/apis" class="<?php echo $menuselect==3?'selected':''; ?>"><i class="fa fa-plug"></i>&nbsp;接口</a></li>
-            <li><a href="/status" class="<?php echo $menuselect==4?'selected':''; ?>"><i class="fa fa-link"></i>&nbsp;模拟测试</a></li>
+            <li><a href="/docapi/apitest" class="<?php echo $menuselect==4?'selected':''; ?>"><i class="fa fa-link"></i>&nbsp;接口测试</a></li>
         </ul>
         <ul class="nav-actions list-inline float-right">
             <?php if(\think\Session::get('adminuser')): ?>
@@ -112,7 +114,7 @@
 </div>
 
 <div id="apidetails" style="margin-top: 20px;width:80%;font-size:16px;">
-    <h2 id="apiname"><?php echo $apidetails['api_name']; ?></h2>
+    <h2 id="apiname"><?php echo $apidetails['api_name']; ?> <a style="font-size: 16px;color:#3c8dbc" href="/docapi/apitest/<?php echo $apidetails['apiid']; ?>">【测试接口】</a></h2>
 
     <div class="form-group">
         <label class="apihd">应用场景</label>
@@ -252,18 +254,6 @@
 
 </div>
 
-                </div>
-            </div>
-        </div>
-        <div class="Footer">Powered By @<font color="#3c8dbc">liuxiaomo</font></div>
-<!-- jQuery 2.1.4 -->
-<script type="text/javascript" src="/static/admin/plugins/jQuery/jquery-1.9.1.min.js"></script>
-<!-- Bootstrap 3.3.2 JS -->
-<script type="text/javascript" src="/static/admin/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/static/home/js/leftnav.js"></script>
-
-<script type="text/javascript" src="/static/home/js/jsonFormater.js"></script>
-
 <script type="application/javascript">
     var successjsonformat;
     var failedjsonformat
@@ -293,7 +283,7 @@
             url: "/docapi/details",
             data:"apiid="+apiid,
             success: function(msg){
-                $("#apiname").html(msg.api_name);
+                $("#apiname").html(msg.api_name+' <a style="font-size: 16px;color:#3c8dbc" href="/docapi/apitest/'+apiid+'">【测试接口】</a>');
                 $("#apiinfo").html(msg.api_info);
                 $("#apiurl").html(msg.api_url);
                 $("#apitesturl").html(msg.api_test_url);
@@ -326,6 +316,18 @@
         });
     }
 </script>
+                </div>
+            </div>
+        </div>
+        <div class="Footer">Powered By @<font color="#3c8dbc">liuxiaomo</font></div>
+<!-- jQuery 2.1.4 -->
+<script type="text/javascript" src="/static/admin/plugins/jQuery/jquery-1.9.1.min.js"></script>
+<!-- Bootstrap 3.3.2 JS -->
+<script type="text/javascript" src="/static/admin/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/home/js/leftnav.js"></script>
+
+<script type="text/javascript" src="/static/home/js/jsonFormater.js"></script>
+
     </article>
 </div>
 </body>

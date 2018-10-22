@@ -79,4 +79,44 @@ class Docapi extends Controller
         $apidetails['api_request'] = Common::$reqtype[$apidetails['api_request']];
         return json($apidetails);
     }
+
+    /**
+     * 接口测试页面
+     * @param $apiid
+     * @return mixed
+     */
+    public function apitest($apiid=0)
+    {
+        $this->assign("menuselect", 4);
+        if($apiid){
+            $projectModel = new Projects();
+            $apidetails = $projectModel->apidetails($apiid);
+            $this->assign("apidetails", $apidetails);
+        }
+        return $this->fetch('apitest');
+    }
+
+    /**
+     *测试接口请求
+     */
+    public function doapitest()
+    {
+        $requestdata = array();
+        $paramstr = array();
+        for ($i = 0; $i < count($_POST['reqname']); $i++) {
+            if ($_POST['apirequest'] == 0) {
+                $paramstr[] = $_POST['reqname'][$i] . "=" . $_POST['reqvalue'][$i];
+            } else {
+                $requestdata[$_POST['reqname'][$i]] = $_POST['reqvalue'][$i];
+            }
+            $paramstr[] = $_POST['reqname'][$i] . "=" . $_POST['reqvalue'][$i];
+        }
+        $apiurl = $_POST['apiurl'];
+        if ($_POST['apirequest'] == 0) {
+            $paramstr = implode("&", $paramstr);
+            $apiurl .= "?" . $paramstr;
+        }
+        $returnjson = Common::curlapi($apiurl, $requestdata, $_POST['reqtype'], $_POST['apirequest']);
+        return json($returnjson);
+    }
 }

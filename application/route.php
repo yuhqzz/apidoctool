@@ -62,5 +62,7 @@ Route::group('docapi',[
     'projects'=>['index/Docapi/userProject',['method' => 'get']],
     'apis/[:proid]/[:moduleid]/[:apiid]'=>['index/Docapi/userApis',['method' => 'get']],
     'details' => ['index/Docapi/apidetails', ['method' => 'post']],
+    'apitest/[:apiid]'=>['index/Docapi/apitest',['method' => 'get']],
+    'doapitest' => ['index/Docapi/doapitest', ['method' => 'post']],
 ]);
 
