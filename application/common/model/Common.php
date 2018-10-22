@@ -46,4 +46,12 @@ class Common extends Model
         }
         return $text;
     }
+
+    //请求类型
+    public static $reqtype = [
+        'GET',
+        'POST',
+        'PUT',
+        'DELETE',
+    ];
 }

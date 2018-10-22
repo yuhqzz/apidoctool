@@ -1,7 +1,11 @@
+<!-- jsonforamt -->
+{css href="/static/home/css/jsonFormater.css" /}
 <nav style="width:100%;border-bottom:1px solid #e1e4e8">
-    <select class="form-control float-left w160 mr12" onchange="self.location.href='/docapi/apis/'+options[selectedIndex].value">
+    <select class="form-control float-left w160 mr12"
+            onchange="self.location.href='/docapi/apis/'+options[selectedIndex].value" style="width:13%">
         {foreach $projects as $pro}
-            <option {$pro?$pro.projectid==$proid ? 'selected' : '':''} value="{$pro.projectid}">{$pro.project_name}</option>
+        <option {$pro?$pro.projectid==$proid ?
+        'selected' : '':''} value="{$pro.projectid}">{$pro.project_name}</option>
         {/foreach}
     </select>
 
@@ -15,14 +19,153 @@
         {foreach $modules as $module}
         <li {$module.id==$moduleid?"class='open'":''}>
             <div class="link"><i class="fa fa-plug"></i>{$module.module_name}<i class="fa fa-chevron-down"></i></div>
-            <ul class="submenu"  style="{$module.id==$moduleid?'display:block':''}">
+            <ul class="submenu" style="{$module.id==$moduleid?'display:block':''}">
                 {foreach $module.apis as $api}
-                <li id="shop"><a>{$api.api_name}</a></li>
+                <li {$api.apiid==$apiid?"class='current'":''}><a href="javascript:void(0)" onclick="showapidetail({$api.apiid})">{$api.api_name}</a></li>
                 {/foreach}
             </ul>
         </li>
         {/foreach}
     </ul>
+</div>
 
+<div id="apidetails" style="margin-top: 20px;width:80%;font-size:16px;">
+    <h2 id="apiname">{$apidetails.api_name}</h2>
+
+    <div class="form-group">
+        <label class="apihd">应用场景</label>
+        <p class="apivalue" id="apiinfo">{$apidetails.api_info}</p>
+    </div>
+
+    <div class="form-group">
+        <label class="apihd">请求地址</label>
+        <table class="table table-bordered apivalue" style="width:95%;">
+            <tr>
+                <th>环境</th>
+                <th>请求地址</th>
+            </tr>
+            <tr>
+                <td>正式环境</td>
+                <td id="apiurl">
+                    {$apidetails.api_url}
+                </td>
+            </tr>
+            <tr>
+                <td>测试环境</td>
+                <td id="apitesturl">
+                    {$apidetails.api_test_url}
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-group">
+        <label class="apihd">支持格式</label>
+        <p class="apivalue" id="apiformat">{$apidetails.api_format}</p>
+    </div>
+
+    <div class="form-group">
+        <label class="apihd">请求方式</label>
+        <p class="apivalue" id="apirequest">{$apidetails.api_request}</p>
+    </div>
+
+    <div class="form-group">
+        <label class="apihd">请求参数</label>
+        <table class="table table-bordered apivalue" style="width:95%;" id="reqparam">
+            <th>参数名称</th>
+            <th>参数类型</th>
+            <th>是否必填</th>
+            <th>最大长度</th>
+            <th>参数描述</th>
+            {foreach $apidetails.req_params as $reqparam}
+            <tr>
+                <td>{$reqparam.param_name}</td>
+                <td>{$reqparam.param_type}</td>
+                <td>{$reqparam.is_required==0?'必填':($reqparam.is_required==1?'可选':'特殊可选')}</td>
+                <td>{$reqparam.max_length==0?'--':$reqparam.max_length}</td>
+                <td>{$reqparam.param_info}</td>
+            </tr>
+            {/foreach}
+        </table>
+    </div>
+
+    <div class="form-group">
+        <label class="apihd">响应参数</label>
+        <table class="table table-bordered apivalue" style="width:95%;" id="resparam">
+            <th>参数名称</th>
+            <th>参数类型</th>
+            <th>是否必填</th>
+            <th>最大长度</th>
+            <th>参数描述</th>
+            {foreach $apidetails.res_params as $resparam}
+            <tr>
+                <td>{$resparam.param_name}</td>
+                <td>{$resparam.param_type}</td>
+                <td>{$resparam.is_required==0?'必填':($reqparam.is_required==1?'可选':'特殊可选')}</td>
+                <td>{$resparam.max_length==0?'--':$reqparam.max_length}</td>
+                <td>{$resparam.param_info}</td>
+            </tr>
+            {/foreach}
+        </table>
+    </div>
+
+    <div class="form-group">
+        <label class="apihd">响应状态码</label>
+        <table class="table table-bordered apivalue" style="width:95%;" id="statecode">
+            <th>状态值(status)</th>
+            <th>状态描述(msg)</th>
+            <th>原因</th>
+            <th>解决方案</th>
+            <tr>
+                <td>0</td>
+                <td>成功</td>
+                <td>你和医库很有缘</td>
+                <td>继续保持这种缘分</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>失败/参数不全</td>
+                <td>缺少了某个请求参数</td>
+                <td>检查下你少传了啥参数</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>token过期</td>
+                <td>可能你账号被别人登录了</td>
+                <td>重新登录获取token</td>
+            </tr>
+
+            {foreach $apidetails.state_codes as $statecode}
+            <tr>
+                <td>{$statecode.state_name}</td>
+                <td>{$statecode.state_info}</td>
+                <td>{$statecode.state_reason}</td>
+                <td>{$statecode.state_solution}</td>
+            </tr>
+            {/foreach}
+
+        </table>
+    </div>
+
+    <div class="form-group">
+        <label class="apihd">响应示例</label>
+        <ul id="myTab" class="nav nav-tabs apivalue">
+            <li class="active"><a href="#successformat" data-toggle="tab">
+                成功示例</a>
+            </li>
+            <li><a href="#failedformat" data-toggle="tab">失败示例</a></li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content apivalue">
+            <textarea id="successcode" style="display: none">{$apidetails.success_result}</textarea>
+            <div class="tab-pane fade in active" id="successformat" style="margin-top:15px;">
+            </div>
+            <textarea id="failedcode" style="display: none">{$apidetails.failed_result}</textarea>
+            <div class="tab-pane fade" id="failedformat"  style="margin-top:15px;">
+            </div>
+
+        </div>
+
+    </div>
 
 </div>

@@ -134,6 +134,35 @@
                 </table>
             </div>
 
+
+            <div class="form-group" style="padding-top:10px;">
+                <label>接口响应状态码&nbsp;&nbsp;&nbsp;
+                    <a href="javascript:void(0)" onclick="addcodeRow()">
+                        <i class="fa fa-edit" title="添加状态码"></i> </a></label>
+                <table class="table table-hover dataTable" >
+                    <thead>
+                    <tr>
+                        <th>状态值/状态名称</th>
+                        <th>状态描述</th>
+                        <th>出现原因</th>
+                        <th>解决方案</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="codeparamtable">
+                    {foreach $docapi.state_codes as $statecode}
+                    <tr>
+                        <td><input type='text' name='statename[]' value="{$statecode.state_name}" class='form-control' placeholder='状态值'/></td>
+                        <td><input type='text' name='stateinfo[]' value="{$statecode.state_info}"  class='form-control' placeholder='状态描述'/></td>
+                        <td><input type='text' name='statereason[]' value="{$statecode.state_reason}" class='form-control' placeholder='出现原因' /></td>
+                        <td><input type='text' name='statesolution[]' value="{$statecode.state_solution}" class='form-control' placeholder='解决方案'/></td>
+                        <td><a href='javascript:void(0)' onclick='removeRow(this,2);'><i class="fa fa-trash-o fa-fw" style="font-size: 20px;"></i></a></td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+
             <div class="form-group" style="clear:both;padding-top:10px;">
                 <label for="successresult">请求成功实例</label>
                 <textarea id="successresult" name="successresult" class="form-control" placeholder="请输入接口请求成功示例">{$docapi.success_result?$docapi.success_result:''}</textarea>
@@ -208,14 +237,41 @@
 
     }
 
+    //增加响应状态码
+    function addcodeRow()
+    {
+        var row=document.getElementById("codeparamtable").rows.length;
+        var newRow = document.getElementById("codeparamtable").insertRow(row);
+
+//得到表的对象并插入一行，下面是插入了行以后，填充相应的列节点，如下面所示
+        var oCell = newRow.insertCell(0);//插入列的节点
+        oCell.innerHTML = "<input type='text' name='statename[]' class='form-control' placeholder='状态值'/>";//列里面填充的值，innerHtml值列内的所有元素
+
+        oCell = newRow.insertCell(1);
+        oCell.innerHTML="<input type='text' name='stateinfo[]'  class='form-control' placeholder='状态描述'/>";
+
+        oCell=newRow.insertCell(2);
+        oCell.innerHTML = "<input type='text' name='statereason[]' class='form-control' placeholder='出现原因' />";
+
+        oCell=newRow.insertCell(3);
+        oCell.innerHTML = "<input type='text' name='statesolution[]' class='form-control' placeholder='解决方案'/>";
+
+        oCell=newRow.insertCell(4);
+        oCell.innerHTML = "<a href='javascript:void(0)' onclick='removeRow(this,1);'><i class='fa fa-trash-o fa-fw' style='font-size: 20px;'></i></a>";
+
+    }
+
+
     //删除参数
     function removeRow(src,obj)
     {
         var oRow = src.parentElement;  //获取当前事件的父节点
         if(obj==0){
             var table="reqparamtable";
-        }else{
+        }else if(obj==1){
             var table="resparamtable";
+        }else{
+            var table="codeparamtable";
         }
         document.getElementById(table).deleteRow(oRow.rowIndex);  //删除当前列
     }

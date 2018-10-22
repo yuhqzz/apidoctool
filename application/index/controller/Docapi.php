@@ -1,6 +1,7 @@
 <?php
 namespace app\index\controller;
 use app\common\model\Projects;
+use app\common\model\Common;
 use think\Controller;
 use think\Hook;
 class Docapi extends Controller
@@ -44,10 +45,11 @@ class Docapi extends Controller
      * 接口列表
      * @return mixed
      */
-    public function userApis($proid=0,$moduleid=0){
+    public function userApis($proid=0,$moduleid=0,$apiid=0)
+    {
         $this->assign("menuselect", 3);
         $projectModel = new Projects();
-        $resultdata = $projectModel->webapilists($proid,$moduleid);
+        $resultdata = $projectModel->webapilists($proid, $moduleid, $apiid);
         //页面下拉项目列表
         $this->assign("projects", $resultdata['projects']);
         //当前项目下的版块列表
@@ -58,6 +60,23 @@ class Docapi extends Controller
         $this->assign("moduleid", $resultdata['moduleid']);
         //当前项目名称
         $this->assign("proname", $resultdata['proname']);
+        //接口详情
+        $this->assign("apidetails", $resultdata['apidetails']);
+        //接口id
+        $this->assign("apiid", $resultdata['apiid']);
         return $this->fetch('apis');
+    }
+
+    /**
+     * 获取接口详情
+     * @param $apiid
+     */
+    public function apidetails()
+    {
+        $apiid=$_POST['apiid'];
+        $projectModel = new Projects();
+        $apidetails = $projectModel->apidetails($apiid);
+        $apidetails['api_request'] = Common::$reqtype[$apidetails['api_request']];
+        return json($apidetails);
     }
 }

@@ -93,7 +93,7 @@ class Projects extends Model
     }
 
     //获取接口页面数据信息
-    public function webapilists($proid,$moduleid)
+    public function webapilists($proid,$moduleid,$apiid)
     {
         //获得项目列表
         $userid = $this->user['userid'];
@@ -129,17 +129,24 @@ class Projects extends Model
             ->where('projectid', $proid)
             ->where('is_logic_del', 0)
             ->select();
-        for($i=0;$i<count($modules);$i++){
+        for ($i = 0; $i < count($modules); $i++) {
             //取出这个版块的接口信息
             $apis = Db::table('doc_api')->field('apiid,api_name')
                 ->where('moduleid', $modules[$i]['id'])
                 ->select();
-            $modules[$i]['apis']=$apis;
+            $modules[$i]['apis'] = $apis;
         }
         if (empty($moduleid)) {
             $moduleid = $modules[0]['id'];
         }
-        return ['projects' => $prolist, 'modules' => $modules, 'proname' => $proname, 'proid' => $proid, 'moduleid' => $moduleid];
+
+        if (empty($apiid)) {
+            $apiid = $modules[0]['apis'][0]['apiid'];
+        }
+        //获取接口信息
+        $apidetails = $this->apidetails($apiid);
+        $apidetails['api_request']=Common::$reqtype[$apidetails['api_request']];
+        return ['projects' => $prolist, 'modules' => $modules, 'proname' => $proname, 'proid' => $proid, 'moduleid' => $moduleid, 'apidetails' => $apidetails, 'apiid' => $apiid];
     }
 
 
@@ -442,6 +449,11 @@ class Projects extends Model
             ->where('data_type', 1)
             ->select();
         $docapi['res_params'] = $resparams;
+        //获取当前接口的响应状态码
+        $statecodes=Db::table('doc_statecode')
+            ->where('apiid', $apiid)
+            ->select();
+        $docapi['state_codes'] = $statecodes;
         return $docapi;
     }
 
@@ -527,6 +539,20 @@ class Projects extends Model
                 'apiid' => $reqdata['apiid']
             ];
             Db::table('doc_params')->insert($reqdta);
+        }
+        //清空原来的状态码数据
+        Db::table('doc_statecode')
+            ->where('apiid', $reqdata['apiid'])
+            ->delete();
+        for($i=0;$i<count($reqdata['statename']);$i++){
+            $reqdta = [
+                'state_name' => $reqdata['statename'][$i],
+                'state_info' => $reqdata['stateinfo'][$i],
+                'state_reason' => $reqdata['statereason'][$i],
+                'state_solution' => $reqdata['statesolution'][$i],
+                'apiid' => $reqdata['apiid']
+            ];
+            Db::table('doc_statecode')->insert($reqdta);
         }
     }
 }

@@ -4,3 +4,68 @@
 <!-- Bootstrap 3.3.2 JS -->
 {js href="/static/admin/js/bootstrap.min.js" /}
 {js href="/static/home/js/leftnav.js" /}
+
+{js href="/static/home/js/jsonFormater.js" /}
+
+<script type="application/javascript">
+    var successjsonformat;
+    var failedjsonformat
+    $(document).ready(function () {
+        successjsonformat = function () {
+            var options = {
+                dom: '#successformat',
+            };
+            window.jf = new JsonFormater(options);
+            jf.doFormat($('#successcode').val());
+        };
+        failedjsonformat = function () {
+            var options = {
+                dom: '#failedformat',
+            };
+            window.jf = new JsonFormater(options);
+            jf.doFormat($('#failedcode').val());
+        };
+        successjsonformat();
+        failedjsonformat();
+    });
+
+    //获取接口详情
+    function showapidetail(apiid){
+        $.ajax({
+            type: "POST",
+            url: "/docapi/details",
+            data:"apiid="+apiid,
+            success: function(msg){
+                $("#apiname").html(msg.api_name);
+                $("#apiinfo").html(msg.api_info);
+                $("#apiurl").html(msg.api_url);
+                $("#apitesturl").html(msg.api_test_url);
+                $("#apiformat").html(msg.api_format);
+                $("#apirequest").html(msg.api_request);
+                $("#reqparam tr:gt(0)").remove();
+                $.each(msg.req_params,function(index,array){
+                    var trhtml="<tr><td>"+array.param_name+"</td><td>"+array.param_type+"</td><td>"+(array.is_required==0?'必填':(array.is_required==1?'可选':'特殊可选'))+"</td><td>"+(array.max_length==0?'--':array.max_length)+"</td><td>"+array.param_info+"</td></tr>";
+                    $("#reqparam tbody").append(trhtml);
+                });
+
+                $("#resparam tr:gt(0)").remove();
+                $.each(msg.res_params,function(index,array){
+                    var trhtml="<tr><td>"+array.param_name+"</td><td>"+array.param_type+"</td><td>"+(array.is_required==0?'必填':(array.is_required==1?'可选':'特殊可选'))+"</td><td>"+(array.max_length==0?'--':array.max_length)+"</td><td>"+array.param_info+"</td></tr>";
+                    $("#resparam tbody").append(trhtml);
+                });
+
+
+                $("#statecode tr:gt(3)").remove();
+                $.each(msg.state_codes,function(index,array){
+                    var trhtml="<tr><td>"+array.state_name+"</td><td>"+array.state_info+"</td><td>"+array.state_reason+"</td><td>"+array.state_solution+"</td></tr>";
+                    $("#statecode tbody").append(trhtml);
+                });
+                $("#successcode").html(msg.success_result);
+                $("#failedcode").html(msg.failed_result);
+
+                successjsonformat();
+                failedjsonformat();
+            }
+        });
+    }
+</script>
