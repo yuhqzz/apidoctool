@@ -62,7 +62,7 @@ class Projects extends Model
         $updatedata=Db::table('doc_api')->field('apiid,api_name,create_userid,create_time,update_time,update_userid,projectid,moduleid')
             ->where('projectid', 'in', $joinids)
             ->order('update_time desc')
-            ->limit(10)
+            ->limit(8)
             ->select();
         for($i=0;$i<count($updatedata);$i++){
             //创建人姓名
