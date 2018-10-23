@@ -97,6 +97,20 @@
             <th>是否必填</th>
             <th>最大长度</th>
             <th>参数描述</th>
+            <tr>
+                <td>status</td>
+                <td>int</td>
+                <td>必填</td>
+                <td>--</td>
+                <td>状态码</td>
+            </tr>
+            <tr>
+                <td>msg</td>
+                <td>string</td>
+                <td>必填</td>
+                <td>--</td>
+                <td>状态码描述</td>
+            </tr>
             {foreach $apidetails.res_params as $resparam}
             <tr>
                 <td>{$resparam.param_name}</td>
@@ -211,7 +225,7 @@
                     $("#reqparam tbody").append(trhtml);
                 });
 
-                $("#resparam tr:gt(0)").remove();
+                $("#resparam tr:gt(2)").remove();
                 $.each(msg.res_params,function(index,array){
                     var trhtml="<tr><td>"+array.param_name+"</td><td>"+array.param_type+"</td><td>"+(array.is_required==0?'必填':(array.is_required==1?'可选':'特殊可选'))+"</td><td>"+(array.max_length==0?'--':array.max_length)+"</td><td>"+array.param_info+"</td></tr>";
                     $("#resparam tbody").append(trhtml);
