@@ -61,6 +61,7 @@ class Projects extends Model
             ->column('projectid');
         $updatedata=Db::table('doc_api')->field('apiid,api_name,create_userid,create_time,update_time,update_userid,projectid,moduleid')
             ->where('projectid', 'in', $joinids)
+            ->order('update_time desc')
             ->limit(10)
             ->select();
         for($i=0;$i<count($updatedata);$i++){
