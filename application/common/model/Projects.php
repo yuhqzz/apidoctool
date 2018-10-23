@@ -383,7 +383,7 @@ class Projects extends Model
             ->where('userid', $this->user['userid'])
             ->where('level', 1)
             ->column('projectid');
-
+        $proids=implode(",",$proids);
         $where = "is_logic_del=0";
         if ($proid) {
             $where .= " AND projectid=$proid";
