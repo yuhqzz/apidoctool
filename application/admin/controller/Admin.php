@@ -160,7 +160,7 @@ class Admin extends Controller
         $projectsModel = new Projects();
         if ($apiid) {
             $apidata = $projectsModel->apidetails($apiid);
-            $proid=$apidata['apiid'];
+            $proid=$apidata['projectid'];
             $moduleid=$apidata['moduleid'];
         } else {
             $apidata = $projectsModel->toArray();
