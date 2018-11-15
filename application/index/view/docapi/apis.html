@@ -137,17 +137,24 @@
                 <td>继续保持这种缘分</td>
             </tr>
             <tr>
-                <td>1</td>
+                <td>1或-1</td>
                 <td>失败/参数不全</td>
-                <td>缺少了某个请求参数</td>
-                <td>检查下你少传了啥参数</td>
+                <td>可能缺少参数;也可能单纯的出错了</td>
+                <td>检查下你少传了啥参数;找写接口的人</td>
             </tr>
             <tr>
-                <td>2</td>
-                <td>token过期</td>
+                <td>2或-2</td>
+                <td>token过期/非法操作</td>
                 <td>可能你账号被别人登录了</td>
                 <td>重新登录获取token</td>
             </tr>
+            <tr>
+                <td>-3</td>
+                <td>未登录</td>
+                <td>你还没登录</td>
+                <td>你可能要登录下</td>
+            </tr>
+
 
             {foreach $apidetails.state_codes as $statecode}
             <tr>

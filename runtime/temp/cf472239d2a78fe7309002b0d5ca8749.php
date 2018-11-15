@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:94:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/docapis.html";i:1539763783;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539762352;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;s:49:"../application/admin/view/layouts/mainheader.html";i:1539832086;s:45:"../application/admin/view/layouts/menuer.html";i:1539764240;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539762186;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:94:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/docapis.html";i:1541989792;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1541989792;s:49:"../application/admin/view/layouts/htmlheader.html";i:1541989792;s:49:"../application/admin/view/layouts/mainheader.html";i:1541989792;s:45:"../application/admin/view/layouts/menuer.html";i:1541989792;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1541989792;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
@@ -51,7 +51,7 @@
     <!-- Logo -->
     <a href="#" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini">Shop</span>
+        <span class="logo-mini">后台</span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">接口文档管理后台</span>
     </a>
@@ -123,7 +123,7 @@
 
             <li>
                 <a href="#">
-                    <i class='fa fa-desktop'></i> <span>项目管理</span>
+                    <i class='fa fa-book'></i> <span>项目管理</span>
                     <i class="pull-right fa fa-caret-down"></i>
                 </a>
 
@@ -148,7 +148,7 @@
 
             <li>
                 <a href="#">
-                    <i class='fa fa-desktop'></i> <span>用户管理</span>
+                    <i class='fa fa-user-circle-o'></i> <span>用户管理</span>
                     <i class="pull-right fa fa-caret-down"></i>
                 </a>
 
@@ -180,7 +180,7 @@
                 <div class="row">
                     <div class="col-md-10">
                         <div class="panel panel-default">
-                            <div class="panel-heading">接口列表
+                            <div class="panel-heading">接口列表&nbsp;&nbsp;&nbsp;&nbsp;(<i class="fa fa-eye" style="color:#3c8dbc"></i><a href="/docapi/apis">前台查看</a>)
    <a style="float:right;margin-top:-6px;" href="/admin/addDocapi/<?php echo $proid; ?>/<?php echo $moduleid; ?>" class="btn btn-primary">添加接口</a>
 </div>
 

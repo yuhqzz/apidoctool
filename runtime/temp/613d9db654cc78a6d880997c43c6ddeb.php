@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/adddocapi.html";i:1540175522;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1539762352;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;s:49:"../application/admin/view/layouts/mainheader.html";i:1539832086;s:45:"../application/admin/view/layouts/menuer.html";i:1539764240;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1539762186;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/admin/adddocapi.html";i:1541989792;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/admin/view/layouts/admin.html";i:1541989792;s:49:"../application/admin/view/layouts/htmlheader.html";i:1541989792;s:49:"../application/admin/view/layouts/mainheader.html";i:1541989792;s:45:"../application/admin/view/layouts/menuer.html";i:1541989792;s:49:"../application/admin/view/layouts/htmlfooter.html";i:1541989792;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
@@ -51,7 +51,7 @@
     <!-- Logo -->
     <a href="#" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini">Shop</span>
+        <span class="logo-mini">后台</span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">接口文档管理后台</span>
     </a>
@@ -123,7 +123,7 @@
 
             <li>
                 <a href="#">
-                    <i class='fa fa-desktop'></i> <span>项目管理</span>
+                    <i class='fa fa-book'></i> <span>项目管理</span>
                     <i class="pull-right fa fa-caret-down"></i>
                 </a>
 
@@ -148,7 +148,7 @@
 
             <li>
                 <a href="#">
-                    <i class='fa fa-desktop'></i> <span>用户管理</span>
+                    <i class='fa fa-user-circle-o'></i> <span>用户管理</span>
                     <i class="pull-right fa fa-caret-down"></i>
                 </a>
 
@@ -237,7 +237,7 @@
                     <option value="0" <?php echo !empty($docapi)?$docapi['api_request']==0 ? 'selected' : '':''; ?>>GET</option>
                     <option value="1" <?php echo !empty($docapi)?$docapi['api_request']==1 ? 'selected' : '':''; ?>>POST</option>
                     <option value="2" <?php echo !empty($docapi)?$docapi['api_request']==2 ? 'selected' : '':''; ?>>PUT</option>
-                    <option value="2" <?php echo !empty($docapi)?$docapi['api_request']==3 ? 'selected' : '':''; ?>>DELETE</option>
+                    <option value="3" <?php echo !empty($docapi)?$docapi['api_request']==3 ? 'selected' : '':''; ?>>DELETE</option>
                 </select>
             </div>
 

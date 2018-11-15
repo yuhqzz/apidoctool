@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:92:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/index/index.html";i:1540176884;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1539859787;s:49:"../application/index/view/layouts/htmlheader.html";i:1540204259;s:48:"../application/index/view/layouts/htmltitle.html";i:1540211400;s:49:"../application/index/view/layouts/htmlfooter.html";i:1540204282;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:92:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/index/view/index/index.html";i:1541989792;s:84:"/Users/liudanfeng/Documents/www/apidoctool/application/index/view/layouts/index.html";i:1541989792;s:49:"../application/index/view/layouts/htmlheader.html";i:1541989792;s:48:"../application/index/view/layouts/htmltitle.html";i:1541989792;s:49:"../application/index/view/layouts/htmlfooter.html";i:1541989792;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
@@ -115,7 +115,7 @@
                 </div>
             </div>
         </div>
-        <div class="Footer">Powered By @<font color="#3c8dbc">liuxiaomo</font></div>
+        <div class="Footer">Powered By @<a href="/adminauth/index">liuxiaomo</a></div>
 <!-- jQuery 2.1.4 -->
 <script type="text/javascript" src="/static/admin/plugins/jQuery/jquery-1.9.1.min.js"></script>
 <!-- Bootstrap 3.3.2 JS -->

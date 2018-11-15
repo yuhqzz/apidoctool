@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/adminauth/login.html";i:1539862187;s:49:"../application/admin/view/layouts/htmlheader.html";i:1539745999;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:96:"/Users/liudanfeng/Documents/www/apidoctool/public/../application/admin/view/adminauth/login.html";i:1541989792;s:49:"../application/admin/view/layouts/htmlheader.html";i:1541989792;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
