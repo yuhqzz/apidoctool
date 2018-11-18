@@ -145,8 +145,8 @@
             <tr>
                 <td>2或-2</td>
                 <td>token过期/非法操作</td>
-                <td>可能你账号被别人登录了</td>
-                <td>重新登录获取token</td>
+                <td>可能你账号被别人登录了;操作有问题</td>
+                <td>重新登录获取token;找写接口的人</td>
             </tr>
             <tr>
                 <td>-3</td>
@@ -243,7 +243,7 @@
                 });
 
 
-                $("#statecode tr:gt(3)").remove();
+                $("#statecode tr:gt(4)").remove();
                 $.each(msg.state_codes,function(index,array){
                     var trhtml="<tr><td>"+array.state_name+"</td><td>"+array.state_info+"</td><td>"+array.state_reason+"</td><td>"+array.state_solution+"</td></tr>";
                     $("#statecode tbody").append(trhtml);
