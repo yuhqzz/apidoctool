@@ -514,7 +514,7 @@ class Projects extends Model
         //清空原来的请求参数数据
         Db::table('doc_params')
             ->where('data_type', 0)
-            ->where('apiid', $reqdata['apiid'])
+            ->where('apiid', $apiid)
             ->delete();
         for ($i = 0; $i < count($reqdata['reqname']); $i++) {
             $reqdta = [
@@ -531,7 +531,7 @@ class Projects extends Model
         //清空原来的响应参数
         Db::table('doc_params')
             ->where('data_type', 1)
-            ->where('apiid', $reqdata['apiid'])
+            ->where('apiid', $apiid)
             ->delete();
         for ($i = 0; $i < count($reqdata['resname']); $i++) {
             $reqdta = [
@@ -541,13 +541,13 @@ class Projects extends Model
                 'max_length' => $reqdata['resmaxlenth'][$i],
                 'param_info' => $reqdata['resinfo'][$i],
                 'data_type' => 1,
-                'apiid' => $reqdata['apiid']
+                'apiid' => $apiid
             ];
             Db::table('doc_params')->insert($reqdta);
         }
         //清空原来的状态码数据
         Db::table('doc_statecode')
-            ->where('apiid', $reqdata['apiid'])
+            ->where('apiid', $apiid)
             ->delete();
         for($i=0;$i<count($reqdata['statename']);$i++){
             $reqdta = [
@@ -555,7 +555,7 @@ class Projects extends Model
                 'state_info' => $reqdata['stateinfo'][$i],
                 'state_reason' => $reqdata['statereason'][$i],
                 'state_solution' => $reqdata['statesolution'][$i],
-                'apiid' => $reqdata['apiid']
+                'apiid' => $apiid
             ];
             Db::table('doc_statecode')->insert($reqdta);
         }
