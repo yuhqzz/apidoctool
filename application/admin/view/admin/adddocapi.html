@@ -257,23 +257,22 @@
         oCell.innerHTML = "<input type='text' name='statesolution[]' class='form-control' placeholder='解决方案'/>";
 
         oCell=newRow.insertCell(4);
-        oCell.innerHTML = "<a href='javascript:void(0)' onclick='removeRow(this,1);'><i class='fa fa-trash-o fa-fw' style='font-size: 20px;'></i></a>";
+        oCell.innerHTML = "<a href='javascript:void(0)' onclick='removeRow(this,2);'><i class='fa fa-trash-o fa-fw' style='font-size: 20px;'></i></a>";
 
     }
 
 
     //删除参数
-    function removeRow(src,obj)
-    {
-        var oRow = src.parentElement;  //获取当前事件的父节点
-        if(obj==0){
-            var table="reqparamtable";
-        }else if(obj==1){
-            var table="resparamtable";
-        }else{
-            var table="codeparamtable";
+    function removeRow(src,obj) {
+        if (obj == 0) {
+            var table = "reqparamtable";
+        } else if (obj == 1) {
+            var table = "resparamtable";
+        } else {
+            var table = "codeparamtable";
         }
-        document.getElementById(table).deleteRow(oRow.rowIndex);  //删除当前列
+        var oRow = src.parentElement.parentElement;  //获取当前事件的父节点
+        document.getElementById(table).removeChild(oRow);
     }
 
 
