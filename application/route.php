@@ -60,6 +60,7 @@ Route::rule('/','index/Index/index','GET');
 Route::group('docapi',[
     '/'   => ['index/Docapi/userDefault', ['method' => 'get']],
     'projects'=>['index/Docapi/userProject',['method' => 'get']],
+    'prorules/:proid'=>['index/Docapi/prorules',['method' => 'get']],
     'apis/[:proid]/[:moduleid]/[:apiid]'=>['index/Docapi/userApis',['method' => 'get']],
     'details' => ['index/Docapi/apidetails', ['method' => 'post']],
     'apitest/[:apiid]'=>['index/Docapi/apitest',['method' => 'get']],
