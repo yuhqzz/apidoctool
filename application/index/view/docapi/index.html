@@ -43,6 +43,9 @@
             {foreach $joindta as $myjoin}
             <p>
                 <a href="/docapi/apis/{$myjoin.projectid}"><i class="fa fa-book"></i>&nbsp;&nbsp;<span>{$myjoin.project_name}</span></a>
+                {if $myjoin.cooperation_rule!=null}
+                (<a href="/docapi/prorules/{$myjoin.projectid}" target="_blank">合作约定</a>)
+                {/if}
                 <span style="float: right;color:#dedede">{$myjoin.create_time|date="y-m-d h:i:s",###}</span>
             </p>
             {/foreach}
