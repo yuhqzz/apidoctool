@@ -56,7 +56,7 @@ class Admin extends Controller
         if ($data) {
             $this->error('该项目已经存在，请重新输入', '/admin/addproject');
         } else {
-            $projectsModel->proinsert($_POST['proid'], $_POST['projectname'], $_POST['projectinfo']);
+            $projectsModel->proinsert($_POST['proid'], $_POST['projectname'], $_POST['projectinfo'],$_POST['cooperationrule']);
             $this->success('保存成功', '/admin/projects');
         }
     }

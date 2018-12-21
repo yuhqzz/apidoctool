@@ -232,12 +232,13 @@ class Projects extends Model
     }
 
     //新建项目
-    public function proinsert($proid,$proname,$proinfo)
+    public function proinsert($proid,$proname,$proinfo,$cooperationrule)
     {
         $userid = $this->user['userid'];
         $data = [
             "project_name" => $proname,
-            "project_info" => $proinfo
+            "project_info" => $proinfo,
+            "cooperation_rule"=>$cooperationrule
         ];
         if ($proid) {
             Db::table('doc_projects')->where('projectid=' . $proid)->update($data);
