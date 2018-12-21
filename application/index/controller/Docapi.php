@@ -42,6 +42,21 @@ class Docapi extends Controller
     }
 
     /**
+     * 项目约定
+     * @param $proid
+     * @return mixed
+     */
+    public function prorules($proid)
+    {
+        $this->assign("menuselect", 2);
+        $projectModel = new Projects();
+        $prodata = $projectModel->prodetails($proid);
+        $markdown = json_encode($prodata['cooperation_rule'],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
+        $this->assign('prorules', $markdown);
+        return $this->fetch('prorules');
+    }
+
+    /**
      * 接口列表
      * @return mixed
      */
