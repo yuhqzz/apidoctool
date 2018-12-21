@@ -220,7 +220,7 @@ class Projects extends Model
     {
         if ($proid) {
             $prodata = Db::table('doc_projects')
-                ->where('projectid', '!=', $proid)
+                ->where("projectid!=$proid")
                 ->where('project_name', $proname)
                 ->find();
         } else {
